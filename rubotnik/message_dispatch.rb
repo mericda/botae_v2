@@ -17,10 +17,7 @@ module Rubotnik
       @message = message
       p @message.class
       p @message
-      entities = @message.nlp["entities"]
- puts "#{entities}"
- keys = entities.keys
- puts "#{keys}"
+
 # if keys.include? 'greetings'
   # confidence = entities['greetings'].first['confidence']
   # confidence = confidence.to_f
@@ -28,12 +25,7 @@ module Rubotnik
  #end
 
  #alternatively to loop over them all
- keys.each do |key|
-   puts key.to_s
-   confidence = entities[key].first['confidence']
-  confidence = confidence.to_f
-  puts "#{confidence}"
- end
+
       #confidence = entities.first['confidence']
       #confidence = keys.confidence
       #puts "#{entities}"
