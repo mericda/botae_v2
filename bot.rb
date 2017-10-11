@@ -105,6 +105,8 @@ Bot.on :message do |message|
             say "Hello!"
           elsif  entity_max == 'bye' && confidence_max > 0.9
                 say "bye!"
+              else
+                  say 'Here are some suggestions for you:', quick_replies: HINTS
     end
 
 
@@ -148,7 +150,7 @@ Bot.on :message do |message|
     # Falback action if none of the commands matched the input,
     # NB: Should always come last. Takes a block.
     default do
-      say 'Here are some suggestions for you:', quick_replies: HINTS
+    
 
 
           #      greetings = firstEntity(@message.nlp, 'greetings')
