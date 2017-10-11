@@ -79,7 +79,8 @@ Bot.on :message do |message|
         say 'I could not get your name, sorry :('
       end
     end
-
+if message_contains_location?
+else
     entities = @message.nlp["entities"]
     puts "#{entities}"
     keys = entities.keys
@@ -107,7 +108,7 @@ Bot.on :message do |message|
                 say "bye!"
 
     end
-
+end
 
 
     # Use with block if you want to provide response behaviour
@@ -149,7 +150,7 @@ Bot.on :message do |message|
     # Falback action if none of the commands matched the input,
     # NB: Should always come last. Takes a block.
     default do
-    
+
         say 'Here are some suggestions for you:', quick_replies: HINTS
 
 
