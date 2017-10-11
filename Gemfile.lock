@@ -1,0 +1,61 @@
+GIT
+  remote: git://github.com/hyperoslo/facebook-messenger.git
+  revision: 3c23cbcab388a1cba956fd6d492129ec4f874be0
+  specs:
+    facebook-messenger (1.0.0)
+      httparty (~> 0.13, >= 0.13.7)
+      rack (>= 1.4.5)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
+    dotenv (2.2.1)
+    faraday (0.13.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.10.1)
+      faraday (>= 0.7.4, < 1.0)
+    faraday_middleware-parse_oj (0.3.1)
+      faraday (~> 0.9)
+      faraday_middleware (>= 0.9.1, < 1.0)
+      oj (~> 2.0)
+    giphy (3.0.0)
+      faraday (~> 0.9)
+      faraday_middleware (~> 0.9)
+      faraday_middleware-parse_oj (~> 0.3)
+      launchy (~> 2.4)
+    httparty (0.15.6)
+      multi_xml (>= 0.5.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    multi_xml (0.6.0)
+    multipart-post (2.0.0)
+    mustermann (1.0.1)
+    oj (2.18.0)
+    public_suffix (3.0.0)
+    puma (3.10.0)
+    rack (2.0.3)
+    rack-protection (2.0.0)
+      rack
+    sinatra (2.0.0)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.0)
+      tilt (~> 2.0)
+    tilt (2.0.8)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  addressable
+  dotenv
+  facebook-messenger!
+  giphy
+  httparty
+  puma
+  sinatra
+
+BUNDLED WITH
+   1.15.4
