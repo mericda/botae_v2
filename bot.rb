@@ -103,7 +103,7 @@ Bot.on :message do |message|
     puts "Entity with max confidence: #{entity_max} #{confidence_max}"
     if entity_max == 'greetings' && confidence_max > 0.9
             say "Hello!"
-          elsif  entity_max == 'bye' && confidence_max > 0.9 condition
+          elsif  entity_max == 'bye' && confidence_max > 0.9
                 say "bye!"
     end
 
