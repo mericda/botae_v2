@@ -106,7 +106,7 @@ module Trust
 
   def trust_stage_5
     if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
-      say 'Lets do this'
+
       trust_auth
 
     else
@@ -126,17 +126,31 @@ module Trust
     #sleep 120
     say 'user_name, I have both good and bad news.'
 
+    @message.typing_on
+    say 'Bad news first: I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such informationi at first hand.'
+    @message.typing_off
 
-    say 'Bad news first: I will be honest with you. Although you trusted me to show you popular places among your friends,'
-    say 'I am not designed to process such informationi at first hand.'
-
+    @message.typing_on
     say 'Now, some good news. Your data is safe, and my real aim as a bot was to show how easy it is to trust a program like myself to give access for personal data. '
+    @message.typing_off
+    @message.typing_on
     say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs,'
+    @message.typing_off
+    @message.typing_on
     say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+    @message.typing_off
+    @message.typing_on
     say 'There are many malicious bots that have bad intentions such as stealing personal information such as your accounnt or location information.'
+    @message.typing_off
+    @message.typing_on
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+    @message.typing_off
+    @message.typing_on
     say 'I hope you understand my good intentions. '
+    @message.typing_off
+    @message.typing_on
     say 'If you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu or visit the project page below.'
+@message.typing_off
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     say 'Thank you! '
     stop_thread
