@@ -3,7 +3,10 @@ require 'json'
 require_relative 'rubotnik/rubotnik'
 require_relative 'helpers/helpers'
 # Showcases a chained sequence of commands that gather the data
-# and store it in the answers hash inside the User instance.
+# and store it in the answers hash inside the User instance.\
+
+LOCATION_PROMPT = UI::QuickReplies.location
+
 module Trust
   # State 'module_function' before any method definitions so
   # commands are mixed into Dispatch classes as private methods.
@@ -18,8 +21,7 @@ module Trust
     else
       say 'Nice! Let me see if I can find something better than Subway.'
     end
-    location_prompt = UI::QuickReplies.location
-    say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: location_prompt
+    say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
     next_command :lookup_location
   end
 
