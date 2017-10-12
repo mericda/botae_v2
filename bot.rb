@@ -102,9 +102,9 @@ Bot.on :message do |message|
     }
 
     bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
-      say "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location."
-      say "I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places."
-      say "such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
+      message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n"
+      message:  "I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.\n"
+      message:  "such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
     }
 
 
@@ -200,8 +200,8 @@ Bot.on :postback do |postback|
       message:  "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
     }
     bind 'PERSUADE_STAGE_1', to: :trust_stage_2, start_thread: {
-      message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.",
-      message: "I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.",
+      message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n",
+      message: "I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.\n",
       message: "such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
     }
 
