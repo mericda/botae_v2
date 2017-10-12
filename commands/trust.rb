@@ -1,5 +1,7 @@
 require 'httparty'
 require 'json'
+require_relative 'rubotnik/rubotnik'
+require_relative 'helpers/helpers'
 # Showcases a chained sequence of commands that gather the data
 # and store it in the answers hash inside the User instance.
 module Trust
@@ -16,8 +18,8 @@ module Trust
     else
       say 'Nice! Let me see if I can find something better than Subway.'
     end
-    LOCATION_PROMPT = UI::QuickReplies.location
-    say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
+    location_prompt = UI::QuickReplies.location
+    say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: location_prompt
     next_command :lookup_location
   end
 
