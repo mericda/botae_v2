@@ -29,36 +29,19 @@ Rubotnik::PersistentMenu.enable
 
 
 #TRUST_QUICK_REPLIES
-  TRUST_INT_0_QR = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_INT_1_CHOICE_A'], ['🍱 Food', 'TRUST_INT_1_CHOICE_B'])
 
-#STAGE_QUICK_REPLIES
-STAGE_1_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_2'])
-STAGE_2_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_3'])
-STAGE_3_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_4'])
-STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_5'])
-STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Quit', 'EXIT_SURVEY'])
+  intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_STAGE_1'], ['Tell me more', 'PERSUADE_STAGE_1'])
 
 
   # Build a quick reply that prompts location from user
   LOCATION_PROMPT = UI::QuickReplies.location
 
-  # Define vartiables you want to use for both messages and postbacks
-  # outside both Bot.on method calls.
-  questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
-    %w[No STOP_QUESTIONNAIRE])
-    questionnaire_welcome = 'Welcome to the sample questionnaire! Are you ready?'
 
+    # Define vartiables you want to use for both messages and postbacks
+    # outside both Bot.on method calls.
+    trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
 
-
-    #def firstEntity(nlp, name)
-    #  return nlp && nlp.entities && nlp.entities && nlp.entities[name] && nlp.entities[name][0]
-    #end
-
-
-    #greetings = firstEntity(@message.nlp, 'greetings')
-    #        if greetings && greetings.confidence > 0.8
-    #          say 'it works',
-    #      end
+    persuade_stage_qr_1 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
 
     ####################### ROUTE MESSAGES HERE ################################
 
@@ -134,13 +117,6 @@ STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Quit', 
         #      say "Nice to meet you! Here's what I can do", quick_replies: HINTS
         #  end
 
-
-        bind 'all', 'true', all:true do
-          say "all true really"
-        end
-
-
-
         # Use with 'to:' and 'start_thread:' to point to the first
         # command of a thread. Thread should be located in Commands
         # or a separate module mixed into Commands.
@@ -152,10 +128,18 @@ STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Quit', 
           quick_replies: questionnaire_replies
         }
 
-        bind 'where', 'am', 'I', all:true, to: :lookup_location, start_thread: {
-          message: 'Let me know your location',
-          quick_replies: LOCATION_PROMPT
+        bind 'i', 'am', 'ready', all:true, to: :trust_stage2, start_thread: {
+          say 'Cool! What are you interested in?'
+          quick_replies: trust_stage_qr_1
         }
+
+        bind 'tell', 'me', 'more', all:true, to: :trust_stage2, start_thread: {
+          say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
+          say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
+          say 'such as 🍕 Pizza or 🥗 Salad'
+          quick_replies: persuade_stage_qr_1
+        }
+
 
         bind "Have a gif", to: :get_cute_gif
 
@@ -181,46 +165,13 @@ STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Quit', 
       Rubotnik::PostbackDispatch.new(postback).route do
 
         ## START THE CONVERSATION
-        bind 'START' do
-            say 'Hi! 👋 I am here to find you the best places for food and coffee closest to you.'
-            say 'I can also check and gather the places that your Facebook friends liked or posted photos.'
-            UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
-            say 'Ready to browse the best?', quick_replies: STAGE_1_QR
-        end
+        bind 'START' , to: :start_persuade, start_thread: {
+          say 'Hi! 👋 I am here to find you the best places for food and coffee closest to you.'
+          say 'I can also check and gather the places that your Facebook friends liked or posted photos.'
+          UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
+          say 'Ready to browse the best?', quick_replies: intention_replies
 
-  ## TRUST INTENTION  STAGES
-
-  #STAGE O
-  bind 'TRUST_INTENTION' do
-      say 'Cool 😎 What are you interested in?', quick_replies: TRUST_INT_0_QR
-  end
-
-#STAGE 1
-bind 'TRUST_INT_1_CHOICE_A' do
-    say 'Nice! Let me see if I can find something better than Starbucks.'
-    say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION
-end
-
-
-  ## STAGE_2
- ## STAGE_2
-
-  ## STAGE_2
-  bind 'STAGE_2' do
-      say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
-      say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
-      say 'such as 🍕 Pizza or 🥗 Salad'
-        say 'Ready to browse the best?', quick_replies: STAGE_2_QR
-  end
-
-
-
-    ## TRUST INTENTION  STAGES
-
-
-    ## STAGE_2
-   ## STAGE_2
-
+        }
 
 
         bind 'CAROUSEL', to: :show_carousel
@@ -244,15 +195,22 @@ end
 
         # No custom parameter passed, can use simplified syntax
 
-        bind 'LOCATION', to: :lookup_location, start_thread: {
-          message: 'Let me know your location',
-          quick_replies: LOCATION_PROMPT
-        }
 
         bind 'QUESTIONNAIRE', to: :start_questionnaire, start_thread: {
           message: questionnaire_welcome,
           quick_replies: questionnaire_replies
         }
+        bind 'TRUST_STAGE_1', to: :trust_stage2, start_thread: {
+          say 'Cool! What are you interested in?'
+          quick_replies: trust_stage_qr_1
+        }
+        bind 'PERSUADE_STAGE_1', to: :trust_stage2, start_thread: {
+          say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
+          say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
+          say 'such as 🍕 Pizza or 🥗 Salad'
+          quick_replies: persuade_stage_qr_1
+        }
+
       end
     end
 
