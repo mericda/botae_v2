@@ -28,7 +28,7 @@ module Trust
     else
       say("Please try your request again and use 'Send location' button")
     end
-    stop_thread
+    
   end
 
   def handle_user_location
