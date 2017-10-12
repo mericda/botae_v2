@@ -144,7 +144,7 @@ end
       quick_replies: LOCATION_PROMPT
     }
 
-    bind "Have a gif", to: :get_gif_for "cute dog"
+    bind "Have a gif", to: :get_gif_for 'cute'
 
 
     # Falback action if none of the commands matched the input,
@@ -190,7 +190,7 @@ Bot.on :postback do |postback|
 
     # No custom parameter passed, can use simplified syntax
     bind 'HORIZONTAL_IMAGES', to: :show_carousel
-    bind 'HAVEAGIF', to: :get_gif_for "cute dog"
+    bind 'HAVEAGIF', to: :get_gif_for 'cute'
     bind 'LOCATION', to: :lookup_location, start_thread: {
       message: 'Let me know your location',
       quick_replies: LOCATION_PROMPT
