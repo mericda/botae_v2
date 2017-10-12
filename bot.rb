@@ -110,19 +110,6 @@ Bot.on :message do |message|
 
     bind "Have a gif", to: :get_cute_gif
 
-
-    # Falback action if none of the commands matched the input,
-    # NB: Should always come last. Takes a block.
-    default do
-
-      say 'I have no idea about what you are saying.'#, quick_replies: HINTS
-
-
-      #      greetings = firstEntity(@message.nlp, 'greetings')
-      #        if greetings && greetings.confidence > 0.8
-      #          say 'it works',
-      #      end
-    end
     if message_contains_location?
     else
       entities = @message.nlp["entities"]
@@ -152,6 +139,19 @@ Bot.on :message do |message|
         say "bye!"
 
       end
+    # Falback action if none of the commands matched the input,
+    # NB: Should always come last. Takes a block.
+    default do
+
+      say 'I have no idea about what you are saying.'#, quick_replies: HINTS
+
+
+      #      greetings = firstEntity(@message.nlp, 'greetings')
+      #        if greetings && greetings.confidence > 0.8
+      #          say 'it works',
+      #      end
+    end
+
     end
   end
 end
