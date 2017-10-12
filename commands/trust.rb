@@ -102,6 +102,7 @@ next_command :trust_stage_3
 
   def trust_stage_5
       if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
+        say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
 
 #REDIRECT USER TO TRUST CONFIRMATION: FACEBOOK AUTHENTICATION
 next_command :trust_facebook_auth
