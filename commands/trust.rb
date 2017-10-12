@@ -3,7 +3,7 @@
 
 LOCATION_PROMPT = UI::QuickReplies.location
 #NAY_FEEDBACK = [{['The results were not accurate']}, {['I know those places, and they are not good']}, {['Option 3']}, {['Option 4']}, {['Option 5']}, {['Option 6']}, {['Option 7']}]
-EMAIL_TEXT = "Send an email to mericda@cmu.edu ".freeze
+EMAIL_TEXT = "Send an email ".freeze
 EMAIL = [
   {
     type: :web_url,
