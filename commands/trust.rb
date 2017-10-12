@@ -89,7 +89,7 @@ next_command :trust_stage_3
   def trust_stage_4
       if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
         #log = @message.text
-        persuade_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
+        trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
         say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
         next_command :trust_stage_5
       else
