@@ -20,6 +20,8 @@ module Trust
   REVERSE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.freeze
 
   def trust_stage_2
+    fall_back && return
+
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
       say 'Nice! Let me see if I can find something better than Starbucks.'
     else
@@ -70,6 +72,8 @@ module Trust
 
 
   def trust_stage_3
+    fall_back && return
+
     # Fallback functionality if stop word used or user input is not text
     if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
       #log = @message.text
@@ -91,6 +95,8 @@ module Trust
 
 
   def trust_stage_4
+    fall_back && return
+
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
       #log = @message.text
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
@@ -105,6 +111,8 @@ module Trust
 
 
   def trust_stage_5
+    fall_back && return
+
     if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
 
       trust_auth
@@ -121,7 +129,7 @@ module Trust
   def trust_auth
     #handle_facebook_auth
     # if FACEBOOK_AUTH == 1
-    Bot.on :message do |message|
+    fall_back && return
 
     say 'Now, give me some time while I am looking what your friends did.'
     say 'I will let you know when I am ready to share the results.'
