@@ -167,6 +167,9 @@ HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
     Bot.on :postback do |postback|
       Rubotnik::PostbackDispatch.new(postback).route do
         bind 'START' do
+          user_info = get_user_info(:first_name,:last_name,:profile_pic)
+          user_name = user_info[:first_name]
+          say "Your name is #{user_name}."
             say "Hi {{user_first_name}}!"
             say 'I am here to find you the best places for food and coffee closest to you.'
             say 'I can also check and gather the places that your facebook friends liked or posted photos.'
