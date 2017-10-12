@@ -35,7 +35,9 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_STAGE_1'], ['Te
 # Build a quick reply that prompts location from user
 #LOCATION_PROMPT = UI::QuickReplies.location
 
-
+questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
+                                               %w[No STOP_QUESTIONNAIRE])
+questionnaire_welcome = 'Welcome to the sample questionnaire! Are you ready?'
 # Define vartiables you want to use for both messages and postbacks
 # outside both Bot.on method calls.
 trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
