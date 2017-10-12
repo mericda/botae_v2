@@ -121,6 +121,8 @@ module Trust
   def trust_auth
     #handle_facebook_auth
     # if FACEBOOK_AUTH == 1
+    Bot.on :message do |message|
+
     say 'Now, give me some time while I am looking what your friends did.'
     say 'I will let you know when I am ready to share the results.'
     #sleep 120
@@ -153,6 +155,7 @@ module Trust
 @message.typing_off
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     say 'Thank you! '
+  end
     stop_thread
     #else #IF_FACEBOOK_AUTH == 0
     #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
