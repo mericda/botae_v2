@@ -28,7 +28,7 @@ module Trust
     else
       say("Please try your request again and use 'Send location' button")
     end
-    
+
   end
 
   def handle_user_location
@@ -40,8 +40,11 @@ module Trust
     address = extract_full_address(parsed)
     say "Looks like you're at #{address}"
     @message.typing_off
-    next_command :trust_stage_3
 
+    :show_carousel
+    trust_stage_qr_3_1 = UI::QuickReplies.build(['Yay', 'TRUST_STABLE'], ['Quit', 'TRUST_NOT_STABLE'])
+      say 'Did you like it?', quick_replies: trust_stage_qr_3_1
+next_command :trust_stage_3
   end
 
   # Talk to API
@@ -57,16 +60,13 @@ module Trust
 
   def trust_stage_3
     # Fallback functionality if stop word used or user input is not text
-    :show_carousel
-    trust_stage_qr_3 = UI::QuickReplies.build(['Yay', 'TRUST_STABLE'], ['Quit', 'TRUST_NOT_STABLE'])
-      say 'Did you like it?', quick_replies: trust_stage_qr_3
       if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
         say 'Stable 🙌'
       else
         say 'Sorry to hear that 😭'
       end
-      trust_stage_qr_3_3 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
-        say 'Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_3
+      trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+        say 'Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
         next_command :trust_stage_4
   end
   def trust_stage_4
