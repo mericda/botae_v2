@@ -72,7 +72,8 @@ next_command :trust_stage_3
     # Fallback functionality if stop word used or user input is not text
       if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
         #log = @message.text
-        say 'Stable 🙌'
+        say 'Great 🙌'
+        stop_thread
       else
         #
         say 'Sorry to hear that 😭'
@@ -83,7 +84,7 @@ next_command :trust_stage_3
         #stop_thread
       end
       trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
-        say 'Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
+        say 'Anyway, Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
         next_command :trust_stage_4
   end
 
