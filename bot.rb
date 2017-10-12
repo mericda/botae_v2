@@ -182,13 +182,9 @@ STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Quit', 
 
         ## START THE CONVERSATION
         bind 'START' do
-          @message.typing_on
             say 'Hi! 👋 I am here to find you the best places for food and coffee closest to you.'
-            @message.typing_on
             say 'I can also check and gather the places that your Facebook friends liked or posted photos.'
-            @message.typing_on
             UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
-
             say 'Ready to browse the best?', quick_replies: STAGE_1_QR
         end
 
@@ -196,15 +192,12 @@ STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Quit', 
 
   #STAGE O
   bind 'TRUST_INTENTION' do
-    @message.typing_on
       say 'Cool 😎 What are you interested in?', quick_replies: TRUST_INT_0_QR
   end
 
 #STAGE 1
 bind 'TRUST_INT_1_CHOICE_A' do
-  @message.typing_on
     say 'Nice! Let me see if I can find something better than Starbucks.'
-    @message.typing_on
     say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION
 end
 
@@ -214,11 +207,8 @@ end
 
   ## STAGE_2
   bind 'STAGE_2' do
-    @message.typing_on
       say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
-      @message.typing_on
       say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
-      @message.typing_on
       say 'such as 🍕 Pizza or 🥗 Salad'
         say 'Ready to browse the best?', quick_replies: STAGE_2_QR
   end
