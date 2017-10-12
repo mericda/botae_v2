@@ -114,7 +114,7 @@ next_command :trust_stage_4
   end
 
 
-  def trust_facebookauth
+  def trust_facebook_auth
     #handle_facebook_auth
 # if FACEBOOK_AUTH == 1
   say 'Now, give me some time while I am looking what your friends did.'
@@ -136,8 +136,8 @@ say 'There are many programs, bots that have bad intentions such as stealing per
 #else #IF_FACEBOOK_AUTH == 0
 trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
   say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
-next_command :trust_stage_qr_5
-  stop_thread
+next_command :trust_stage_5
+  stop_thread #INTERIM
 #end
 #GET CONFIRMATION OF USERS
 
