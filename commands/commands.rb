@@ -19,14 +19,14 @@ module Commands
   REVERSE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.freeze
 
 
-  def get_cute_gif
+  def get_gif_for(query)
 
 
   Giphy::Configuration.configure do |config|
     config.api_key = ENV["GIPHY_API_KEY"]
   end
 
-  results = Giphy.search('cute dog', {limit: 50})
+  results = Giphy.search(query, {limit: 50})
   gif = nil
 
   #puts results.to_yaml
