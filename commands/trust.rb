@@ -8,7 +8,7 @@ EMAIL = [
   {
     type: :web_url,
     url: 'http://www.mericdagli.com',
-    title: "Send an email to mericda@cmu.edu"
+    title: "Visit project page"
   }
 ].freeze
 module Trust
