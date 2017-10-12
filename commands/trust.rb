@@ -3,6 +3,7 @@
 
 LOCATION_PROMPT = UI::QuickReplies.location
 #NAY_FEEDBACK = [{['The results were not accurate']}, {['I know those places, and they are not good']}, {['Option 3']}, {['Option 4']}, {['Option 5']}, {['Option 6']}, {['Option 7']}]
+EMAIL_TEXT = "Send an email to mericda@cmu.edu ".freeze
 EMAIL = [
   {
     type: :web_url,
@@ -137,7 +138,7 @@ module Trust
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
     sleep 5
     say 'I hope you understand my good intentions, but if you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu. '
-    UI::FBButtonTemplate.new(EMAIL).send(@user)
+    UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     say 'Thank you! '
     stop_thread
     #else #IF_FACEBOOK_AUTH == 0
