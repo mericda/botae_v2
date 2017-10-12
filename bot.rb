@@ -23,7 +23,7 @@ Rubotnik::PersistentMenu.enable
 # NOTE: QuickReplies.build should be called with a splat operator
 # if a set of quick replies is an array of arrays.
 # e.g. UI::QuickReplies.build(*replies)
-HINTS = UI::QuickReplies.build(['Where I?', 'LOCATION'],
+HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
                                ['Take questionnaire', 'QUESTIONNAIRE'], ['Have a gif', 'HAVEAGIF'])
 
 # Build a quick reply that prompts location from user
@@ -144,7 +144,7 @@ end
       quick_replies: LOCATION_PROMPT
     }
 
-    bind "Have a gif", to: :get_gif_for 'cute'
+    bind "Have a gif", to: :get_cute_gif
 
 
     # Falback action if none of the commands matched the input,
@@ -190,7 +190,7 @@ Bot.on :postback do |postback|
 
     # No custom parameter passed, can use simplified syntax
     bind 'HORIZONTAL_IMAGES', to: :show_carousel
-    bind 'HAVEAGIF', to: :get_gif_for 'cute'
+    bind 'HAVEAGIF', to: :get_cute_gif
     bind 'LOCATION', to: :lookup_location, start_thread: {
       message: 'Let me know your location',
       quick_replies: LOCATION_PROMPT

@@ -18,7 +18,12 @@ module Commands
   API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?address='.freeze
   REVERSE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.freeze
 
+  def get_cute_gif
 
+
+  get_gif_for "cute dog"
+
+  end
 
 
   def get_gif_for query
