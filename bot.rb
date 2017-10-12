@@ -28,7 +28,6 @@ Rubotnik::PersistentMenu.enable
 # ['Take questionnaire', 'QUESTIONNAIRE'], ['Have a gif', 'HAVEAGIF'])
 
 
-#TRUST_QUICK_REPLIES
 
   intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_STAGE_1'], ['Tell me more', 'PERSUADE_STAGE_1'])
 
@@ -129,15 +128,13 @@ Rubotnik::PersistentMenu.enable
         }
 
         bind 'i', 'am', 'ready', all:true, to: :trust_stage2, start_thread: {
-          say 'Cool! What are you interested in?'
-          quick_replies: trust_stage_qr_1
+          say 'Cool! What are you interested in?', quick_replies: trust_stage_qr_1
         }
 
         bind 'tell', 'me', 'more', all:true, to: :trust_stage2, start_thread: {
           say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
           say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
-          say 'such as 🍕 Pizza or 🥗 Salad'
-          quick_replies: persuade_stage_qr_1
+          say 'such as 🍕 Pizza or 🥗 Salad', quick_replies: persuade_stage_qr_1
         }
 
 
