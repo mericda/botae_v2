@@ -172,9 +172,6 @@ HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
             say 'I can also check and gather the places that your facebook friends liked or posted photos.'
             say 'Here are some suggestions for you:', quick_replies: HINTS
 
-          else
-            say 'I could not get your name, sorry :('
-          end
 
         end
 
