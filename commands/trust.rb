@@ -122,22 +122,21 @@ module Trust
     #handle_facebook_auth
     # if FACEBOOK_AUTH == 1
     say 'Now, give me some time while I am looking what your friends did.'
-    say 'I will let you know when I am ready to share the results, it usually takes around two minutes.'
+    say 'I will let you know when I am ready to share the results.'
     #sleep 120
     say 'user_name, I have both good and bad news.'
-    sleep 3
 
-    say 'Bad news first: I couldn\t manage to see your friends information with this level of authentication.'
-    say 'and I will be honest with you, I don\'t know how to process such information.'
-    say 'So in other words,  I had access to your facebook profile for a second, but I am not designed to process such information.'
-    sleep 3
-    say 'Now, some good news. Your data is safe, and my real aim as a bot was to show how easy it is to trust a program such as myself to give access for personal data. '
-    say 'Although my aim is purely educational since I am part of a project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs,'
-    say 'There are many programs, bots that have bad intentions such as stealing personal information to do malicious things.'
+
+    say 'Bad news first: I will be honest with you. Although you trusted me to show you popular places among your friends,'
+    say 'I am not designed to process such informationi at first hand.'
+
+    say 'Now, some good news. Your data is safe, and my real aim as a bot was to show how easy it is to trust a program like myself to give access for personal data. '
+    say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs,'
     say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+    say 'There are many malicious bots that have bad intentions such as stealing personal information such as your accounnt or location information.'
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-    sleep 5
-    say 'I hope you understand my good intentions, but if you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu. '
+    say 'I hope you understand my good intentions. '
+    say 'If you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu or visit the project page below.'
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     say 'Thank you! '
     stop_thread
