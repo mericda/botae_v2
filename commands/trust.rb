@@ -106,7 +106,7 @@ module Trust
   def trust_stage_5
     if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
       say 'Lets do this'
-      next_command :trust_facebook_auth
+      trust_auth
 
     else
       trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Tell me more', 'TRUST_NOT_STABLE'])
@@ -117,7 +117,7 @@ module Trust
   end
 
 
-  def trust_facebook_auth
+  def trust_auth
     #handle_facebook_auth
     # if FACEBOOK_AUTH == 1
     say 'Now, give me some time while I am looking what your friends did.'
