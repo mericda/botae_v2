@@ -34,7 +34,7 @@ module Trust
     if message_contains_location?
       handle_user_location
     else
-      say("Please try your request again and use 'Send location' button below"), quick_replies: LOCATION_PROMPT
+      say("Please try your request again and use \'Send location\' button below"), quick_replies: LOCATION_PROMPT
       next_command :lookup_location
     end
 
