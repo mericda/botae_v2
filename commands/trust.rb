@@ -163,7 +163,6 @@ module Trust
 @message.typing_off
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     say 'Thank you! '
-  end
     stop_thread
     #else #IF_FACEBOOK_AUTH == 0
     #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
