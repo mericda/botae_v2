@@ -139,7 +139,7 @@ module Trust
     say 'I hope you understand my good intentions, but if you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu. '
     UI::FBButtonTemplate.new(EMAIL).send(@user)
     say 'Thank you! '
-    #stop_thread
+    stop_thread
     #else #IF_FACEBOOK_AUTH == 0
     #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
     #say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
