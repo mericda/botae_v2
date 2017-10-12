@@ -128,13 +128,13 @@ Rubotnik::PersistentMenu.enable
         }
 
         bind 'i', 'am', 'ready', all:true, to: :trust_stage2, start_thread: {
-          say 'Cool! What are you interested in?', quick_replies: trust_stage_qr_1
+          message: 'Cool! What are you interested in?', quick_replies: trust_stage_qr_1
         }
 
-        bind 'tell', 'me', 'more', all:true, to: :trust_stage2, start_thread: {
-          say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
-          say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
-          say 'such as 🍕 Pizza or 🥗 Salad', quick_replies: persuade_stage_qr_1
+        bind 'tell', 'me', 'more', all:true, to: :persuade_stage2, start_thread: {
+          message: 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
+          message: 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
+          message: 'such as 🍕 Pizza or 🥗 Salad', quick_replies: persuade_stage_qr_1
         }
 
 
@@ -162,13 +162,12 @@ Rubotnik::PersistentMenu.enable
       Rubotnik::PostbackDispatch.new(postback).route do
 
         ## START THE CONVERSATION
-        bind 'START' , to: :start_persuade, start_thread: {
+        bind 'START' do
           say 'Hi! 👋 I am here to find you the best places for food and coffee closest to you.'
           say 'I can also check and gather the places that your Facebook friends liked or posted photos.'
           UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
           say 'Ready to browse the best?', quick_replies: intention_replies
-
-        }
+        end
 
 
         bind 'CAROUSEL', to: :show_carousel
@@ -202,10 +201,9 @@ Rubotnik::PersistentMenu.enable
           quick_replies: trust_stage_qr_1
         }
         bind 'PERSUADE_STAGE_1', to: :trust_stage2, start_thread: {
-          say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
-          say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
-          say 'such as 🍕 Pizza or 🥗 Salad'
-          quick_replies: persuade_stage_qr_1
+            message: 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
+            message: 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
+            message:'such as 🍕 Pizza or 🥗 Salad', quick_replies: persuade_stage_qr_1
         }
 
       end
