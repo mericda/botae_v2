@@ -1,3 +1,5 @@
+require 'httparty'
+require 'json'
 # Showcases a chained sequence of commands that gather the data
 # and store it in the answers hash inside the User instance.
 module Trust
