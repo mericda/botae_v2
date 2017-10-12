@@ -144,7 +144,7 @@ Bot.on :message do |message|
     # NB: Should always come last. Takes a block.
     default do
 
-      say 'Here are some suggestions for you:', quick_replies: HINTS
+      say 'I have no idea about what you are saying.'#, quick_replies: HINTS
 
 
       #      greetings = firstEntity(@message.nlp, 'greetings')
