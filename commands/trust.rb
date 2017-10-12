@@ -2,7 +2,7 @@
 # and store it in the answers hash inside the User instance.\
 
 LOCATION_PROMPT = UI::QuickReplies.location
-NAY_FEEDBACK = [{['The results were not accurate']}, {['I know those places, and they are not good']}, {['Option 3']}, {['Option 4']}, {['Option 5']}, {['Option 6']}, {['Option 7']}]
+#NAY_FEEDBACK = [{['The results were not accurate']}, {['I know those places, and they are not good']}, {['Option 3']}, {['Option 4']}, {['Option 5']}, {['Option 6']}, {['Option 7']}]
 EMAIL = [
   {
     type: :web_url,
@@ -76,8 +76,9 @@ next_command :trust_stage_3
       else
         #
         say 'Sorry to hear that 😭'
-        trust_stage_qr_feedback= UI::QuickReplies.build(*NAY_FEEDBACK)
+        #trust_stage_qr_feedback= UI::QuickReplies.build(*NAY_FEEDBACK)
         say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
+        stop_thread
       end
       trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
         say 'Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
