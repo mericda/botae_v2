@@ -102,9 +102,9 @@ Bot.on :message do |message|
     }
 
     bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
-      say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
-      say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
-      say 'such as 🍕 Pizza or 🥗 Salad', quick_replies: persuade_stage_qr_1
+      say "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location."
+      say "I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places."
+      say "such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
     }
 
 
