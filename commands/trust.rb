@@ -2,7 +2,7 @@
 # and store it in the answers hash inside the User instance.\
 
 LOCATION_PROMPT = UI::QuickReplies.location
-NAY_FEEDBACK = [{'The results were not accurate'}, {'I know those places, and they are not good'}, {'Option 3'},{'Option 4'},{'Option 5'},{'Option 6'},{'Option 7'}]
+NAY_FEEDBACK = [{['The results were not accurate']}, {['I know those places, and they are not good']}, {['Option 3']}, {['Option 4']}, {['Option 5']}, {['Option 6']}, {['Option 7']}]
 EMAIL = [
   {
     type: :web_url,
