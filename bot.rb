@@ -33,7 +33,7 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_STAGE_1'], ['Te
 
 
 # Build a quick reply that prompts location from user
-LOCATION_PROMPT = UI::QuickReplies.location
+#LOCATION_PROMPT = UI::QuickReplies.location
 
 
 # Define vartiables you want to use for both messages and postbacks
