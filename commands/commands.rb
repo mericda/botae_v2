@@ -19,6 +19,8 @@ module Commands
   REVERSE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.freeze
 
 
+
+
   def get_gif_for query
 
 
