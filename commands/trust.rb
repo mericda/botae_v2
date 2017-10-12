@@ -41,7 +41,7 @@ module Trust
     say "Looks like you're at #{address}"
     @message.typing_off
 
-    :show_carousel
+    show_carousel(image_ratio: :square)
     trust_stage_qr_3_1 = UI::QuickReplies.build(['Yay', 'TRUST_STABLE'], ['Quit', 'TRUST_NOT_STABLE'])
       say 'Did you like it?', quick_replies: trust_stage_qr_3_1
 next_command :trust_stage_3
