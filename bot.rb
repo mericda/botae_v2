@@ -23,8 +23,21 @@ Rubotnik::PersistentMenu.enable
 # NOTE: QuickReplies.build should be called with a splat operator
 # if a set of quick replies is an array of arrays.
 # e.g. UI::QuickReplies.build(*replies)
-HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
-  ['Take questionnaire', 'QUESTIONNAIRE'], ['Have a gif', 'HAVEAGIF'])
+
+#HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
+# ['Take questionnaire', 'QUESTIONNAIRE'], ['Have a gif', 'HAVEAGIF'])
+
+
+#TRUST_QUICK_REPLIES
+  TRUST_INT_0_QR = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_INT_1_CHOICE_A'], ['🍱 Food', 'TRUST_INT_1_CHOICE_B'])
+
+#STAGE_QUICK_REPLIES
+STAGE_1_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_2'])
+STAGE_2_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_3'])
+STAGE_3_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_4'])
+STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Tell me more', 'STAGE_5'])
+STAGE_4_QR = UI::QuickReplies.build(['I am ready', 'TRUST_INTENTION'], ['Quit', 'EXIT_SURVEY'])
+
 
   # Build a quick reply that prompts location from user
   LOCATION_PROMPT = UI::QuickReplies.location
@@ -169,13 +182,56 @@ HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
 
         ## START THE CONVERSATION
         bind 'START' do
-            say ' Hi! 👋 I am here to find you the best places for food and coffee closest to you.'
+          @message.typing_on
+            say 'Hi! 👋 I am here to find you the best places for food and coffee closest to you.'
+            @message.typing_on
             say 'I can also check and gather the places that your Facebook friends liked or posted photos.'
-            UI::ImageAttachment.new('https://unsplash.it/600/400?random').send(@user)
-            say 'Here are some suggestions for you:', quick_replies: HINTS
+            @message.typing_on
+            UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
 
-
+            say 'Ready to browse the best?', quick_replies: STAGE_1_QR
         end
+
+  ## TRUST INTENTION  STAGES
+
+  #STAGE O
+  bind 'TRUST_INTENTION' do
+    @message.typing_on
+      say 'Cool 😎 What are you interested in?', quick_replies: TRUST_INT_0_QR
+  end
+
+#STAGE 1
+bind 'TRUST_INT_1_CHOICE_A' do
+  @message.typing_on
+    say 'Nice! Let me see if I can find something better than Starbucks.'
+    @message.typing_on
+    say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION
+end
+
+
+  ## STAGE_2
+ ## STAGE_2
+
+  ## STAGE_2
+  bind 'STAGE_2' do
+    @message.typing_on
+      say 'So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.'
+      @message.typing_on
+      say 'I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.'
+      @message.typing_on
+      say 'such as 🍕 Pizza or 🥗 Salad'
+        say 'Ready to browse the best?', quick_replies: STAGE_2_QR
+  end
+
+
+
+    ## TRUST INTENTION  STAGES
+
+
+    ## STAGE_2
+   ## STAGE_2
+
+
 
         bind 'CAROUSEL', to: :show_carousel
         bind 'BUTTON_TEMPLATE', to: :show_button_template
@@ -192,9 +248,12 @@ HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
           show_carousel(image_ratio: :square)
         end
 
+
+
+
+
         # No custom parameter passed, can use simplified syntax
-        bind 'HORIZONTAL_IMAGES', to: :show_carousel
-        bind 'HAVEAGIF', to: :get_cute_gif
+
         bind 'LOCATION', to: :lookup_location, start_thread: {
           message: 'Let me know your location',
           quick_replies: LOCATION_PROMPT
