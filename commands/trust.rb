@@ -7,7 +7,7 @@ EMAIL_TEXT = "Send an email to mericda@cmu.edu ".freeze
 EMAIL = [
   {
     type: :web_url,
-    url: 'mailto:mericda@cmu.edu',
+    url: 'http://www.mericdagli.com',
     title: "Send an email to mericda@cmu.edu"
   }
 ].freeze
