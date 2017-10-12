@@ -1,7 +1,3 @@
-require 'httparty'
-require 'json'
-require_relative 'rubotnik/rubotnik'
-require_relative 'helpers/helpers'
 # Showcases a chained sequence of commands that gather the data
 # and store it in the answers hash inside the User instance.\
 
