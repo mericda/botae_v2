@@ -142,9 +142,9 @@ module Trust
     @message.typing_on
     say 'There are many malicious bots that have bad intentions such as stealing personal information such as your accounnt or location information.'
     @message.typing_off
-    @message.typing_on
+
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-    @message.typing_off
+
     @message.typing_on
     say 'I hope you understand my good intentions. '
     @message.typing_off
