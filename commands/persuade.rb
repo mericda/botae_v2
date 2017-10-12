@@ -63,9 +63,7 @@ module Persuade
     if @message.quick_reply == 'QUIT_SURVEY' || @message.text =~ /yes/i
       say 'Sorry to hear that!'
       say 'Is there any question that you want to ask me?'
-      persuade_stage_qr_3 = UI::QuickReplies.build(%w[I am ready TRUST], %w[No BYE'])
-      say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
-      next_command :persuade_stage_5
+      stop_thread
     else
       stop_thread
       next_command :trust_stage_2
