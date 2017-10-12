@@ -73,7 +73,7 @@ next_command :trust_stage_3
       if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
         #log = @message.text
         say 'Great 🙌'
-        stop_thread
+        
       else
         #
         say 'Sorry to hear that 😭'
