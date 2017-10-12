@@ -126,11 +126,11 @@ Bot.on :message do |message|
       quick_replies: questionnaire_replies
     }
 
-    bind 'i', 'am', 'ready', all:true, to: :trust_stage2, start_thread: {
+    bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
       message: "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
     }
 
-    bind 'tell', 'me', 'more', all:true, to: :persuade_stage2, start_thread: {
+    bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
       message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.",
       message: "I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.",
       message: "such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
@@ -195,10 +195,10 @@ Bot.on :postback do |postback|
       message: questionnaire_welcome,
       quick_replies: questionnaire_replies
     }
-    bind 'TRUST_STAGE_1', to: :trust_stage2, start_thread: {
+    bind 'TRUST_STAGE_1', to: :trust_stage_2, start_thread: {
       message:  "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
     }
-    bind 'PERSUADE_STAGE_1', to: :trust_stage2, start_thread: {
+    bind 'PERSUADE_STAGE_1', to: :trust_stage_2, start_thread: {
       message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.",
       message: "I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.",
       message: "such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
