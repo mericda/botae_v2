@@ -7,3 +7,8 @@ gem 'httparty'
 gem 'puma'
 gem 'sinatra'
 gem 'giphy'
+gem 'activerecord'
+gem 'sinatra-activerecord' # excellent gem that ports ActiveRecord for Sinatra
+gem 'activesupport'
+gem 'pg'
+gem 'rake'
