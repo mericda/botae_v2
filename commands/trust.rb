@@ -400,13 +400,13 @@ module Trust
       @message.typing_on
       #sleep 3
 
-      say 'I hope you understand my good intentions.' + BYE.sample + " #{user_name} ✌️"
+      say BYE.sample + ", #{user_name}! ✌️"
       UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
     else
       @message.typing_on
       #sleep 3
-      say 'I hope you understand my good intentions.' + BYE.sample + " ✌️"
+      say BYE.sample + "! ✌️"
       UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
     end
