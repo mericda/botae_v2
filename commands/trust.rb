@@ -257,9 +257,10 @@ module Trust
 
   @message.typing_on
     say 'Bad news first.'
-    sleep 3
+
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
 @message.typing_on
+sleep 3
     say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
     next_command :trust_auth_2
 
@@ -271,12 +272,13 @@ module Trust
 
     if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
 @message.typing_on
+sleep 3
       say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
 
     end
+    @message.typing_on
 sleep 3
     trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
-@message.typing_on
     say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
     next_command :trust_auth_3
 
@@ -292,6 +294,8 @@ sleep 3
 sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     end
+    stop_thread
+
   @message.typing_on
   sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
@@ -304,7 +308,7 @@ sleep 1
     say 'Thank you! '
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
-    stop_thread
+
   end
   #else #IF_FACEBOOK_AUTH == 0
   #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
