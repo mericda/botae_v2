@@ -187,7 +187,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
       ## START THE CONVERSATION
       bind 'START' do
-        composer_input_disabled: true,
+        composer_input_disabled: true
         say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
         say 'I can also find the places popular among your Facebook friends.'
         UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
