@@ -375,6 +375,8 @@ module Trust
 
 
   def trust_auth_4
+    fall_back && return
+
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
@@ -388,10 +390,7 @@ module Trust
       say 'I hope you understand my good intentions.' + BYE.sample + " ✌️"
     end
 
-    @message.typing_on
-    sleep 3
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-        @message.typing_off
 stop_thread
   end
 
@@ -407,7 +406,7 @@ stop_thread
   def fall_back
     say 'You tried to fool me, human! Start over!' unless text_message?
     return false unless !text_message? || stop_word_used?('Stop')
-    stop_questionnaire
+    stop_thread
     puts 'Fallback triggered!'
     true # to trigger return from the caller on 'and return'
   end
