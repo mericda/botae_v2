@@ -194,6 +194,7 @@ module Trust
     if message_contains_location?
       handle_user_location
     else
+      @user.answers[:lookup_location_fail] = @message.text
       @message.typing_on
       sleep 3
       say "Please try your request again and use \'Send location\' button below", quick_replies: LOCATION_PROMPT
@@ -243,6 +244,8 @@ module Trust
 
   def trust_stage_3
     fall_back && return
+    @user.answers[:trust_stage_2] = @message.text
+
     # Fallback functionality if stop word used or user input is not text
     if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
       #log = @message.text
@@ -273,6 +276,7 @@ module Trust
   def trust_stage_4
     fall_back && return
     #log = @message.text
+    @user.answers[:trust_stage_3] = @message.text
 
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
@@ -293,6 +297,7 @@ module Trust
 
   def trust_stage_5
     fall_back && return
+    @user.answers[:trust_stage_4] = @message.text
 
     if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
 
@@ -313,6 +318,7 @@ module Trust
     #handle_facebook_auth
     # if FACEBOOK_AUTH == 1
     fall_back && return
+    @user.answers[:trust_stage_5] = @message.text
 
     #  say 'Now, give me some time while I am looking what your friends did.'
     #  say 'I will let you know when I am ready to share the results.'
@@ -327,10 +333,9 @@ module Trust
 
     @message.typing_on
     say 'Bad news first.'
-
-    trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
     @message.typing_on
     sleep 3
+    trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
     say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
     next_command :trust_auth_2
 
@@ -339,6 +344,7 @@ module Trust
 
   def trust_auth_2
     fall_back && return
+    @user.answers[:trust_auth_1] = @message.text
 
     if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
       @message.typing_on
@@ -348,7 +354,7 @@ module Trust
     end
     @message.typing_on
     sleep 3
-    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Why?', 'CONTINUE'])
+    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Why?', 'CONTINUE_TRUST_FINAL'])
     say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
     next_command :trust_auth_3
 
@@ -356,7 +362,9 @@ module Trust
 
   def trust_auth_3
     fall_back && return
-    if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i || @message.text =~ /why?/i
+    @user.answers[:trust_auth_2] = @message.text
+
+    if @message.quick_reply == 'CONTINUE_TRUST_FINAL' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
       say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
@@ -371,12 +379,13 @@ module Trust
     #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
     trust_auth_4
-
+stop_thread
   end
 
 
   def trust_auth_4
     fall_back && return
+    @user.answers[:trust_auth_3] = @message.text
 
     user_info = get_user_info(:first_name)
     if user_info
@@ -392,7 +401,6 @@ module Trust
     end
 
     #UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-stop_thread
   end
 
   #else #IF_FACEBOOK_AUTH == 0
@@ -415,6 +423,11 @@ stop_thread
   # specify stop word
   def stop_word_used?(word)
     !(@message.text =~ /#{word.downcase}/i).nil?
+  end
+
+  def user_responses
+    stop_thread
+    @user.answers = {}
   end
 
 
