@@ -387,7 +387,10 @@ module Trust
 
 
   def trust_auth_4
-    @user.answers[:trust_auth_3] = @message.text
+    fall_back && return
+
+    @user.answers[:trust_auth_qr_3] = @message.text
+
       if @message.quick_reply == 'LEARN_MORE' || @message.text =~ /yes/i
         UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
       end
