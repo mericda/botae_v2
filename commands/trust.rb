@@ -254,6 +254,8 @@ module Trust
     next_command :trust_auth_2
 
   end
+
+
   def trust_auth_2
     fall_back && return
 
@@ -267,6 +269,7 @@ module Trust
     next_command :trust_auth_3
 
   end
+
   def trust_auth_3
     fall_back && return
     if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
@@ -290,7 +293,6 @@ module Trust
   #end
   #GET CONFIRMATION OF USERS
 
-end
 
 
 
