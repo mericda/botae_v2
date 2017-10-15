@@ -125,14 +125,11 @@ module Trust
 
 
       @@choice = 'coffee'
-      puts "#{choice}"
     else
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       @@choice = 'food'
-      puts "#{choice}"
     end
     #log = @message.text
-    puts "#{choice}"
     say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
     next_command :lookup_location
   end
