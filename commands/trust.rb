@@ -89,16 +89,16 @@ module Trust
       #stop_thread
     end
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
-    say 'Anyway, Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
+    say 'Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     next_command :trust_stage_4
   end
 
 
   def trust_stage_4
     fall_back && return
+    #log = @message.text
 
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
-      #log = @message.text
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
       say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
       next_command :trust_stage_5
