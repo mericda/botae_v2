@@ -139,6 +139,8 @@ Bot.on :message do |message|
           say "Hello!"
         elsif  entity_max == 'bye' && confidence_max > 0.9
           say "bye!"
+        elsif  entity_max == 'help' && confidence_max > 0.9
+          say "I am here to help you!", quick_replies: start
 else
   say 'I have no idea about what you are saying.'#, quick_replies: HINTS
 
@@ -162,8 +164,8 @@ Bot.on :postback do |postback|
 
     ## START THE CONVERSATION
     bind 'START' do
-      say 'Hi! 👋 I am here to find you the best places for food and coffee closest to you.'
-      say 'I can also check and gather the places that your Facebook friends liked or posted photos.'
+      say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
+      say 'I can also find the places popular among your Facebook friends.'
       UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
       say 'Ready to browse the best?', quick_replies: intention_replies
     end
