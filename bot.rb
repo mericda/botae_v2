@@ -30,14 +30,16 @@ Rubotnik::PersistentMenu.enable
 
 GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba!"]
 INTROS = ["I'm Meriç's personal bot, Meriç.me🤖", "You're talking to Meriç's personal bot, Meriç.me🤖", "Meriç's personal bot, Meriç.me🤖 at your service"]
+BYE = ["Goodbye!","Have a good one!", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba!"]
 
 
 
 
-APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "]
-HINTS_TEXT = ["You can say 'play' to start a game or 'quit' when its running. Then choose 'rock', 'paper' or 'scissors'", "I understand the words play, quit, rock, paper, and scissors. And not much more", " I'm a simple bot with limited vocabulary. Ask me to play or quit. Or say rock, paper, and scissors when we're in a game" ]
+APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "I don\'t understand everything. "]
+HELP = ["Instead, I can help you to find the closest best places for a coffee or food. Ready to go?", "Instead, I know what is the best places for coffee or food nearby. Ready to find out?", "Instead, I do one thing good! Finding the best food and coffee nearby. Are you ready? "]
 
-
+NO = ["Tell me more", "More","More information"]
+YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me","Yes, I\'m ready"]
 
 
 intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_STAGE_1'], ['Tell me more', 'PERSUADE_STAGE_1'])
@@ -53,7 +55,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
   # outside both Bot.on method calls.
   trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
 
-  persuade_stage_qr_1 = UI::QuickReplies.build(['Sounds good', 'TRUST'], ['Tell me more', 'PERSUADE'])
+  persuade_stage_qr_1 = UI::QuickReplies.build([YES, 'TRUST'], [NO, 'PERSUADE'])
 
   ####################### ROUTE MESSAGES HERE ################################
 
@@ -143,24 +145,34 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
               confidence_max = confidence
             end
           end
+          user_info = get_user_info(:first_name,:last_name,:profile_pic)
+          if user_info
+            user_name = user_info[:first_name]
 
-          puts "Entity with max confidence: #{entity_max} #{confidence_max}"
-          if entity_max == 'greetings' && confidence_max > 0.9
-            say "Hello!"
-          elsif  entity_max == 'bye' && confidence_max > 0.9
-            say "bye!"
-          elsif  entity_max == 'help' && confidence_max > 0.9
-            say "I can help you to find the closest best places for a coffee or food."
-            say 'Ready to browse the best?', quick_replies: intention_replies
+
+            puts "Entity with max confidence: #{entity_max} #{confidence_max}"
+            if entity_max == 'greetings' && confidence_max > 0.9
+              say GREETINGS.sample + "#{user_name} 👋" + HELP.sample
+              say 'I can also find the places popular among your Facebook friends.'
+              say 'Ready to browse the best?', quick_replies: intention_replies
+            elsif  entity_max == 'bye' && confidence_max > 0.9
+              say BYE.sample + "#{user_name} ✌️"
+            elsif  entity_max == 'help' && confidence_max > 0.9
+              say "I can help you to find the closest best places for a coffee or food."
+              say 'Ready to browse the best?', quick_replies: intention_replies
+            else
+              say   APOLOGIES.sample + " " + INTROS.sample
+              say   APOLOGIES.sample + " " + INTROS.sample
+
+              , quick_replies: intention_replies
+            end
           else
-            say   APOLOGIES.sample + " " + HINTS_TEXT.sample, quick_replies: intention_replies
+            say   APOLOGIES.sample + " " + HELP.sample, quick_replies: intention_replies
+            #, quick_replies: HINTS
+
           end
         else
-          say   APOLOGIES.sample + " " + HINTS_TEXT.sample, quick_replies: intention_replies
-          #, quick_replies: HINTS
-
         end
-
 
         #      greetings = firstEntity(@message.nlp, 'greetings')
         #        if greetings && greetings.confidence > 0.8
