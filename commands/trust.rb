@@ -11,6 +11,7 @@ EMAIL = [
     title: "Visit project page"
   }
 ].freeze
+choice = nil
 
 
 COFFEE = [
