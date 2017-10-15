@@ -354,8 +354,9 @@ module Trust
     end
     @message.typing_on
     sleep 3
-    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell more', 'CONTINUE_TRUST_FINAL'])
-    say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
+    say 'I wasn\'t able to get your Facebook data so your data is perfectly safe.'
+    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP_TRUST_FINAL'], ['Why?', 'CONTINUE_TRUST_FINAL'])
+    say 'I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
     next_command :trust_auth_3
 
   end
@@ -367,17 +368,18 @@ module Trust
     if @message.quick_reply == 'CONTINUE_TRUST_FINAL' || @message.text =~ /yes/i || @message.text =~ /tell more/i
       @message.typing_on
       sleep 3
-      say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
+      say 'There are many malicious bots. They can steal your personal information such as your account details or location.'
 
       @message.typing_on
       sleep 3
-      say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+      say 'Please think twice when you are providing access or directly giving your personal info to a computer program.'
     else
     end
-    #@message.typing_on
-    #sleep 3
-    say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
-    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+    @message.typing_on
+    sleep 3
+    say 'By the way, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
+    trust_auth_qr_3  = UI::QuickReplies.build(['Yes', 'LEARN_MORE'], ['No', 'THANKS'])
+    say 'Want to learn more about the project?', quick_replies: trust_auth_qr_3
 
     trust_auth_4
 
@@ -386,9 +388,9 @@ module Trust
 
   def trust_auth_4
     @user.answers[:trust_auth_3] = @message.text
-
-UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-
+      if @message.quick_reply == 'LEARN_MORE' || @message.text =~ /yes/i
+        UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+      end
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
@@ -396,10 +398,14 @@ UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
       #sleep 3
 
       say 'I hope you understand my good intentions.' + BYE.sample + " #{user_name} ✌️"
+      UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+
     else
       @message.typing_on
       #sleep 3
       say 'I hope you understand my good intentions.' + BYE.sample + " ✌️"
+      UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+
     end
 
 
