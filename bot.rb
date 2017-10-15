@@ -126,10 +126,26 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       # Falback action if none of the commands matched the input,
       # NB: Should always come last. Takes a block.
       default do
-
         if text_message?
-          entity_check
-
+          entities = @message.nlp["entities"]
+          puts "#{entities}"
+          keys = entities.keys
+          # store the entity with the
+          # highest confidence
+          entity_max = nil
+          confidence_max = 0
+          puts "#{keys.to_s}"
+          # iterate over the keys and find
+          #the one with the highest confidence
+          keys.each do |key|
+            confidence = entities[key].first['confidence']
+            confidence = confidence.to_f
+            puts "#{key} #{confidence}"
+            if confidence > confidence_max
+              entity_max = key
+              confidence_max = confidence
+            end
+          end
           user_info = get_user_info(:first_name)
           if user_info
             user_name = user_info[:first_name]
@@ -155,10 +171,13 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
           else
             say   APOLOGIES.sample + " Instead, " + HELP.sample
             say HELP_CTA.sample, quick_replies: intention_replies
-          end
 
+            #, quick_replies: HINTS
+
+          end
         else
         end
+
         #      greetings = firstEntity(@message.nlp, 'greetings')
         #        if greetings && greetings.confidence > 0.8
         #          say 'it works',
@@ -167,76 +186,77 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
       end
     end
-end
-    ######################## ROUTE POSTBACKS HERE ###############################
+  end
 
-    Bot.on :postback do |postback|
-      Rubotnik::PostbackDispatch.new(postback).route do
+  ######################## ROUTE POSTBACKS HERE ###############################
 
-        ## START THE CONVERSATION
-        bind 'START' do
+  Bot.on :postback do |postback|
+    Rubotnik::PostbackDispatch.new(postback).route do
 
-          say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
-          say 'I can also find the places popular among your Facebook friends.'
-          UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
-          say 'Ready to browse the best?', quick_replies: intention_replies
-        end
+      ## START THE CONVERSATION
+      bind 'START' do
 
-
-        bind 'CAROUSEL', to: :show_carousel
-        bind 'BUTTON_TEMPLATE', to: :show_button_template
-        bind 'IMAGE_ATTACHMENT', to: :send_image
-
-        # Use block syntax when a command takes an argument rather
-        # than 'message' or 'user' (which are accessible from everyhwere
-        # as instance variables, no need to pass them around).
-        bind 'BUTTON_TEMPLATE_ACTION' do
-          say "I don't really do anything useful"
-        end
-
-        bind 'SQUARE_IMAGES' do
-          show_carousel(image_ratio: :square)
-        end
-
-
-
-
-
-        # No custom parameter passed, can use simplified syntax
-
-
-        bind 'QUESTIONNAIRE', to: :start_questionnaire, start_thread: {
-          message: questionnaire_welcome,
-          quick_replies: questionnaire_replies
-        }
-        bind 'TRUST_STAGE_1', to: :trust_stage_2, start_thread: {
-          composer_input_disabled: true,
-          message:  "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
-        }
-        bind 'PERSUADE_STAGE_1', to: :persuade_stage_2, start_thread: {
-          composer_input_disabled: true,
-          message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.\n such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
-        }
-
+        say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
+        say 'I can also find the places popular among your Facebook friends.'
+        UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
+        say 'Ready to browse the best?', quick_replies: intention_replies
       end
-    end
-
-    ##### USE STANDARD SINATRA TO IMPLEMENT WEBHOOKS FOR OTHER SERVICES #######
 
 
+      bind 'CAROUSEL', to: :show_carousel
+      bind 'BUTTON_TEMPLATE', to: :show_button_template
+      bind 'IMAGE_ATTACHMENT', to: :send_image
 
-
-    # Example of API integration. Use regular Sintatra syntax to define endpoints.
-    post '/incoming' do
-      begin
-        sender_id = params['id']
-        user = UserStore.instance.find_or_create_user(sender_id)
-        say("You got a message: #{params['message']}", user: user)
-      rescue
-        p 'User not recognized or not available at the time'
+      # Use block syntax when a command takes an argument rather
+      # than 'message' or 'user' (which are accessible from everyhwere
+      # as instance variables, no need to pass them around).
+      bind 'BUTTON_TEMPLATE_ACTION' do
+        say "I don't really do anything useful"
       end
-    end
 
-    get '/' do
-      'Nothing to look at'
+      bind 'SQUARE_IMAGES' do
+        show_carousel(image_ratio: :square)
+      end
+
+
+
+
+
+      # No custom parameter passed, can use simplified syntax
+
+
+      bind 'QUESTIONNAIRE', to: :start_questionnaire, start_thread: {
+        message: questionnaire_welcome,
+        quick_replies: questionnaire_replies
+      }
+      bind 'TRUST_STAGE_1', to: :trust_stage_2, start_thread: {
+        composer_input_disabled: true,
+        message:  "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
+      }
+      bind 'PERSUADE_STAGE_1', to: :persuade_stage_2, start_thread: {
+        composer_input_disabled: true,
+        message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.\n such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
+      }
+
     end
+  end
+
+  ##### USE STANDARD SINATRA TO IMPLEMENT WEBHOOKS FOR OTHER SERVICES #######
+
+
+
+
+  # Example of API integration. Use regular Sintatra syntax to define endpoints.
+  post '/incoming' do
+    begin
+      sender_id = params['id']
+      user = UserStore.instance.find_or_create_user(sender_id)
+      say("You got a message: #{params['message']}", user: user)
+    rescue
+      p 'User not recognized or not available at the time'
+    end
+  end
+
+  get '/' do
+    'Nothing to look at'
+  end
