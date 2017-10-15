@@ -385,7 +385,6 @@ module Trust
 
 
   def trust_auth_4
-    fall_back && return
     @user.answers[:trust_auth_3] = @message.text
 
     user_info = get_user_info(:first_name)
