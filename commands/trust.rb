@@ -5,7 +5,7 @@ module Trust
   # commands are mixed into Dispatch classes as private methods.
   module_function
 
-
+class Stages
   # Showcases a chained sequence of commands that gather the data
   # and store it in the answers hash inside the User instance.\
 
@@ -179,6 +179,7 @@ module Trust
       @@choice = 'food'
 
     else
+      trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
       say "To proceed, tell me what are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
       next_command:trust_stage_2
     end
