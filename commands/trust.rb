@@ -23,9 +23,9 @@ module Trust
     fall_back && return
 
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
-      say 'Nice! Let me see if I can find something better than Starbucks.'
+      say 'Nice! Let me see if I can find ☕️ better than Starbucks.'
     else
-      say 'Nice! Let me see if I can find something better than Subway.'
+      say 'Nice! Let me see if I can find 🍽 better than Subway.'
     end
     #log = @message.text
     say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
