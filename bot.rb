@@ -140,7 +140,8 @@ Bot.on :message do |message|
         elsif  entity_max == 'bye' && confidence_max > 0.9
           say "bye!"
         elsif  entity_max == 'help' && confidence_max > 0.9
-          say "I am here to help you!", quick_replies: start
+          say "I can help you to find the closest best places for a coffee or food."
+          say 'Ready to browse the best?', quick_replies: intention_replies
 else
   say 'I have no idea about what you are saying.'#, quick_replies: HINTS
 
