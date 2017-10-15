@@ -152,6 +152,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
         elsif  entity_max == 'help' && confidence_max > 0.9
           say "I can help you to find the closest best places for a coffee or food."
           say 'Ready to browse the best?', quick_replies: intention_replies
+          say   APOLOGIES.sample + " " + HINTS_TEXT.sample, quick_replies: intention_replies
 
 
         end
