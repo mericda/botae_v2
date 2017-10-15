@@ -1,167 +1,163 @@
-# Showcases a chained sequence of commands that gather the data
-# and store it in the answers hash inside the User instance.\
 
-LOCATION_PROMPT = UI::QuickReplies.location
-NAY_FEEDBACK = [['My location were not accurate', 'TEST_1'],['Yese', 'TEST_2'],['Yesa', 'TEST_3']]
-EMAIL_TEXT = "If you have questions about this research, please contact the researcher, Meric Dagli.".freeze
-EMAIL = [
-  {
-    type: :web_url,
-    url: 'http://www.mericdagli.com',
-    title: "Contact the Researcher"
-  }
-].freeze
-
-
-=begin
-Due to the time limitation, I am wizard of ozing the suggestions
-based on Yelp suggestions for Craig St @ Forbes Ave.
-=end
-
-
-COFFEE = [
-  {
-    title: 'Crepes Parisiennes',
-    # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_1.jpg',
-    subtitle: "🚶 2 mins ⭐️ 4.3 (128 Reviews)",
-    default_action: {
-      type: 'web_url',
-      url: 'https://www.google.com/search?q=Crepes+Parisiennes'
-    },
-    buttons: [
-      {
-        type: :web_url,
-        url: 'https://goo.gl/maps/VFryWVNiWZ12',
-        title: '🗺 Get Directions'
-      },
-      {
-        type: :web_url,
-        url: 'https://www.google.com/search?q=Crepes+Parisiennes',
-        title: '🤓 More Information'
-      }
-    ]
-  },
-  {
-    title: 'Tazza D\'Oro at Forbes Ave',
-    # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_2.jpg',
-    subtitle: "🚶 5 mins ⭐️ 4.6 (26 Reviews)",
-    default_action: {
-      type: 'web_url',
-      url: 'https://www.google.com/search?q=Taza+d+Oro+Forbes+Ave'
-    },
-    buttons: [
-      {
-        type: :web_url,
-        url: 'https://goo.gl/maps/jsLLSjYXGc22',
-        title: '🗺 Get Directions'
-      },
-      {
-        type: :web_url,
-        url: 'https://www.google.com/search?q=Taza+d+Oro+Forbes+Ave',
-        title: '🤓 More Information'
-      }
-    ]
-  },
-  {
-    title: 'Redhawk Coffee',
-    # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_4.jpg',
-    subtitle: "🚶 13 mins ⭐️ 5 (82 Reviews)",
-    default_action: {
-      type: 'web_url',
-      url: 'https://www.google.com/search?q=Redhawk+Coffee'
-    },
-    buttons: [
-      {
-        type: :web_url,
-        url: 'https://goo.gl/maps/BQLiRBhXifC2',
-        title: '🗺 Get Directions'
-      },
-      {
-        type: :web_url,
-        url: 'https://www.google.com/search?q=Redhawk+Coffee',
-        title: '🤓 More Information'
-      }
-    ]
-  }
-].freeze
-
-
-FOOD = [
-  {
-    title: 'Las Palmas Pittsburgh #2',
-    # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_1.jpg',
-    subtitle: "🚶 14 mins ⭐️ 4.6 (174 Reviews)",
-    default_action: {
-      type: 'web_url',
-      url: 'https://www.google.com/search?q=Las+Palmas+Pittsburgh+2'
-    },
-    buttons: [
-      {
-        type: :web_url,
-        url: 'https://goo.gl/maps/YzRDr4bBNwP2',
-        title: '🗺 Get Directions'
-      },
-      {
-        type: :web_url,
-        url: 'https://www.google.com/search?q=Las+Palmas+Pittsburgh+2',
-        title: '🤓 More Information'
-      }
-    ]
-  },
-  {
-    title: 'Mount Everest Sushi',
-    # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_2.jpg',
-    subtitle: "🚶 10 mins ⭐️ 5 (84 Reviews)",
-    default_action: {
-      type: 'web_url',
-      url: 'https://www.google.com/search?q=Mount+Everest+Sushi'
-    },
-    buttons: [
-      {
-        type: :web_url,
-        url: 'https://goo.gl/maps/oZTUkvWBoep',
-        title: '🗺 Get Directions'
-      },
-      {
-        type: :web_url,
-        url: 'https://www.google.com/search?q=Mount+Everest+Sushi',
-        title: '🤓 More Information'
-      }
-    ]
-  },
-  {
-    title: 'Piada Italian Street Food',
-    # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_3.jpg',
-    subtitle: "🚶 12 mins ⭐️ 4.6 (121 Reviews)",
-    default_action: {
-      type: 'web_url',
-      url: 'https://www.google.com/search?q=Piada+Italian+Street+Food'
-    },
-    buttons: [
-      {
-        type: :web_url,
-        url: 'https://goo.gl/maps/KB75PguDCAC2',
-        title: '🗺 Get Directions'
-      },
-      {
-        type: :web_url,
-        url: 'https://www.google.com/search?q=Piada+Italian+Street+Food',
-        title: '🤓 More Information'
-      }
-    ]
-  }
-].freeze
 
 module Trust
   # State 'module_function' before any method definitions so
   # commands are mixed into Dispatch classes as private methods.
   module_function
+
+
+  # Showcases a chained sequence of commands that gather the data
+  # and store it in the answers hash inside the User instance.\
+
+  LOCATION_PROMPT = UI::QuickReplies.location
+  NAY_FEEDBACK = [['My location were not accurate', 'TEST_1'],['Yese', 'TEST_2'],['Yesa', 'TEST_3']]
+  EMAIL_TEXT = "If you have questions about this research, please contact the researcher, Meric Dagli.".freeze
+  EMAIL = [
+    {
+      type: :web_url,
+      url: 'http://www.mericdagli.com',
+      title: "Contact the Researcher"
+    }
+  ].freeze
+
+  COFFEE = [
+    {
+      title: 'Crepes Parisiennes',
+      # Horizontal image should have 1.91:1 ratio
+      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_1.jpg',
+      subtitle: "🚶 2 mins ⭐️ 4.3 (128 Reviews)",
+      default_action: {
+        type: 'web_url',
+        url: 'https://www.google.com/search?q=Crepes+Parisiennes'
+      },
+      buttons: [
+        {
+          type: :web_url,
+          url: 'https://goo.gl/maps/VFryWVNiWZ12',
+          title: '🗺 Get Directions'
+        },
+        {
+          type: :web_url,
+          url: 'https://www.google.com/search?q=Crepes+Parisiennes',
+          title: '🤓 More Information'
+        }
+      ]
+    },
+    {
+      title: 'Tazza D\'Oro at Forbes Ave',
+      # Horizontal image should have 1.91:1 ratio
+      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_2.jpg',
+      subtitle: "🚶 5 mins ⭐️ 4.6 (26 Reviews)",
+      default_action: {
+        type: 'web_url',
+        url: 'https://www.google.com/search?q=Taza+d+Oro+Forbes+Ave'
+      },
+      buttons: [
+        {
+          type: :web_url,
+          url: 'https://goo.gl/maps/jsLLSjYXGc22',
+          title: '🗺 Get Directions'
+        },
+        {
+          type: :web_url,
+          url: 'https://www.google.com/search?q=Taza+d+Oro+Forbes+Ave',
+          title: '🤓 More Information'
+        }
+      ]
+    },
+    {
+      title: 'Redhawk Coffee',
+      # Horizontal image should have 1.91:1 ratio
+      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_4.jpg',
+      subtitle: "🚶 13 mins ⭐️ 5 (82 Reviews)",
+      default_action: {
+        type: 'web_url',
+        url: 'https://www.google.com/search?q=Redhawk+Coffee'
+      },
+      buttons: [
+        {
+          type: :web_url,
+          url: 'https://goo.gl/maps/BQLiRBhXifC2',
+          title: '🗺 Get Directions'
+        },
+        {
+          type: :web_url,
+          url: 'https://www.google.com/search?q=Redhawk+Coffee',
+          title: '🤓 More Information'
+        }
+      ]
+    }
+  ].freeze
+
+
+  FOOD = [
+    {
+      title: 'Las Palmas Pittsburgh #2',
+      # Horizontal image should have 1.91:1 ratio
+      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_1.jpg',
+      subtitle: "🚶 14 mins ⭐️ 4.6 (174 Reviews)",
+      default_action: {
+        type: 'web_url',
+        url: 'https://www.google.com/search?q=Las+Palmas+Pittsburgh+2'
+      },
+      buttons: [
+        {
+          type: :web_url,
+          url: 'https://goo.gl/maps/YzRDr4bBNwP2',
+          title: '🗺 Get Directions'
+        },
+        {
+          type: :web_url,
+          url: 'https://www.google.com/search?q=Las+Palmas+Pittsburgh+2',
+          title: '🤓 More Information'
+        }
+      ]
+    },
+    {
+      title: 'Mount Everest Sushi',
+      # Horizontal image should have 1.91:1 ratio
+      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_2.jpg',
+      subtitle: "🚶 10 mins ⭐️ 5 (84 Reviews)",
+      default_action: {
+        type: 'web_url',
+        url: 'https://www.google.com/search?q=Mount+Everest+Sushi'
+      },
+      buttons: [
+        {
+          type: :web_url,
+          url: 'https://goo.gl/maps/oZTUkvWBoep',
+          title: '🗺 Get Directions'
+        },
+        {
+          type: :web_url,
+          url: 'https://www.google.com/search?q=Mount+Everest+Sushi',
+          title: '🤓 More Information'
+        }
+      ]
+    },
+    {
+      title: 'Piada Italian Street Food',
+      # Horizontal image should have 1.91:1 ratio
+      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_3.jpg',
+      subtitle: "🚶 12 mins ⭐️ 4.6 (121 Reviews)",
+      default_action: {
+        type: 'web_url',
+        url: 'https://www.google.com/search?q=Piada+Italian+Street+Food'
+      },
+      buttons: [
+        {
+          type: :web_url,
+          url: 'https://goo.gl/maps/KB75PguDCAC2',
+          title: '🗺 Get Directions'
+        },
+        {
+          type: :web_url,
+          url: 'https://www.google.com/search?q=Piada+Italian+Street+Food',
+          title: '🤓 More Information'
+        }
+      ]
+    }
+  ].freeze
 
   API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?address='.freeze
   REVERSE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.freeze
@@ -372,7 +368,7 @@ module Trust
     sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-stop_thread
+
     trust_auth_4
 
   end
@@ -396,7 +392,7 @@ stop_thread
     sleep 3
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
         @message.typing_off
-
+stop_thread
   end
 
   #else #IF_FACEBOOK_AUTH == 0
