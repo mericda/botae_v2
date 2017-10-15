@@ -230,8 +230,9 @@ module Trust
       trust_auth_1
 
     else
+      @message.typing_on
+
       trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Tell me more', 'TRUST_NOT_STABLE'])
-@message.typing_on
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       next_command :trust_stage_4
 
@@ -294,21 +295,37 @@ sleep 3
 sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     end
-
-  @message.typing_on
-  sleep 3
-    say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
-@message.typing_on
+    @message.typing_on
+    sleep 3
+      say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
+    @message.typing_on
 sleep 3
-    say 'I hope you understand my good intentions. '
-    UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-@message.typing_on
-sleep 1
-    say 'Thank you! '
-    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-stop_thread
+UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+trust_auth_4
 
   end
+
+
+    def trust_auth_4
+user_info = get_user_info(:first_name)
+if user_info
+  user_name = user_info[:first_name]
+  @message.typing_on
+  sleep 3
+
+say 'I hope you understand my good intentions.' + BYE.sample + " #{user_name} ✌️", quick_replies: trust_auth_qr_3
+else
+  @message.typing_on
+  sleep 3
+  say 'I hope you understand my good intentions.' + BYE.sample + " ✌️", quick_replies: trust_auth_qr_3
+end
+
+@message.typing_on
+sleep 3
+    UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+stop_thread
+end
+
   #else #IF_FACEBOOK_AUTH == 0
   #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
   #say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
