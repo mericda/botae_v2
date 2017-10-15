@@ -375,7 +375,7 @@ module Trust
     else
     end
     #@message.typing_on
-    #sleep 3
+    sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
@@ -391,7 +391,7 @@ module Trust
     if user_info
       user_name = user_info[:first_name]
       @message.typing_on
-      #sleep 3
+      sleep 3
 
       say 'I hope you understand my good intentions.' + BYE.sample + " #{user_name} ✌️"
     else
