@@ -153,16 +153,17 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
             puts "Entity with max confidence: #{entity_max} #{confidence_max}"
             if entity_max == 'greetings' && confidence_max > 0.9
-              say GREETINGS.sample + " #{user_name} 👋 " + HELP.sample
+              say GREETINGS.sample + " #{user_name} 👋 " + HELP.sample, composer_input_disabled: true
               say 'Then I may also find the places popular among your Facebook friends.'
-              say HELP_CTA.sample, quick_replies: intention_replies, composer_input_disabled: true
+              say HELP_CTA.sample, quick_replies: intention_replies
             elsif  entity_max == 'bye' && confidence_max > 0.9
               say BYE.sample + " #{user_name} ✌️"
             elsif  entity_max == 'no' && confidence_max > 0.9
               say ACKNOWLEDGED.sample + " #{user_name}."
             elsif  entity_max == 'help' && confidence_max > 0.9
-              say "I can help you to find the closest best places for a coffee or food."
-              say HELP_CTA.sample, quick_replies: intention_replies, composer_input_disabled: true
+
+              say "I can help you to find the closest best places for a coffee or food.", composer_input_disabled: true
+              say HELP_CTA.sample, quick_replies: intention_replies
             else
               say   APOLOGIES.sample + " Instead, " + HELP.sample
               say HELP_CTA.sample, quick_replies: intention_replies
