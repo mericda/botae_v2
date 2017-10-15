@@ -144,23 +144,22 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
             end
           end
 
-        puts "Entity with max confidence: #{entity_max} #{confidence_max}"
-        if entity_max == 'greetings' && confidence_max > 0.9
-          say "Hello!"
-        elsif  entity_max == 'bye' && confidence_max > 0.9
-          say "bye!"
-        elsif  entity_max == 'help' && confidence_max > 0.9
-          say "I can help you to find the closest best places for a coffee or food."
-          say 'Ready to browse the best?', quick_replies: intention_replies
+          puts "Entity with max confidence: #{entity_max} #{confidence_max}"
+          if entity_max == 'greetings' && confidence_max > 0.9
+            say "Hello!"
+          elsif  entity_max == 'bye' && confidence_max > 0.9
+            say "bye!"
+          elsif  entity_max == 'help' && confidence_max > 0.9
+            say "I can help you to find the closest best places for a coffee or food."
+            say 'Ready to browse the best?', quick_replies: intention_replies
+          else
+            say   APOLOGIES.sample + " " + HINTS_TEXT.sample, quick_replies: intention_replies
+          end
+        else
           say   APOLOGIES.sample + " " + HINTS_TEXT.sample, quick_replies: intention_replies
-
+          #, quick_replies: HINTS
 
         end
-      else
-        say   APOLOGIES.sample + " " + HINTS_TEXT.sample, quick_replies: intention_replies
-#, quick_replies: HINTS
-
-      end
 
 
         #      greetings = firstEntity(@message.nlp, 'greetings')
