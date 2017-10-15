@@ -388,7 +388,7 @@ module Trust
     @user.answers[:trust_auth_3] = @message.text
 
 UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-sleep 3
+
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
