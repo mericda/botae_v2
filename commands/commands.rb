@@ -73,7 +73,7 @@ def entity_check
         confidence_max = confidence
       end
 
-    end
+    
   end
 
 
