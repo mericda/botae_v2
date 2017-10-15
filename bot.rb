@@ -156,6 +156,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
             say   APOLOGIES.sample + " Instead, " + HELP.sample
             say HELP_CTA.sample, quick_replies: intention_replies
           end
+
         else
         end
         #      greetings = firstEntity(@message.nlp, 'greetings')
@@ -166,7 +167,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
       end
     end
-
+end
     ######################## ROUTE POSTBACKS HERE ###############################
 
     Bot.on :postback do |postback|
