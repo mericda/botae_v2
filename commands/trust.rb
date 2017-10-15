@@ -8,7 +8,7 @@ EMAIL = [
   {
     type: :web_url,
     url: 'http://www.mericdagli.com',
-    title: "Visit project page"
+    title: "Contact the Researcher"
   }
 ].freeze
 
@@ -121,15 +121,18 @@ module Trust
     fall_back && return
     @@choice = nil
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
+@message.typing_on
       say 'Nice! Let me see if I can find ☕️ better than Starbucks.'
 
 
       @@choice = 'coffee'
     else
+@message.typing_on
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       @@choice = 'food'
     end
     #log = @message.text
+@message.typing_on
     say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
     next_command :lookup_location
   end
@@ -193,6 +196,7 @@ module Trust
       say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
     end
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+@message.typing_on
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     next_command :trust_stage_4
   end
@@ -205,10 +209,12 @@ module Trust
 
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
+@message.typing_on
       say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
       next_command :trust_stage_5
     else
       UI::ImageAttachment.new('https://media.giphy.com/media/rHUCLo2s1otC8/giphy.gif').send(@user)
+@message.typing_on
       say 'Type \'friends\' to if you want to see the most popular places among your friends any time.'
       stop_thread
 
@@ -225,6 +231,7 @@ module Trust
 
     else
       trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Tell me more', 'TRUST_NOT_STABLE'])
+@message.typing_on
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       next_command :trust_stage_4
 
@@ -248,8 +255,10 @@ module Trust
     end
 
 
+  @message.typing_on
     say 'Bad news first.'
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
+@message.typing_on
     say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
     next_command :trust_auth_2
 
@@ -260,12 +269,13 @@ module Trust
     fall_back && return
 
     if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
-
+@message.typing_on
       say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
 
     end
 
     trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
+@message.typing_on
     say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
     next_command :trust_auth_3
 
@@ -274,12 +284,17 @@ module Trust
   def trust_auth_3
     fall_back && return
     if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
+@message.typing_on
       say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
+@message.typing_on
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     end
+  @message.typing_on
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
+@message.typing_on
     say 'I hope you understand my good intentions. '
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+@message.typing_on
     say 'Thank you! '
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
