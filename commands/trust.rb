@@ -247,7 +247,6 @@ module Trust
 
   def trust_stage_3
     fall_back && return
-    entity_check
     # Fallback functionality if stop word used or user input is not text
     if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
       #log = @message.text
