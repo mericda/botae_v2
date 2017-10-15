@@ -144,11 +144,10 @@ entity_check
     say 'user_name, I have both good and bad news.'
 
 
-    @message.typing_on
     say 'Bad news first.'
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
     say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
-    @message.typing_off
+
 
     if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
 
@@ -157,17 +156,13 @@ entity_check
 
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
-    @message.typing_on
     trust_auth_qr_1  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
-    say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data. ', quick_replies: trust_auth_qr_2
-    @message.typing_off
+    say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
 
-    @message.typing_on
     if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
       say 'There are many malicious bots that have bad intentions such as stealing personal information such as your accounnt or location information.'
     end
 
-    @message.typing_off
 
 
 
