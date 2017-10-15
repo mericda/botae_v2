@@ -13,10 +13,15 @@ EMAIL = [
 ].freeze
 
 
+=begin
+Due to the time limitation, I am wizard of ozing the suggestions
+based on Yelp suggestions for Craig St @ Forbes Ave.
+=end
+
 
 COFFEE = [
   {
-    title: 'Random image',
+    title: 'Crepes Parisiennes',
     # Horizontal image should have 1.91:1 ratio
     image_url: 'https://unsplash.it/760/400?random',
     subtitle: "That's a first card in a carousel",
@@ -121,18 +126,21 @@ module Trust
     fall_back && return
     @@choice = nil
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
-@message.typing_on
+      @message.typing_on
+      sleep 3
       say 'Nice! Let me see if I can find ☕️ better than Starbucks.'
 
 
       @@choice = 'coffee'
     else
-@message.typing_on
+      @message.typing_on
+      sleep 3
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       @@choice = 'food'
     end
     #log = @message.text
-@message.typing_on
+    @message.typing_on
+    sleep 3
     say 'Send me your location by clicking the button below and I\'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
     next_command :lookup_location
   end
@@ -142,6 +150,8 @@ module Trust
     if message_contains_location?
       handle_user_location
     else
+      @message.typing_on
+      sleep 3
       say "Please try your request again and use \'Send location\' button below", quick_replies: LOCATION_PROMPT
       next_command :lookup_location
     end
@@ -155,13 +165,21 @@ module Trust
     @message.typing_on
     parsed = get_parsed_response(REVERSE_API_URL, "#{lat},#{long}")
     address = extract_full_address(parsed)
+    @message.typing_on
+    sleep 2
     say "Looks like you're at #{address}"
     @message.typing_off
     if @@choice == 'coffee'
+      @message.typing_on
+      sleep 3
       UI::FBCarousel.new(COFFEE).send(@user)
     elsif @@choice == 'food'
+      @message.typing_on
+      sleep 3
       UI::FBCarousel.new(FOOD).send(@user)
     end
+    @message.typing_on
+    sleep 3
     trust_stage_qr_3_1 = UI::QuickReplies.build(['Yes', 'TRUST_STABLE'], ['No', 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
     next_command :trust_stage_3
@@ -185,18 +203,24 @@ module Trust
     # Fallback functionality if stop word used or user input is not text
     if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
       #log = @message.text
+      @message.typing_on
+      sleep 1
       say 'Great 🙌'
 
     else
       #
+      @message.typing_on
+      sleep 2
       say 'Sorry to hear that 😭'
 
-
+      @message.typing_on
+      sleep 3
       trust_stage_qr_feedback= UI::QuickReplies.build(*NAY_FEEDBACK)
       say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
     end
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
-@message.typing_on
+    @message.typing_on
+    sleep 3
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     next_command :trust_stage_4
   end
@@ -209,12 +233,14 @@ module Trust
 
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
-@message.typing_on
-      say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
+      @message.typing_on
+      sleep 3
+            say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
       next_command :trust_stage_5
     else
       UI::ImageAttachment.new('https://media.giphy.com/media/rHUCLo2s1otC8/giphy.gif').send(@user)
-@message.typing_on
+      @message.typing_on
+      sleep 3
       say 'Type \'friends\' to if you want to see the most popular places among your friends any time.'
       stop_thread
 
@@ -231,7 +257,7 @@ module Trust
 
     else
       @message.typing_on
-
+      sleep 3
       trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Tell me more', 'TRUST_NOT_STABLE'])
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       next_command :trust_stage_4
