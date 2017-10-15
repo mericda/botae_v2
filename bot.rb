@@ -32,7 +32,8 @@ GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hol
 INTROS = ["I'm Botae.", "I am Botae.", "Boate at your service.", "You are speaking with Botae."]
 BYE = ["Goodbye!","Have a good one!", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba!"]
 APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "I don\'t understand everything. "]
-HELP = ["I can help you to find the closest best places for a coffee or food. Ready to go?", "I know the best places for coffee or food nearby. Ready to find out?", "I do one thing good: Finding the best food and coffee nearby. Are you ready?"]
+HELP = ["I can help you to find the closest best places for a coffee or food.", "I know the best places for coffee or food nearby.", "I do one thing good: Finding the best food and coffee nearby."]
+HELP_CTA = ["Ready to go?","Are you in?","Ready to find out?","Are you ready?"]
 NO = ["Tell me more","More information"]
 YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me","Yes, I\'m ready"]
 
@@ -153,17 +154,20 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
             if entity_max == 'greetings' && confidence_max > 0.9
               say GREETINGS.sample + " #{user_name} 👋, " + HELP.sample
               say 'I can also find the places popular among your Facebook friends.'
-              say 'Ready to browse the best?', quick_replies: intention_replies
+              say HELP_CTA.sample, quick_replies: intention_replies
             elsif  entity_max == 'bye' && confidence_max > 0.9
-              say BYE.sample + " #{user_name} ✌️, "
+              say BYE.sample + " #{user_name} ✌️"
             elsif  entity_max == 'help' && confidence_max > 0.9
               say "I can help you to find the closest best places for a coffee or food."
-              say 'Ready to browse the best?', quick_replies: intention_replies
+              say HELP_CTA.sample, quick_replies: intention_replies
             else
-              say   APOLOGIES.sample + " Instead, " + HELP.sample, quick_replies: intention_replies
+              say   APOLOGIES.sample + " Instead, " + HELP.sample
+              say HELP_CTA.sample, quick_replies: intention_replies
             end
           else
-            say   APOLOGIES.sample + " Instead, " + HELP.sample, quick_replies: intention_replies
+            say   APOLOGIES.sample + " Instead, " + HELP.sample
+            say HELP_CTA.sample, quick_replies: intention_replies
+
             #, quick_replies: HINTS
 
           end
