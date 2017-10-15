@@ -133,7 +133,7 @@ module Trust
     end
     #log = @message.text
 @message.typing_on
-    say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
+    say 'Send me your location by clicking the button below and I\'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
     next_command :lookup_location
   end
 
