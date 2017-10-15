@@ -179,7 +179,7 @@ module Trust
       @@choice = 'food'
 
     else
-      say "To proceed, tell me hat are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
+      say "To proceed, tell me what are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
       next_command:trust_stage_2
     end
     #log = @message.text
