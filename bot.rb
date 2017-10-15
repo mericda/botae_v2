@@ -28,6 +28,17 @@ Rubotnik::PersistentMenu.enable
 # ['Take questionnaire', 'QUESTIONNAIRE'], ['Have a gif', 'HAVEAGIF'])
 
 
+GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba!"]
+INTROS = ["I'm Meriç's personal bot, Meriç.me🤖", "You're talking to Meriç's personal bot, Meriç.me🤖", "Meriç's personal bot, Meriç.me🤖 at your service"]
+
+
+
+
+APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "What did you say to me? "]
+HINTS_TEXT = ["You can say 'play' to start a game or 'quit' when its running. Then choose 'rock', 'paper' or 'scissors'", "I understand the words play, quit, rock, paper, and scissors. And not much more", " I'm a simple bot with limited vocabulary. Ask me to play or quit. Or say rock, paper, and scissors when we're in a game" ]
+
+
+
 
 intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_STAGE_1'], ['Tell me more', 'PERSUADE_STAGE_1'])
 
@@ -141,11 +152,13 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
         elsif  entity_max == 'help' && confidence_max > 0.9
           say "I can help you to find the closest best places for a coffee or food."
           say 'Ready to browse the best?', quick_replies: intention_replies
-        else
-          say 'I have no idea about what you are saying.'#, quick_replies: HINTS
+
 
         end
       else
+        say   APOLOGIES.sample + " " + HINTS_TEXT.sample, quick_replies: intention_replies
+#, quick_replies: HINTS
+
       end
 
 
