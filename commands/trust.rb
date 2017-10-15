@@ -75,7 +75,7 @@ module Trust
     fall_back && return
 entity_check
     # Fallback functionality if stop word used or user input is not text
-    if @message.quick_reply == 'TRUST_STABLE' || entity_max == 'yes' && confidence_max > 0.9
+    if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
       #log = @message.text
       say 'Great 🙌'
 
@@ -103,7 +103,7 @@ entity_check
     fall_back && return
     #log = @message.text
 
-    if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
+    if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' ||  || @message.text =~ /yes/i
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
       say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
       next_command :trust_stage_5
