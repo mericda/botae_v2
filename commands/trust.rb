@@ -262,10 +262,10 @@ module Trust
     if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
 
       say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
-      return
+
     end
 
-    trust_auth_qr_1  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
+    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
     say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
     next_command :trust_auth_3
 
