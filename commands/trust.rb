@@ -15,8 +15,8 @@ module Trust
   EMAIL = [
     {
       type: :web_url,
-      url: 'http://www.mericdagli.com',
-      title: "Contact the Researcher"
+      url: 'http://www.mericdagli.com/',
+      title: "Visit Project Page"
     }
   ].freeze
 
