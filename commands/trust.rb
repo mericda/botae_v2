@@ -366,11 +366,11 @@ module Trust
 
     if @message.quick_reply == 'CONTINUE_TRUST_FINAL' || @message.text =~ /yes/i || @message.text =~ /tell more/i
       @message.typing_on
-      #sleep 3
+      sleep 3
       say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
 
       @message.typing_on
-      #sleep 3
+      sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     else
     end
