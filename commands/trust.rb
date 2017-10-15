@@ -368,6 +368,7 @@ module Trust
       @message.typing_on
       sleep 3
       say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
+
       @message.typing_on
       sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
@@ -391,16 +392,15 @@ module Trust
     if user_info
       user_name = user_info[:first_name]
       @message.typing_on
-      sleep 3
+      #sleep 3
 
       say 'I hope you understand my good intentions.' + BYE.sample + " #{user_name} ✌️"
     else
       @message.typing_on
-      sleep 3
+      #sleep 3
       say 'I hope you understand my good intentions.' + BYE.sample + " ✌️"
     end
 user_responses
-stop_thread
     #UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
   end
 
