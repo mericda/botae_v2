@@ -219,7 +219,8 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       end
 
 
-
+      bind 'TRUST' do
+      end
 
 
       # No custom parameter passed, can use simplified syntax
