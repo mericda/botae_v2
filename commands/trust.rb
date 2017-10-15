@@ -274,13 +274,12 @@ module Trust
   def trust_auth_3
     fall_back && return
     if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
-      say 'There are many malicious bots that have bad intentions such as stealing personal information such as your account or location information.'
+      say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
-return
     end
-    say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs.'
+    say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     say 'I hope you understand my good intentions. '
-    say 'If you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu or visit the project page below.'
+    say 'If you have questions about this research, please contact the researcher, Meric Dagli.'
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     say 'Thank you! '
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
