@@ -161,10 +161,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
               say "I can help you to find the closest best places for a coffee or food."
               say 'Ready to browse the best?', quick_replies: intention_replies
             else
-              say   APOLOGIES.sample + " " + INTROS.sample
-              say   APOLOGIES.sample + " " + INTROS.sample
-
-              , quick_replies: intention_replies
+              say   APOLOGIES.sample + " " + HELP.sample, quick_replies: intention_replies
             end
           else
             say   APOLOGIES.sample + " " + HELP.sample, quick_replies: intention_replies
