@@ -390,7 +390,7 @@ module Trust
       say 'I hope you understand my good intentions.' + BYE.sample + " ✌️"
     end
 
-    UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+    #UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
 stop_thread
   end
 
