@@ -391,7 +391,7 @@ module Trust
     if user_info
       user_name = user_info[:first_name]
       @message.typing_on
-      sleep 3
+      #sleep 3
 
       say 'I hope you understand my good intentions.' + BYE.sample + " #{user_name} ✌️"
     else
