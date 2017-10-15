@@ -51,6 +51,31 @@ module Commands
   UI::ImageAttachment.new(img_url).send(@user)
 end
 
+def entity_check
+  if message_contains_location?
+  else
+    entities = @message.nlp["entities"]
+    puts "#{entities}"
+    keys = entities.keys
+    # store the entity with the
+    # highest confidence
+    entity_max = nil
+    confidence_max = 0
+    puts "#{keys.to_s}"
+    # iterate over the keys and find
+    #the one with the highest confidence
+    keys.each do |key|
+      confidence = entities[key].first['confidence']
+      confidence = confidence.to_f
+      puts "#{key} #{confidence}"
+      if confidence > confidence_max
+        entity_max = key
+        confidence_max = confidence
+      end
+
+    end
+  end
+
 
 def get_trending_gif
   Giphy::Configuration.configure do |config|

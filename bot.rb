@@ -112,28 +112,7 @@ Bot.on :message do |message|
     # Falback action if none of the commands matched the input,
     # NB: Should always come last. Takes a block.
     default do
-      if message_contains_location?
-      else
-        entities = @message.nlp["entities"]
-        puts "#{entities}"
-        keys = entities.keys
-        # store the entity with the
-        # highest confidence
-        entity_max = nil
-        confidence_max = 0
-        puts "#{keys.to_s}"
-        # iterate over the keys and find
-        #the one with the highest confidence
-        keys.each do |key|
-          confidence = entities[key].first['confidence']
-          confidence = confidence.to_f
-          puts "#{key} #{confidence}"
-          if confidence > confidence_max
-            entity_max = key
-            confidence_max = confidence
-          end
-
-        end
+    entity_check
         puts "Entity with max confidence: #{entity_max} #{confidence_max}"
         if entity_max == 'greetings' && confidence_max > 0.9
           say "Hello!"

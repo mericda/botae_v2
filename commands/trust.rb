@@ -2,7 +2,7 @@
 # and store it in the answers hash inside the User instance.\
 
 LOCATION_PROMPT = UI::QuickReplies.location
-NAY_FEEDBACK = [['Yes', 'TEST_1'],['Yese', 'TEST_2'],['Yesa', 'TEST_3']]
+NAY_FEEDBACK = [['My location were not accurate', 'TEST_1'],['Yese', 'TEST_2'],['Yesa', 'TEST_3']]
 EMAIL_TEXT = "Send an email ".freeze
 EMAIL = [
   {
@@ -73,9 +73,9 @@ module Trust
 
   def trust_stage_3
     fall_back && return
-
+entity_check
     # Fallback functionality if stop word used or user input is not text
-    if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
+    if @message.quick_reply == 'TRUST_STABLE' || entity_max == 'yes' && confidence_max > 0.9
       #log = @message.text
       say 'Great 🙌'
 
@@ -91,6 +91,8 @@ module Trust
   end
 
   def trust_stage_3_2
+    fall_back && return
+
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
     say 'Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     next_command :trust_stage_4
@@ -138,27 +140,46 @@ module Trust
 
     say 'Now, give me some time while I am looking what your friends did.'
     say 'I will let you know when I am ready to share the results.'
-    #sleep 120
+        sleep 120
     say 'user_name, I have both good and bad news.'
 
+
     @message.typing_on
-    say 'Bad news first: I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such informationi at first hand.'
+    say 'Bad news first.'
+    trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
+    say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.'quick_replies: trust_auth_qr_1
+    @message.typing_off
+
+    if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
+
+      say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
+    end
+
+    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+
+    @message.typing_on
+    trust_stage_qr_5 = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
+    say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data. '
     @message.typing_off
 
     @message.typing_on
-    say 'Now, some good news. Your data is safe, and my real aim as a bot was to show how easy it is to trust a program like myself to give access for personal data. '
+    if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
+      say 'There are many malicious bots that have bad intentions such as stealing personal information such as your accounnt or location information.'
+    end
+
     @message.typing_off
+
+
+
+
+
     @message.typing_on
     say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs,'
     @message.typing_off
     @message.typing_on
     say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     @message.typing_off
-    @message.typing_on
-    say 'There are many malicious bots that have bad intentions such as stealing personal information such as your accounnt or location information.'
-    @message.typing_off
 
-    #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
     @message.typing_on
     say 'I hope you understand my good intentions. '
