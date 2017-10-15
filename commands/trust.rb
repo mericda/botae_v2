@@ -11,7 +11,8 @@ EMAIL = [
     title: "Visit project page"
   }
 ].freeze
-choice = nil
+
+$choice = nil
 
 
 COFFEE = [
@@ -122,11 +123,11 @@ module Trust
 
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
       say 'Nice! Let me see if I can find ☕️ better than Starbucks.'
-      choice = 'coffee'
+      $choice = 'coffee'
       puts "#{choice}"
     else
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
-      choice = 'food'
+      $choice = 'food'
       puts "#{choice}"
     end
     #log = @message.text
@@ -155,10 +156,9 @@ module Trust
     address = extract_full_address(parsed)
     say "Looks like you're at #{address}"
     @message.typing_off
-  puts "#{choice}"
-    if choice == 'coffee'
+    if $choice == 'coffee'
       UI::FBCarousel.new(COFFEE).send(@user)
-    elsif choice == 'food'
+    elsif $choice == 'food'
       UI::FBCarousel.new(FOOD).send(@user)
     end
     trust_stage_qr_3_1 = UI::QuickReplies.build(['Yes', 'TRUST_STABLE'], ['No', 'TRUST_NOT_STABLE'])
