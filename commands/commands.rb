@@ -52,8 +52,6 @@ module Commands
 end
 
 def entity_check
-
-  if text_message?
     entities = @message.nlp["entities"]
     puts "#{entities}"
     keys = entities.keys
