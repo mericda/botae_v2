@@ -23,44 +23,66 @@ COFFEE = [
   {
     title: 'Crepes Parisiennes',
     # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://unsplash.it/760/400?random',
-    subtitle: "That's a first card in a carousel",
+    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_1.jpg',
+    subtitle: "🚶 2 mins ⭐️ 4.3 (128 Reviews)",
     default_action: {
       type: 'web_url',
-      url: 'https://unsplash.it'
+      url: 'https://www.google.com/search?q=Crepes+Parisiennes'
     },
     buttons: [
       {
         type: :web_url,
-        url: 'https://unsplash.it',
-        title: 'Website'
+        url: 'https://goo.gl/maps/VFryWVNiWZ12',
+        title: '🗺 Get Directions'
       },
       {
-        type: :postback,
-        title: 'Square Images',
-        payload: 'SQUARE_IMAGES'
+        type: :web_url,
+        url: 'https://www.google.com/search?q=Crepes+Parisiennes',
+        title: '🤓 More Information'
       }
     ]
   },
   {
-    title: 'Another random image',
+    title: 'Tazza D\'Oro at Forbes Ave',
     # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://unsplash.it/600/315?random',
-    subtitle: "And here's a second card. You can add up to 10!",
+    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_2.jpg',
+    subtitle: "🚶 5 mins ⭐️ 4.6 (26 Reviews)",
     default_action: {
       type: 'web_url',
-      url: 'https://unsplash.it'
+      url: 'https://www.google.com/search?q=Taza+d+Oro+Forbes+Ave'
     },
     buttons: [
       {
         type: :web_url,
-        url: 'https://unsplash.it',
-        title: 'Website'
+        url: 'https://goo.gl/maps/jsLLSjYXGc22',
+        title: '🗺 Get Directions'
       },
       {
-        type: :postback,
-        title: 'Unsquare Images',
-        payload: 'HORIZONTAL_IMAGES'
+        type: :web_url,
+        url: 'https://www.google.com/search?q=Taza+d+Oro+Forbes+Ave',
+        title: '🤓 More Information'
+      }
+    ]
+  },
+  {
+    title: 'Redhawk Coffee',
+    # Horizontal image should have 1.91:1 ratio
+    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_4.jpg',
+    subtitle: "🚶 13 mins ⭐️ 5 (82 Reviews)",
+    default_action: {
+      type: 'web_url',
+      url: 'https://www.google.com/search?q=Redhawk+Coffee'
+    },
+    buttons: [
+      {
+        type: :web_url,
+        url: 'https://goo.gl/maps/BQLiRBhXifC2',
+        title: '🗺 Get Directions'
+      },
+      {
+        type: :web_url,
+        url: 'https://www.google.com/search?q=Redhawk+Coffee',
+        title: '🤓 More Information'
       }
     ]
   }
@@ -69,46 +91,68 @@ COFFEE = [
 
 FOOD = [
   {
-    title: 'Random image',
+    title: 'Las Palmas Pittsburgh #2',
     # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://unsplash.it/760/400?random',
-    subtitle: "That's a first card in a carousel",
+    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_1.jpg',
+    subtitle: "🚶 14 mins ⭐️ 4.6 (174 Reviews)",
     default_action: {
       type: 'web_url',
-      url: 'https://unsplash.it'
+      url: 'https://www.google.com/search?q=Las+Palmas+Pittsburgh+2'
     },
     buttons: [
       {
         type: :web_url,
-        url: 'https://unsplash.it',
-        title: 'Website'
+        url: 'https://goo.gl/maps/YzRDr4bBNwP2',
+        title: '🗺 Get Directions'
       },
       {
-        type: :postback,
-        title: 'Square Images',
-        payload: 'SQUARE_IMAGES'
+        type: :web_url,
+        url: 'https://www.google.com/search?q=Las+Palmas+Pittsburgh+2',
+        title: '🤓 More Information'
       }
     ]
   },
   {
-    title: 'Another random image',
+    title: 'Mount Everest Sushi',
     # Horizontal image should have 1.91:1 ratio
-    image_url: 'https://unsplash.it/600/315?random',
-    subtitle: "And here's a second card. You can add up to 10!",
+    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_2.jpg',
+    subtitle: "🚶 10 mins ⭐️ 5 (84 Reviews)",
     default_action: {
       type: 'web_url',
-      url: 'https://unsplash.it'
+      url: 'https://www.google.com/search?q=Mount+Everest+Sushi'
     },
     buttons: [
       {
         type: :web_url,
-        url: 'https://unsplash.it',
-        title: 'Website'
+        url: 'https://goo.gl/maps/oZTUkvWBoep',
+        title: '🗺 Get Directions'
       },
       {
-        type: :postback,
-        title: 'Unsquare Images',
-        payload: 'HORIZONTAL_IMAGES'
+        type: :web_url,
+        url: 'https://www.google.com/search?q=Mount+Everest+Sushi',
+        title: '🤓 More Information'
+      }
+    ]
+  },
+  {
+    title: 'Piada Italian Street Food',
+    # Horizontal image should have 1.91:1 ratio
+    image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_3.jpg',
+    subtitle: "🚶 12 mins ⭐️ 4.6 (121 Reviews)",
+    default_action: {
+      type: 'web_url',
+      url: 'https://www.google.com/search?q=Piada+Italian+Street+Food'
+    },
+    buttons: [
+      {
+        type: :web_url,
+        url: 'https://goo.gl/maps/KB75PguDCAC2',
+        title: '🗺 Get Directions'
+      },
+      {
+        type: :web_url,
+        url: 'https://www.google.com/search?q=Piada+Italian+Street+Food',
+        title: '🤓 More Information'
       }
     ]
   }
