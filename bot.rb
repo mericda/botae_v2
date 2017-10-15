@@ -153,7 +153,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
             puts "Entity with max confidence: #{entity_max} #{confidence_max}"
             if entity_max == 'greetings' && confidence_max > 0.9
-              say GREETINGS.sample + " #{user_name} 👋 " + HELP.sample, composer_input_disabled: true
+              say GREETINGS.sample + " #{user_name} 👋 " + HELP.sample
               say 'Then I may also find the places popular among your Facebook friends.'
               say HELP_CTA.sample, quick_replies: intention_replies
             elsif  entity_max == 'bye' && confidence_max > 0.9
@@ -162,7 +162,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
               say ACKNOWLEDGED.sample + " #{user_name}."
             elsif  entity_max == 'help' && confidence_max > 0.9
 
-              say "I can help you to find the closest best places for a coffee or food.", composer_input_disabled: true
+              say "I can help you to find the closest best places for a coffee or food."
               say HELP_CTA.sample, quick_replies: intention_replies
             else
               say   APOLOGIES.sample + " Instead, " + HELP.sample
@@ -199,7 +199,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
         say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
         say 'I can also find the places popular among your Facebook friends.'
         UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
-        say 'Ready to browse the best?', quick_replies: intention_replies, composer_input_disabled: true
+        say 'Ready to browse the best?', quick_replies: intention_replies
       end
 
 
