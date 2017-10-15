@@ -146,7 +146,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
               confidence_max = confidence
             end
           end
-          user_info = get_user_info(:first_name,:last_name,:profile_pic)
+          user_info = get_user_info(:first_name)
           if user_info
             user_name = user_info[:first_name]
 

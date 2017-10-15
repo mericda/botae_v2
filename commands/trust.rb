@@ -125,7 +125,7 @@ module Trust
 
     else
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
-        choice = 'food'
+      choice = 'food'
     end
     #log = @message.text
     say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
@@ -152,11 +152,11 @@ module Trust
     address = extract_full_address(parsed)
     say "Looks like you're at #{address}"
     @message.typing_off
-if choice == 'coffee'
-    UI::FBCarousel.new(COFFEE).send(@user)
-  elsif choice == 'food'
-    UI::FBCarousel.new(FOOD).send(@user)
-end
+    if choice == 'coffee'
+      UI::FBCarousel.new(COFFEE).send(@user)
+    elsif choice == 'food'
+      UI::FBCarousel.new(FOOD).send(@user)
+    end
     trust_stage_qr_3_1 = UI::QuickReplies.build(['Yes', 'TRUST_STABLE'], ['No', 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
     next_command :trust_stage_3
@@ -176,7 +176,7 @@ end
 
   def trust_stage_3
     fall_back && return
-entity_check
+    entity_check
     # Fallback functionality if stop word used or user input is not text
     if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
       #log = @message.text
@@ -235,51 +235,54 @@ entity_check
     # if FACEBOOK_AUTH == 1
     fall_back && return
 
-  #  say 'Now, give me some time while I am looking what your friends did.'
-  #  say 'I will let you know when I am ready to share the results.'
+    #  say 'Now, give me some time while I am looking what your friends did.'
+    #  say 'I will let you know when I am ready to share the results.'
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
-    say "#{user_name}, I have both good and bad news."
-
-
-    say 'Bad news first.'
-    trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
-    say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
-
-
-    if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
-
-      say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
-    end
-
-    trust_auth_qr_1  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
-    say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
-
-    if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
-      say 'There are many malicious bots that have bad intentions such as stealing personal information such as your account or location information.'
-      say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+      say "#{user_name}, I have both good and bad news."
+    else
+      say "I have both good and bad news."
     end
 
 
-    say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs.'
-    say 'I hope you understand my good intentions. '
-    say 'If you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu or visit the project page below.'
-    UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-    say 'Thank you! '
-    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+      say 'Bad news first.'
+      trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
+      say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
 
-    stop_thread
-    #else #IF_FACEBOOK_AUTH == 0
-    #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
-    #say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
-    #next_command :trust_stage_5
-    #stop_thread #INTERIM
-    #end
-    #GET CONFIRMATION OF USERS
+
+      if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
+
+        say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
+      end
+
+      trust_auth_qr_1  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
+      say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
+
+      if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
+        say 'There are many malicious bots that have bad intentions such as stealing personal information such as your account or location information.'
+        say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+      end
+
+
+      say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs.'
+      say 'I hope you understand my good intentions. '
+      say 'If you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu or visit the project page below.'
+      UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+      say 'Thank you! '
+      UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+
+      stop_thread
+      #else #IF_FACEBOOK_AUTH == 0
+      #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
+      #say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
+      #next_command :trust_stage_5
+      #stop_thread #INTERIM
+      #end
+      #GET CONFIRMATION OF USERS
+
+    end
+
+
 
   end
-
-
-
-end
