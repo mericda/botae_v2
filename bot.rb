@@ -112,9 +112,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       # Falback action if none of the commands matched the input,
       # NB: Should always come last. Takes a block.
       default do
-        if message_contains_location?
-
-        else
+        if text_message?
           entities = @message.nlp["entities"]
           puts "#{entities}"
           keys = entities.keys
@@ -135,8 +133,6 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
             end
           end
 
-
-        end
         puts "Entity with max confidence: #{entity_max} #{confidence_max}"
         if entity_max == 'greetings' && confidence_max > 0.9
           say "Hello!"
@@ -149,6 +145,8 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
           say 'I have no idea about what you are saying.'#, quick_replies: HINTS
 
         end
+      else
+      end
 
 
         #      greetings = firstEntity(@message.nlp, 'greetings')
