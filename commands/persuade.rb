@@ -58,6 +58,7 @@ module Persuade
       say 'Is there any question that you want to ask me?'
       stop_thread
     else
+    end
 
   end
 
