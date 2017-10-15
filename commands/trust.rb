@@ -2,7 +2,7 @@
 # and store it in the answers hash inside the User instance.\
 
 LOCATION_PROMPT = UI::QuickReplies.location
-NAY_FEEDBACK = [{['Yes', '1'],['Yes', '2'],['Yes', '3']}]
+NAY_FEEDBACK = [{'test'}, {'test2'}, {'test3'}]
 EMAIL_TEXT = "Send an email ".freeze
 EMAIL = [
   {
