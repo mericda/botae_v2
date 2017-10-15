@@ -379,7 +379,7 @@ module Trust
     #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
     trust_auth_4
-stop_thread
+
   end
 
 
@@ -399,7 +399,8 @@ stop_thread
       sleep 3
       say 'I hope you understand my good intentions.' + BYE.sample + " ✌️"
     end
-
+user_responses
+stop_thread
     #UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
   end
 
@@ -428,6 +429,7 @@ stop_thread
   def user_responses
     stop_thread
     @user.answers = {}
+    puts "#{@user.answers}"
   end
 
 
