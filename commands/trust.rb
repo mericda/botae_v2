@@ -370,7 +370,7 @@ module Trust
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     @message.typing_on
     sleep 3
-    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+    #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
     trust_auth_4
 
   end
