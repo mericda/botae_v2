@@ -52,7 +52,9 @@ module Commands
 end
 
 def entity_check
+
   if message_contains_location?
+
   else
     entities = @message.nlp["entities"]
     puts "#{entities}"
@@ -72,8 +74,11 @@ def entity_check
         entity_max = key
         confidence_max = confidence
       end
+end
 
-    
+
+end
+
   end
 
 
