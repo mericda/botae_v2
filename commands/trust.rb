@@ -91,7 +91,6 @@ entity_check
   end
 
   def trust_stage_3_2
-    fall_back && return
 
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
     say 'Are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
