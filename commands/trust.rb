@@ -375,7 +375,7 @@ module Trust
     else
     end
     #@message.typing_on
-    sleep 3
+    #sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
