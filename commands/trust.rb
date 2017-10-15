@@ -123,12 +123,14 @@ module Trust
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
       say 'Nice! Let me see if I can find ☕️ better than Starbucks.'
       choice = 'coffee'
-
+      puts "#{choice}"
     else
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       choice = 'food'
+      puts "#{choice}"
     end
     #log = @message.text
+    puts "#{choice}"
     say 'Send me your location by clicking the button below and I \'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
     next_command :lookup_location
   end
@@ -153,6 +155,7 @@ module Trust
     address = extract_full_address(parsed)
     say "Looks like you're at #{address}"
     @message.typing_off
+  puts "#{choice}"
     if choice == 'coffee'
       UI::FBCarousel.new(COFFEE).send(@user)
     elsif choice == 'food'
