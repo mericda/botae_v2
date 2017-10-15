@@ -354,7 +354,7 @@ module Trust
     end
     @message.typing_on
     sleep 3
-    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Why?', 'CONTINUE_TRUST_FINAL'])
+    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell more', 'CONTINUE_TRUST_FINAL'])
     say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
     next_command :trust_auth_3
 
@@ -364,18 +364,18 @@ module Trust
     fall_back && return
     @user.answers[:trust_auth_2] = @message.text
 
-    if @message.quick_reply == 'CONTINUE_TRUST_FINAL' || @message.text =~ /yes/i
+    if @message.quick_reply == 'CONTINUE_TRUST_FINAL' || @message.text =~ /yes/i || @message.text =~ /tell more/i
       @message.typing_on
-      sleep 3
+      #sleep 3
       say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
 
       @message.typing_on
-      sleep 3
+      #sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     else
     end
-    @message.typing_on
-    sleep 3
+    #@message.typing_on
+    #sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
