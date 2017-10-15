@@ -294,7 +294,6 @@ sleep 3
 sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     end
-    stop_thread
 
   @message.typing_on
   sleep 3
@@ -307,7 +306,7 @@ sleep 3
 sleep 1
     say 'Thank you! '
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-
+stop_thread
 
   end
   #else #IF_FACEBOOK_AUTH == 0
