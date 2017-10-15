@@ -262,6 +262,7 @@ module Trust
     if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
 
       say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
+      return
     end
 
     trust_auth_qr_1  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
@@ -275,6 +276,7 @@ module Trust
     if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
       say 'There are many malicious bots that have bad intentions such as stealing personal information such as your account or location information.'
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+return
     end
     say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs.'
     say 'I hope you understand my good intentions. '
