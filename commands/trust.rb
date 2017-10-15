@@ -429,7 +429,7 @@ stop_thread
   def user_responses
     stop_thread
     @user.answers = {}
-    puts "#{@user.answers}"
+    puts "user answers: #{@user.answers}"
   end
 
 
