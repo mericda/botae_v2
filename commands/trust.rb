@@ -221,7 +221,7 @@ module Trust
 
     if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
 
-      trust_auth
+      trust_auth_1
 
     else
       trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Tell me more', 'TRUST_NOT_STABLE'])
