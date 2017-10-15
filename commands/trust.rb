@@ -176,11 +176,15 @@ module Trust
 
 
       @@choice = 'coffee'
-    else
+    elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       @@choice = 'food'
+
+    else
+      say "To proceed, tell me hat are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
+      next_command:trust_stage_2
     end
     #log = @message.text
     @message.typing_on
