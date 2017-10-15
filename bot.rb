@@ -131,7 +131,7 @@ else
       #        if greetings && greetings.confidence > 0.8
       #          say 'it works',
       #      end
-    end
+  
 
     end
   end
