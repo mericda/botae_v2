@@ -3,7 +3,7 @@
 
 LOCATION_PROMPT = UI::QuickReplies.location
 NAY_FEEDBACK = [['My location were not accurate', 'TEST_1'],['Yese', 'TEST_2'],['Yesa', 'TEST_3']]
-EMAIL_TEXT = "Send an email ".freeze
+EMAIL_TEXT = "If you have questions about this research, please contact the researcher, Meric Dagli.".freeze
 EMAIL = [
   {
     type: :web_url,
@@ -279,7 +279,6 @@ module Trust
     end
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     say 'I hope you understand my good intentions. '
-    say 'If you have questions about this research, please contact the researcher, Meric Dagli.'
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     say 'Thank you! '
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
