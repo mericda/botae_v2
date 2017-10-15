@@ -30,7 +30,7 @@ Rubotnik::PersistentMenu.enable
 
 GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba!"]
 INTROS = ["I'm Botae.", "I am Botae.", "Boate at your service.", "You are speaking with Botae."]
-BYE = ["Goodbye!","Have a good one!"]
+BYE = ["Goodbye","Have a good one"]
 APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "I don\'t understand everything. "]
 HELP = ["I can help you to find the closest best places for a coffee or food.", "I know the best places for coffee or food nearby.", "I do one thing good: Finding the best food and coffee nearby."]
 HELP_CTA = ["Ready to go?","Are you in?","Ready to find out?","Are you ready?"]
@@ -52,7 +52,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
   # outside both Bot.on method calls.
   trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
 
-  persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
+  persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_STAGE_1'], [NO.sample, 'PERSUADE'])
 
   ####################### ROUTE MESSAGES HERE ################################
 
