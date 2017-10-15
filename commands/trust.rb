@@ -377,7 +377,7 @@ module Trust
     #@message.typing_on
     #sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
-    #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
     trust_auth_4
 
@@ -387,6 +387,8 @@ module Trust
   def trust_auth_4
     @user.answers[:trust_auth_3] = @message.text
 
+UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+sleep 3
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
@@ -399,8 +401,9 @@ module Trust
       #sleep 3
       say 'I hope you understand my good intentions.' + BYE.sample + " ✌️"
     end
-user_responses
-    #UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+
+
+    user_responses
   end
 
   #else #IF_FACEBOOK_AUTH == 0
