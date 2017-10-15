@@ -232,7 +232,7 @@ module Trust
   end
 
 
-  def trust_auth
+  def trust_auth_1
     #handle_facebook_auth
     # if FACEBOOK_AUTH == 1
     fall_back && return
@@ -248,43 +248,50 @@ module Trust
     end
 
 
-      say 'Bad news first.'
-      trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
-      say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
-
-
-      if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
-
-        say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
-      end
-
-      trust_auth_qr_1  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
-      say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
-
-      if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
-        say 'There are many malicious bots that have bad intentions such as stealing personal information such as your account or location information.'
-        say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
-      end
-
-
-      say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs.'
-      say 'I hope you understand my good intentions. '
-      say 'If you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu or visit the project page below.'
-      UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-      say 'Thank you! '
-      UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-
-      stop_thread
-      #else #IF_FACEBOOK_AUTH == 0
-      #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
-      #say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
-      #next_command :trust_stage_5
-      #stop_thread #INTERIM
-      #end
-      #GET CONFIRMATION OF USERS
-
-    end
-
-
+    say 'Bad news first.'
+    trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
+    say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
+    next_command :trust_auth_2
 
   end
+  def trust_auth_2
+    fall_back && return
+
+    if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
+
+      say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
+    end
+
+    trust_auth_qr_1  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
+    say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
+    next_command :trust_auth_3
+
+  end
+  def trust_auth_3
+    fall_back && return
+    if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
+      say 'There are many malicious bots that have bad intentions such as stealing personal information such as your account or location information.'
+      say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+    end
+    say 'I am part of a research project at Carnegie Mellon University School of Design that investigates the trust between users and computer programs.'
+    say 'I hope you understand my good intentions. '
+    say 'If you have questions or comments about this research, please e-mail the researcher, Meric Dagli from mericda@cmu.edu or visit the project page below.'
+    UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
+    say 'Thank you! '
+    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+
+    stop_thread
+  end
+  #else #IF_FACEBOOK_AUTH == 0
+  #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
+  #say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
+  #next_command :trust_stage_5
+  #stop_thread #INTERIM
+  #end
+  #GET CONFIRMATION OF USERS
+
+end
+
+
+
+end
