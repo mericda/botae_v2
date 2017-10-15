@@ -257,6 +257,7 @@ module Trust
 
   @message.typing_on
     say 'Bad news first.'
+    sleep 3
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
 @message.typing_on
     say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I am not designed to process such information.', quick_replies: trust_auth_qr_1
@@ -273,7 +274,7 @@ module Trust
       say 'I know. I am sorry if this makes you feel upset. I believe good news will make you feel good.'
 
     end
-
+sleep 3
     trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
 @message.typing_on
     say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
@@ -285,16 +286,21 @@ module Trust
     fall_back && return
     if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
 @message.typing_on
+sleep 3
       say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
 @message.typing_on
+sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
     end
   @message.typing_on
+  sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
 @message.typing_on
+sleep 3
     say 'I hope you understand my good intentions. '
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
 @message.typing_on
+sleep 1
     say 'Thank you! '
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
