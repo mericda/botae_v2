@@ -154,7 +154,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
             puts "Entity with max confidence: #{entity_max} #{confidence_max}"
             if entity_max == 'greetings' && confidence_max > 0.9
               say GREETINGS.sample + " #{user_name} 👋 " + HELP.sample
-              say 'I can also find the places popular among your Facebook friends.'
+              say 'Then I may also find the places popular among your Facebook friends.'
               say HELP_CTA.sample, quick_replies: intention_replies
             elsif  entity_max == 'bye' && confidence_max > 0.9
               say BYE.sample + " #{user_name} ✌️"
