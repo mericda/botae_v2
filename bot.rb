@@ -42,7 +42,7 @@ questionnaire_welcome = 'Welcome to the sample questionnaire! Are you ready?'
 # outside both Bot.on method calls.
 trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
 
-persuade_stage_qr_1 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
+persuade_stage_qr_1 = UI::QuickReplies.build(['Sounds good', 'TRUST'], ['Tell me more', 'PERSUADE'])
 
 ####################### ROUTE MESSAGES HERE ################################
 
@@ -102,7 +102,7 @@ Bot.on :message do |message|
     }
 
     bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
-      message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.\n such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
+      message: "So I am a chatbot that searches for the best places on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general.", quick_replies: persuade_stage_qr_1
     }
 
 
