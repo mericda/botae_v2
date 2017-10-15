@@ -278,7 +278,7 @@ sleep 3
     end
     @message.typing_on
 sleep 3
-    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Tell me more', 'CONTINUE'])
+    trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'SKIP'], ['Why?', 'CONTINUE'])
     say 'Your data is safe, and I\'m designed to show how easy it is to trust a program like myself to give access for personal data.', quick_replies: trust_auth_qr_2
     next_command :trust_auth_3
 
