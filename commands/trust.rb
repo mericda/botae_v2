@@ -381,7 +381,7 @@ module Trust
     trust_auth_qr_3  = UI::QuickReplies.build(['Yes', 'LEARN_MORE'], ['No', 'THANKS'])
     say 'Want to learn more about the project?', quick_replies: trust_auth_qr_3
 
-    trust_auth_4
+    next_command :trust_auth_4
 
   end
 
