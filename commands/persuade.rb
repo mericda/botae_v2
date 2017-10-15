@@ -12,8 +12,8 @@ module Persuade
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_2
       next_command :persuade_stage_3
     else
-      stop_thread
-      next_command :trust_stage_2
+      trust_stage_2
+
     end
   end
   def persuade_stage_3
@@ -25,7 +25,7 @@ module Persuade
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
       next_command :persuade_stage_4
     else
-      next_command :trust_stage_2
+      trust_stage_2
     end
   end
   def persuade_stage_4
@@ -37,7 +37,7 @@ module Persuade
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
       next_command :persuade_stage_5
     else
-      next_command :trust_stage_2
+      trust_stage_2
     end
   end
   def persuade_stage_5
@@ -49,7 +49,7 @@ module Persuade
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
       next_command :persuade_unsuccessful
     else
-      next_command :trust_stage_2
+      trust_stage_2
     end
   end
   def persuade_unsuccessful
@@ -60,7 +60,7 @@ module Persuade
       say 'Is there any question that you want to ask me?'
       stop_thread
     else
-      next_command :trust_stage_2
+      trust_stage_2
     end
   end
 
