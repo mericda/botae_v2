@@ -126,26 +126,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       # Falback action if none of the commands matched the input,
       # NB: Should always come last. Takes a block.
       default do
-        if text_message?
-          entities = @message.nlp["entities"]
-          puts "#{entities}"
-          keys = entities.keys
-          # store the entity with the
-          # highest confidence
-          entity_max = nil
-          confidence_max = 0
-          puts "#{keys.to_s}"
-          # iterate over the keys and find
-          #the one with the highest confidence
-          keys.each do |key|
-            confidence = entities[key].first['confidence']
-            confidence = confidence.to_f
-            puts "#{key} #{confidence}"
-            if confidence > confidence_max
-              entity_max = key
-              confidence_max = confidence
-            end
-          end
+      entity_check
           user_info = get_user_info(:first_name)
           if user_info
             user_name = user_info[:first_name]

@@ -356,13 +356,14 @@ module Trust
 
   def trust_auth_3
     fall_back && return
-    if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i
+    if @message.quick_reply == 'CONTINUE' || @message.text =~ /yes/i || @message.text =~ /why?/i
       @message.typing_on
       sleep 3
       say 'There are many malicious bots that have bad intention. They can steal your personal information such as your account or location.'
       @message.typing_on
       sleep 3
       say 'I want to warn you one more time to think twice when you are providing access or directly giving your personal information to a computer program.'
+    else
     end
     @message.typing_on
     sleep 3
