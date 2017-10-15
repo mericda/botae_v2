@@ -371,9 +371,8 @@ module Trust
     @message.typing_on
     sleep 3
     say 'I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
-    @message.typing_on
-    sleep 3
     #UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+stop_thread
     trust_auth_4
 
   end
@@ -396,7 +395,8 @@ module Trust
     @message.typing_on
     sleep 3
     UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
-    stop_thread
+        @message.typing_off
+
   end
 
   #else #IF_FACEBOOK_AUTH == 0
