@@ -318,7 +318,19 @@ sleep 1
   #end
   #GET CONFIRMATION OF USERS
 
+  # NOTE: A way to enforce sanity checks (repeat for each sequential command)
+  def fall_back
+    say 'You tried to fool me, human! Start over!' unless text_message?
+    return false unless !text_message? || stop_word_used?('Stop')
+    stop_questionnaire
+    puts 'Fallback triggered!'
+    true # to trigger return from the caller on 'and return'
+  end
 
+  # specify stop word
+  def stop_word_used?(word)
+    !(@message.text =~ /#{word.downcase}/i).nil?
+  end
 
 
 end
