@@ -106,13 +106,13 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       }
 
       bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
-        composer_input_disabled: true
+        composer_input_disabled: true,
 
         message: "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
       }
 
       bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
-        composer_input_disabled: true
+        composer_input_disabled: true,
 
         message: "So I am a chatbot that searches for the best places on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general.", quick_replies: persuade_stage_qr_1
       }
@@ -187,7 +187,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
       ## START THE CONVERSATION
       bind 'START' do
-        composer_input_disabled: true
+        composer_input_disabled: true,
         say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
         say 'I can also find the places popular among your Facebook friends.'
         UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
@@ -222,11 +222,11 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
         quick_replies: questionnaire_replies
       }
       bind 'TRUST_STAGE_1', to: :trust_stage_2, start_thread: {
-        composer_input_disabled: true
+        composer_input_disabled: true,
         message:  "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
       }
       bind 'PERSUADE_STAGE_1', to: :persuade_stage_2, start_thread: {
-        composer_input_disabled: true
+        composer_input_disabled: true,
         message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.\n such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
       }
 
