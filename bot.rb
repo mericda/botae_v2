@@ -38,7 +38,7 @@ BYE = ["Goodbye!","Have a good one!", "Hey","Howdy", "Hello", "Ahoy", "‘Ello",
 APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "I don\'t understand everything. "]
 HELP = ["Instead, I can help you to find the closest best places for a coffee or food. Ready to go?", "Instead, I know what is the best places for coffee or food nearby. Ready to find out?", "Instead, I do one thing good! Finding the best food and coffee nearby. Are you ready? "]
 
-NO = ["Tell me more", "More","More information"]
+NO = ["Tell me more","More information"]
 YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me","Yes, I\'m ready"]
 
 
@@ -55,7 +55,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
   # outside both Bot.on method calls.
   trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
 
-  persuade_stage_qr_1 = UI::QuickReplies.build([YES, 'TRUST'], [NO, 'PERSUADE'])
+  persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
 
   ####################### ROUTE MESSAGES HERE ################################
 
