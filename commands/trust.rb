@@ -269,7 +269,7 @@ end
       @message.typing_on
       sleep 1
       say 'Great 🙌'
-
+trust_stage_3_2
     elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /no/i
       #
       @message.typing_on
