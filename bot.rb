@@ -24,6 +24,25 @@ Rubotnik::PersistentMenu.enable
 # if a set of quick replies is an array of arrays.
 # e.g. UI::QuickReplies.build(*replies)
 
+HELP_TEXT = "What would you like to do?".freeze
+HELP_BUTTONS = [
+  {
+    type: 'postback',
+    title: 'Best food or coffee nearby',
+    payload: 'TRUST_PRESTAGE_1'
+  },
+  {
+    type: 'postback',
+    title: 'Places popular among friends',
+    payload: 'TRUST_PRESTAGE_4'
+  },
+  {
+    type: 'postback',
+    title: 'Tell me more',
+    payload: 'PERSUADE_PRESTAGE_1'
+  }
+].freeze
+
 
 GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba!"]
 INTROS = ["I'm Botae.", "I am Botae.", "Boate at your service.", "You are speaking with Botae."]
@@ -36,14 +55,11 @@ YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me",
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
 
 
-intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], ['Tell me more', 'PERSUADE_PRESTAGE_1'])
+intention_replies = UI::QuickReplies.build([YES.sample, 'TRUST_PRESTAGE_1'], ['Tell me more', 'PERSUADE_PRESTAGE_1'])
 
 
 # Build a quick reply that prompts location from user
 
-questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
-  %w[No STOP_QUESTIONNAIRE])
-  questionnaire_welcome = 'Welcome to the sample questionnaire! Are you ready?'
   # Define vartiables you want to use for both messages and postbacks
   # outside both Bot.on method calls.
   trust_prestage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
@@ -101,7 +117,6 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
       bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
 
-
         message: "What are you interested in?", quick_replies: trust_prestage_qr_1
       }
 
@@ -119,13 +134,11 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       default do
         if text_message?
           entities = @message.nlp["entities"]
-          puts "#{entities}"
           keys = entities.keys
           # store the entity with the
           # highest confidence
           entity_max = nil
           confidence_max = 0
-          puts "#{keys.to_s}"
           # iterate over the keys and find
           #the one with the highest confidence
           keys.each do |key|
@@ -144,25 +157,22 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
             puts "Entity with max confidence: #{entity_max} #{confidence_max}"
             if entity_max == 'greetings' && confidence_max > 0.9
-              say GREETINGS.sample + " #{user_name} 👋 " + HELP.sample
-              say 'Then I may also find the places popular among your Facebook friends.'
-              say HELP_CTA.sample, quick_replies: intention_replies
+              say GREETINGS.sample + " #{user_name} 👋"
+              UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
             elsif  entity_max == 'bye' && confidence_max > 0.9
               say BYE.sample + " #{user_name} ✌️"
             elsif  entity_max == 'no' && confidence_max > 0.9
               say ACKNOWLEDGED.sample + " #{user_name}."
             elsif  entity_max == 'help' && confidence_max > 0.9
 
-              say "I can help you to find the closest best places for a coffee or food."
-              say HELP_CTA.sample, quick_replies: intention_replies
+            UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
             else
-              say   APOLOGIES.sample + " Instead, " + HELP.sample
-              say HELP_CTA.sample, quick_replies: intention_replies
+              say   APOLOGIES.sample
+              UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
             end
           else
-            say   APOLOGIES.sample + " Instead, " + HELP.sample
-            say HELP_CTA.sample, quick_replies: intention_replies
-
+            say   APOLOGIES.sample
+            UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
 
           end
         else
