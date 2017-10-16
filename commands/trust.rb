@@ -192,7 +192,7 @@ module Trust
   def trust_stage_2
     fall_back && return
     @@choice = nil
-    if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
+    if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /coffee/i
       @message.typing_on
       sleep 3
       say 'Let me see if I can find better ☕️ than Starbucks.'
@@ -201,7 +201,7 @@ module Trust
 
       @@choice = 'coffee'
       trust_stage_2_2
-    elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /yes/i
+    elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /food/i
       @message.typing_on
       sleep 3
       say 'Let me see if I can find better 🍽 than Subway.'
