@@ -42,6 +42,6 @@ module Rubotnik
           }
         ]
         }, access_token: ENV['ACCESS_TOKEN'])
-    end
+    #end
   end
 end
