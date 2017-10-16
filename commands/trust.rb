@@ -190,6 +190,7 @@ module Trust
   end
 
   def trust_stage_2
+    fall_back && return
     @@choice = nil
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
       @message.typing_on
@@ -209,10 +210,10 @@ module Trust
 
       trust_stage_2_2
     else
-      trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
+      trust_stage_qr_1_fail = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
       @message.typing_on
       sleep 3
-      say "To proceed, tell me what are you interested in by clicking buttons 👇" , quick_replies: trust_stage_qr_1
+      say "To proceed, tell me what are you interested in by clicking buttons 👇" , quick_replies: trust_stage_qr_3_1_fail
       @message.typing_off
       next_command :trust_stage_2
     end
