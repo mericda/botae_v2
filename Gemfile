@@ -10,5 +10,11 @@ gem 'giphy'
 gem 'activerecord'
 gem 'sinatra-activerecord' # excellent gem that ports ActiveRecord for Sinatra
 gem 'activesupport'
-gem 'pg'
+group :development, :test do
+  gem 'pg'
+end
+
+group :production do
+  gem 'pg'
+end
 gem 'rake'
