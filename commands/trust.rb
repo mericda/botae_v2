@@ -397,7 +397,6 @@ end
       @message.typing_on
       sleep 3
       say 'Please think twice when you are providing access or directly giving your personal info to a computer program.'
-    else
     end
     @message.typing_on
     sleep 3
@@ -413,11 +412,12 @@ end
   def trust_auth_4
     fall_back && return
 
-    @user.answers[:trust_auth_qr_3] = @message.text
+    @user.answers[:trust_auth_3] = @message.text
 
     if @message.quick_reply == 'LEARN_MORE' || @message.text =~ /yes/i
       UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     end
+
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
@@ -460,8 +460,8 @@ end
 
   def user_responses
     stop_thread
-    @user.answers = {}
-    puts "user answers: #{@user.answers}"
+    user_answers = @user.answers
+    puts "user answers: #{user_answers}"
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
 
   end
