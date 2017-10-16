@@ -316,7 +316,17 @@ module Trust
       @message.typing_off
       next_command :trust_stage_3_2
 
-    end
+else
+  @user.answers[:lookup_location_fail] = @message.text
+  @message.typing_on
+  sleep 3
+  trust_stage_qr_3_1_fail = UI::QuickReplies.build(['Yes, I liked it', 'TRUST_STABLE'], ['No, I don\'t', 'TRUST_NOT_STABLE'])
+  say "I don\'t understand. Please use buttons 👇", quick_replies: trust_stage_qr_3_1_fail
+  @message.typing_off
+  next_command :trust:stage_3
+end
+
+
 
   end
 
