@@ -16,6 +16,9 @@ module Trust
       type: :web_url,
       url: 'http://www.mericdagli.com/',
       title: "Visit Project Page"
+    },
+    {
+      type: :element_share
     }
   ].freeze
 
@@ -39,6 +42,9 @@ module Trust
           type: :web_url,
           url: 'https://www.google.com/search?q=Crepes+Parisiennes',
           title: '🤓 More Information'
+        },
+        {
+          type: :element_share
         }
       ]
     },
@@ -61,6 +67,9 @@ module Trust
           type: :web_url,
           url: 'https://www.google.com/search?q=Taza+d+Oro+Forbes+Ave',
           title: '🤓 More Information'
+        },
+        {
+          type: :element_share
         }
       ]
     },
@@ -83,6 +92,9 @@ module Trust
           type: :web_url,
           url: 'https://www.google.com/search?q=Redhawk+Coffee',
           title: '🤓 More Information'
+        },
+        {
+          type: :element_share
         }
       ]
     }
@@ -109,6 +121,9 @@ module Trust
           type: :web_url,
           url: 'https://www.google.com/search?q=Las+Palmas+Pittsburgh+2',
           title: '🤓 More Information'
+        },
+        {
+          type: :element_share
         }
       ]
     },
@@ -131,6 +146,9 @@ module Trust
           type: :web_url,
           url: 'https://www.google.com/search?q=Mount+Everest+Sushi',
           title: '🤓 More Information'
+        },
+        {
+          type: :element_share
         }
       ]
     },
@@ -153,6 +171,9 @@ module Trust
           type: :web_url,
           url: 'https://www.google.com/search?q=Piada+Italian+Street+Food',
           title: '🤓 More Information'
+        },
+        {
+          type: :element_share
         }
       ]
     }
