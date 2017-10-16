@@ -9,6 +9,11 @@ require 'rake'
 require 'active_support/all'
 require "active_support/core_ext"
 
+configure :development do
+  require 'dotenv'
+  Dotenv.load
+end
+
 require 'facebook/messenger'
 require_relative 'rubotnik/rubotnik'
 require_relative 'helpers/helpers'
