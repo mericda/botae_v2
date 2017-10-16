@@ -401,15 +401,17 @@ module Trust
     end
 
 
-    @message.typing_on
+    @message.typing_on if @message
     sleep 2
     say 'Bad news first.'
-    @message.typing_off
+    @message.typing_off if @message
 
-    @message.typing_on
+  @message.typing_on if @message
     sleep 3
+
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
     say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I\'m not designed to do it.', quick_replies: trust_auth_qr_1
+@message.typing_off if @message
     next_command :trust_auth_2
 
   end
