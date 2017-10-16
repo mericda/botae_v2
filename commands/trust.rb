@@ -323,7 +323,7 @@ else
   trust_stage_qr_3_1_fail = UI::QuickReplies.build(['Yes, I liked it', 'TRUST_STABLE'], ['No, I don\'t', 'TRUST_NOT_STABLE'])
   say "I don\'t understand. Please use buttons 👇", quick_replies: trust_stage_qr_3_1_fail
   @message.typing_off
-  next_command :trust:stage_3
+  next_command :trust_stage_3
 end
 
 
