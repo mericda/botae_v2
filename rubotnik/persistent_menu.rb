@@ -17,12 +17,12 @@ module Rubotnik
               {
                 type: 'postback',
                 title: 'Best food or coffee nearby',
-                payload: 'trust_stage_1'
+                payload: 'TRUST_STAGE_1'
               },
               {
                 type: 'postback',
                 title: 'Places popular among friends',
-                payload: 'trust_stage_4'
+                payload: 'TRUST_STAGE_1'
               }
 =begin
               {
