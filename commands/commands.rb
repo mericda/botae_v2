@@ -2,16 +2,12 @@ require 'httparty'
 require 'json'
 require 'giphy'
 require_relative '../ui/ui'
-require_relative 'questionnaire'
-require_relative 'show_ui_examples'
 require_relative 'persuade'
 require_relative 'trust'
 # Everything in this module will become private methods for Dispatch classes
 # and will exist in a shared namespace.
 module Commands
   # Mix-in sub-modules for threads
-  include Questionnaire
-  include ShowUIExamples
   include Persuade
   include Trust
 
