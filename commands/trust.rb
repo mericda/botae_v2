@@ -185,7 +185,7 @@ module Trust
     sleep 3
     trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
     say "To proceed, tell me what are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
-@message.typing_off
+    @message.typing_off
     next_command:trust_stage_2
   end
 
@@ -214,7 +214,7 @@ module Trust
       @message.typing_on
       sleep 3
       say "To proceed, tell me what are you interested in by clicking buttons 👇" , quick_replies: trust_stage_qr_1
-@message.typing_off
+      @message.typing_off
       next_command :trust_stage_2
     end
 
@@ -265,17 +265,17 @@ module Trust
     if @@choice == 'coffee'
       @message.typing_on
       UI::FBCarousel.new(COFFEE).send(@user)
-  @message.typing_off
+      @message.typing_off
     elsif @@choice == 'food'
       @message.typing_on
       UI::FBCarousel.new(FOOD).send(@user)
-  @message.typing_off
+      @message.typing_off
     end
     @message.typing_on
     sleep 3
     trust_stage_qr_3_1 = UI::QuickReplies.build(['Yes', 'TRUST_STABLE'], ['No', 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
-  @message.typing_off
+    @message.typing_off
     next_command :trust_stage_3
   end
 
@@ -301,19 +301,19 @@ module Trust
       @message.typing_on
       sleep 1
       say 'Great 🙌'
-        @message.typing_off
+      @message.typing_off
       trust_stage_3_2
     elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /no/i
       #
       @message.typing_on
       sleep 2
       say 'Sorry to hear that 😭'
-  @message.typing_off
+      @message.typing_off
       @message.typing_on
       sleep 3
       trust_stage_qr_feedback= UI::QuickReplies.build(*NAY_FEEDBACK)
       say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
-  @message.typing_off
+      @message.typing_off
       next_command :trust_stage_3_2
 
     end
@@ -328,7 +328,7 @@ module Trust
     sleep 3
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
-  @message.typing_off
+    @message.typing_off
     next_command :trust_stage_4
   end
 
@@ -341,7 +341,7 @@ module Trust
       sleep 3
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
       say 'To do this, I need your permission to read your Facebook profile. Click the button 👇 to authorize me.', quick_replies: trust_stage_qr_4
-  @message.typing_off
+      @message.typing_off
       next_command :trust_stage_5
     else
       @message.typing_on if @message
@@ -350,7 +350,7 @@ module Trust
       @message.typing_on
       sleep 3
       say 'Type \'friends\' to if you want to see the most popular places among your friends any time.'
-        @message.typing_off
+      @message.typing_off
       stop_thread
 
     end
@@ -392,22 +392,22 @@ module Trust
       @message.typing_on
       sleep 3
       say "#{user_name}, I have good and bad news."
-        @message.typing_off
+      @message.typing_off
     else
       @message.typing_on
       sleep 3
       say "I have good and bad news."
-        @message.typing_off
+      @message.typing_off
     end
 
 
     @message.typing_on
-      sleep 2
+    sleep 2
     say 'Bad news first.'
     @message.typing_off
 
     @message.typing_on
-      sleep 3
+    sleep 3
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
     say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I\'m not designed to do it.', quick_replies: trust_auth_qr_1
     next_command :trust_auth_2
@@ -429,12 +429,12 @@ module Trust
     @message.typing_on
     sleep 3
     say 'Good news: I didn\'t even try to access your Facebook data so you are perfectly safe.'
-      @message.typing_off
+    @message.typing_off
     @message.typing_on
     sleep 3
     trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'CONTINUE_TRUST_FINAL'])
     say 'Instead, I\'m designed to show you how easy you trust a program like myself to give your personal data.', quick_replies: trust_auth_qr_2
-@message.typing_off
+    @message.typing_off
     next_command :trust_auth_3
 
   end
@@ -442,27 +442,27 @@ module Trust
   def trust_auth_3
     fall_back && return
     @user.answers[:trust_auth_2] = @message.text
-      @message.typing_on
-      sleep 3
-      say 'There are many malicious bots that can steal your account details or location.'
-        @message.typing_off
-      #@message.typing_on
-      #UI::ImageAttachment.new('https://media.giphy.com/media/mzJMYiKAHF1aE/giphy.gif').send(@user)
-      #@message.typing_off
+    @message.typing_on
+    sleep 3
+    say 'There are many malicious bots that can steal your account details or location.'
+    @message.typing_off
+    #@message.typing_on
+    #UI::ImageAttachment.new('https://media.giphy.com/media/mzJMYiKAHF1aE/giphy.gif').send(@user)
+    #@message.typing_off
 
-      @message.typing_on
-      sleep 3
-      say 'Please think twice when you are providing access or directly giving your personal data to a computer program.'
-      @message.typing_off
+    @message.typing_on
+    sleep 3
+    say 'Please think twice when you are providing access or directly giving your personal data to a computer program.'
+    @message.typing_off
 
-          @message.typing_on
-          sleep 3
-          say 'On top of all, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
-          @message.typing_off
+    @message.typing_on
+    sleep 3
+    say 'On top of all, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
+    @message.typing_off
 
-  trust_auth_qr_3  = UI::QuickReplies.build(['Yes', 'LEARN_MORE'], ['No', 'THANKS'])
-      say 'Want to learn more about the project?', quick_replies: trust_auth_qr_3
-    next_command: trust_auth_4
+    trust_auth_qr_3  = UI::QuickReplies.build(['Yes', 'LEARN_MORE'], ['No', 'THANKS'])
+    say 'Want to learn more about the project?', quick_replies: trust_auth_qr_3
+    next_command :trust_auth_4
 
   end
 
