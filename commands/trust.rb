@@ -16,9 +16,6 @@ module Trust
       type: :web_url,
       url: 'http://www.mericdagli.com/',
       title: "Visit Project Page"
-    },
-    {
-      type: :element_share
     }
   ].freeze
 
@@ -393,7 +390,7 @@ module Trust
     if user_info
       user_name = user_info[:first_name]
       @message.typing_on
-      sleep 3
+      sleep 10
       say "#{user_name}, I have both good and bad news."
         @message.typing_off
     else
@@ -470,7 +467,7 @@ module Trust
 
     @message.typing_on
     sleep 3
-    say 'By the way, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
+    say 'On top of all, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     trust_auth_qr_3  = UI::QuickReplies.build(['Yes', 'LEARN_MORE'], ['No', 'THANKS'])
     say 'Want to learn more about the project?', quick_replies: trust_auth_qr_3
 
