@@ -55,7 +55,7 @@ YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me",
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
 
 
-intention_replies = UI::QuickReplies.build([YES.sample, 'TRUST_PRESTAGE_1'], ['Tell me more', 'PERSUADE_PRESTAGE_1'])
+intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], ['Tell me more', 'PERSUADE_PRESTAGE_1'])
 
 
 # Build a quick reply that prompts location from user
