@@ -15,8 +15,18 @@ module Rubotnik
             composer_input_disabled: false,
             call_to_actions: [
               {
+                type: 'postback',
+                title: 'Best food or coffee nearby',
+                payload: 'TRUST_STAGE_1'
+              },
+              {
+                type: 'postback',
+                title: 'Places popular among your friends',
+                payload: 'TRUST_STAGE_4'
+              },
+              {
                 type: 'nested',
-                title: 'Random Things',
+                title: 'Info',
                 call_to_actions: [
                   {
                     title: 'Get a Gif',
@@ -24,17 +34,8 @@ module Rubotnik
                     payload: 'HAVEAGIF'
                   },
                 ]
-              },
-              {
-                type: 'postback',
-                title: 'Location lookup',
-                payload: 'LOCATION'
-              },
-              {
-                type: 'postback',
-                title: 'Sample questionnaire',
-                payload: 'QUESTIONNAIRE'
               }
+
             ]
           }
         ]
