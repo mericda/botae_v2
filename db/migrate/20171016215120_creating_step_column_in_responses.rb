@@ -3,3 +3,4 @@ class CreatingStepColumnInResponses < ActiveRecord::Migration[5.1]
     add_column :responses, :step_id, :integer
   end
 end
+  
