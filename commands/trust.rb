@@ -460,6 +460,7 @@ end
   # specify stop word
   def stop_word_used?(word)
     !(@message.text =~ /#{word.downcase}/i).nil?
+    @message.typing_off
   end
 
   def user_responses
