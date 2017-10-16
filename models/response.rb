@@ -1,3 +1,3 @@
-class Log < ActiveRecord::Base
+class Response < ActiveRecord::Base
 
 end
