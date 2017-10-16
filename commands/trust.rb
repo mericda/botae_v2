@@ -392,15 +392,22 @@ module Trust
     if @message.quick_reply == 'CONTINUE_TRUST_FINAL' || @message.text =~ /yes/i || @message.text =~ /tell more/i
       @message.typing_on
       sleep 3
-      say 'There are many malicious bots. They can steal your personal information such as your account details or location.'
-      @message.typing_on
-      UI::ImageAttachment.new('https://media.giphy.com/media/mzJMYiKAHF1aE/giphy.gif').send(@user)
-      @message.typing_off
+      say 'There are many malicious bots that can steal your account details or location.'
+        @message.typing_off
+      #@message.typing_on
+      #UI::ImageAttachment.new('https://media.giphy.com/media/mzJMYiKAHF1aE/giphy.gif').send(@user)
+      #@message.typing_off
 
       @message.typing_on
       sleep 3
       say 'Please think twice when you are providing access or directly giving your personal info to a computer program.'
+      @message.typing_off
     end
+    next_command :trust_auth_3_2
+
+  end
+
+  def trust_auth_3_2
     @message.typing_on
     sleep 3
     say 'By the way, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
