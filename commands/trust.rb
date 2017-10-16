@@ -326,7 +326,7 @@ module Trust
       @message.typing_on
       sleep 3
       trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
-      say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
+      say 'To do this, I need your permissions to read your friends list. Click the button 👇 to authorize me to read your Friends list.', quick_replies: trust_stage_qr_4
   @message.typing_off
       next_command :trust_stage_5
     else
