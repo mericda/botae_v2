@@ -177,7 +177,7 @@ module Trust
       @message.typing_on
       sleep 3
       say 'Nice! Let me see if I can find ☕️ better than Starbucks.'
-
+next_command :trust_stage_2_2
 
       @@choice = 'coffee'
     elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /yes/i
@@ -185,16 +185,25 @@ module Trust
       sleep 3
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       @@choice = 'food'
-
+next_command :trust_stage_2_2
     else
+      trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
+      say "To proceed, tell me what are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
+      next_command :trust_stage_2
     end
-    #log = @message.text
-    @message.typing_on
-    sleep 3
-    say 'Send me your location by clicking the button below and I\'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
-    next_command :lookup_location
+
   end
 
+
+def trust_stage_2_2
+  fall_back && return
+
+  @message.typing_on
+  sleep 3
+  say 'Send me your location by clicking the button below and I\'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
+  next_command :lookup_location
+
+end
 
   def lookup_location
 
