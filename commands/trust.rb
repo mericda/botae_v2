@@ -350,7 +350,7 @@ end
       next_command :trust_stage_5
     else
       @message.typing_on if @message
-      UI::ImageAttachment.new('https://media.giphy.com/media/rHUCLo2s1otC8/giphy.gif').send(@user)
+      UI::ImageAttachment.new('https://media.giphy.com/media/5EU19WZsBUdqM/giphy.gif').send(@user)
       @message.typing_off if @message
       @message.typing_on
       sleep 3
