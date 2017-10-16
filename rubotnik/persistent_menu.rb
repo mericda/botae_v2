@@ -17,7 +17,7 @@ module Rubotnik
               {
                 type: 'postback',
                 title: 'Best food or coffee nearby',
-                payload: 'TRUST_STAGE_1'
+                payload: 'trust_stage_1'
               },
               {
                 type: 'postback',
