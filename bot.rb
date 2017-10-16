@@ -2,11 +2,13 @@
 # require 'dotenv/load' # leave this line commented while working with heroku
 require 'facebook/messenger'
 require 'sinatra'
+
 require 'sinatra/activerecord'
 require 'rake'
 
 require 'active_support/all'
 require "active_support/core_ext"
+
 
 require_relative 'rubotnik/rubotnik'
 require_relative 'helpers/helpers'
