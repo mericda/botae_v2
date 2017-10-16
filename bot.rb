@@ -51,7 +51,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
   # Define vartiables you want to use for both messages and postbacks
   # outside both Bot.on method calls.
   trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
-  trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+  trust_stage_qr_4 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
 
   persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_STAGE_1'], [NO.sample, 'PERSUADE'])
 
