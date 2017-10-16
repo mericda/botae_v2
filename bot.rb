@@ -1,22 +1,29 @@
 # rubocop:disable Metrics/BlockLength
 # require 'dotenv/load' # leave this line commented while working with heroku
-
+require 'facebook/messenger'
 require 'sinatra'
-
 require 'sinatra/activerecord'
 require 'rake'
 
 require 'active_support/all'
 require "active_support/core_ext"
 
+
+#needed for creating migrations
 configure :development do
   require 'dotenv'
   Dotenv.load
 end
 
-require 'facebook/messenger'
+#database models
+require_relative './models/log'
+require_relative './models/response'
+
+#boilerplate files
 require_relative 'rubotnik/rubotnik'
 require_relative 'helpers/helpers'
+
+
 include Facebook::Messenger
 include Helpers # mixing helpers into the common namespace
 # so they can be used outside of Dispatches
