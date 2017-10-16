@@ -527,6 +527,7 @@ end
   # specify stop word
   def stop_word_used?(word)
     !(@message.text =~ /#{word.downcase}/i).nil?
+    stop_thread
   end
 
   def user_responses
