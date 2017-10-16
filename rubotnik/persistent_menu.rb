@@ -21,7 +21,7 @@ module Rubotnik
               },
               {
                 type: 'postback',
-                title: 'Places popular among your friends',
+                title: 'Places popular among friends',
                 payload: 'TRUST_STAGE_4'
               }
 =begin
