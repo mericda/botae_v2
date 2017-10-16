@@ -434,14 +434,15 @@ module Trust
     if user_info
       user_name = user_info[:first_name]
       @message.typing_on
-      #sleep 3
-
+      UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
+      @message.typing_off
       say BYE.sample + ", #{user_name}! ✌️"
 
 
     else
       @message.typing_on
-      #sleep 3
+      UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
+      @message.typing_off
       say BYE.sample + "! ✌️"
     end
     user_responses
@@ -474,9 +475,7 @@ module Trust
     stop_thread
     user_answers = @user.answers
     puts "user answers: #{user_answers}"
-    @message.typing_on
-    UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
-    @message.typing_off
+
   end
 
 
