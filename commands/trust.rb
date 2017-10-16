@@ -339,7 +339,7 @@ module Trust
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
-      trust_stage_qr_4 = UI::QuickReplies.build(['Authenticate', 'TRUST'])
+      trust_stage_qr_4 = UI::QuickReplies.build(['Authorize', 'TRUST'])
       say 'To do this, I need your permission to read your Facebook profile. Click the button 👇 to authorize me.', quick_replies: trust_stage_qr_4
       @message.typing_off
       next_command :trust_stage_5
