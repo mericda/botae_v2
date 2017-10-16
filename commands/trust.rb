@@ -259,7 +259,6 @@ module Trust
     parsed = get_parsed_response(REVERSE_API_URL, "#{lat},#{long}")
     address = extract_full_address(parsed)
     @message.typing_on
-    sleep 2
     say "Got your address: #{address}"
     @message.typing_off
     @message.typing_on
