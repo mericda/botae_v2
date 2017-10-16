@@ -190,7 +190,6 @@ module Trust
   end
 
   def trust_stage_2
-    fall_back && return
     @@choice = nil
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /yes/i
       @message.typing_on
