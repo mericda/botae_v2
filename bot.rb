@@ -24,9 +24,6 @@ Rubotnik::PersistentMenu.enable
 # if a set of quick replies is an array of arrays.
 # e.g. UI::QuickReplies.build(*replies)
 
-#HINTS = UI::QuickReplies.build(['Where am I?', 'LOCATION'],
-# ['Take questionnaire', 'QUESTIONNAIRE'], ['Have a gif', 'HAVEAGIF'])
-
 
 GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba!"]
 INTROS = ["I'm Botae.", "I am Botae.", "Boate at your service.", "You are speaking with Botae."]
@@ -39,11 +36,10 @@ YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me",
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
 
 
-intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_STAGE_1'], ['Tell me more', 'PERSUADE_STAGE_1'])
+intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], ['Tell me more', 'PERSUADE_PRESTAGE_1'])
 
 
 # Build a quick reply that prompts location from user
-#LOCATION_PROMPT = UI::QuickReplies.location
 
 questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
   %w[No STOP_QUESTIONNAIRE])
@@ -53,7 +49,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
   trust_prestage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
   trust_prestage_qr_4 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
 
-  persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_STAGE_1'], [NO.sample, 'PERSUADE'])
+  persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_PRESTAGE_1'], [NO.sample, 'PERSUADE'])
 
   ####################### ROUTE MESSAGES HERE ################################
 
@@ -67,9 +63,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
       # Use with 'to:' syntax to bind to a command found inside Commands
       # or its sub-modules.
-      bind 'carousel', 'generic template', to: :show_carousel
-      bind 'button', 'template', all: true, to: :show_button_template
-      bind 'image', to: :send_image
+
 
       # bind also takes regexps directly
       bind(/my name/i, /mon nom/i) do
@@ -103,10 +97,7 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       # Include nested hash to provide a message asking user
       # for input to the next command. You can also pass an array of
       # quick replies (and process them inside the thread).
-      bind 'questionnaire', to: :start_questionnaire, start_thread: {
-        message: questionnaire_welcome,
-        quick_replies: questionnaire_replies
-      }
+
 
       bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
 
@@ -116,11 +107,11 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
 
       bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
 
-        message: "So I am a chatbot that searches for the best places on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general.", quick_replies: persuade_stage_qr_1
+        message: "So I am a chatbot that searches for the best places on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general.", quick_replies: persuade_prestage_qr_1
       }
 
 
-      bind "Have a gif", to: :get_cute_gif
+      #bind "Have a gif", to: :get_cute_gif
 
 
       # Falback action if none of the commands matched the input,
@@ -172,16 +163,11 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
             say   APOLOGIES.sample + " Instead, " + HELP.sample
             say HELP_CTA.sample, quick_replies: intention_replies
 
-            #, quick_replies: HINTS
 
           end
         else
         end
 
-        #      greetings = firstEntity(@message.nlp, 'greetings')
-        #        if greetings && greetings.confidence > 0.8
-        #          say 'it works',
-        #      end
 
 
       end
@@ -203,40 +189,22 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       end
 
 
-      bind 'CAROUSEL', to: :show_carousel
-      bind 'BUTTON_TEMPLATE', to: :show_button_template
-      bind 'IMAGE_ATTACHMENT', to: :send_image
-
       # Use block syntax when a command takes an argument rather
       # than 'message' or 'user' (which are accessible from everyhwere
       # as instance variables, no need to pass them around).
-      bind 'BUTTON_TEMPLATE_ACTION' do
-        say "I don't really do anything useful"
-      end
 
-      bind 'SQUARE_IMAGES' do
-        show_carousel(image_ratio: :square)
-      end
-
-
-      bind 'TRUST' do
-      end
 
 
       # No custom parameter passed, can use simplified syntax
 
 
-      bind 'QUESTIONNAIRE', to: :start_questionnaire, start_thread: {
-        message: questionnaire_welcome,
-        quick_replies: questionnaire_replies
-      }
-      bind 'TRUST_STAGE_1', to: :trust_stage_2, start_thread: {
+      bind 'TRUST_PRESTAGE_1', to: :trust_stage_2, start_thread: {
         message:  "Cool! What are you interested in?", quick_replies: trust_prestage_qr_1
       }
-      bind 'TRUST_STAGE_4', to: :trust_stage_4, start_thread: {
+      bind 'TRUST_PRESTAGE_4', to: :trust_stage_4, start_thread: {
         message:  "Alright, are you ready to see the most popular places among your Facebook friends?", quick_replies: trust_prestage_qr_4
       }
-      bind 'PERSUADE_STAGE_1', to: :persuade_stage_2, start_thread: {
+      bind 'PERSUADE_PRESTAGE_1', to: :persuade_stage_2, start_thread: {
         composer_input_disabled: true,
         message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general. Soon I will be also able to suggest meal specific places.\n such as 🍕 Pizza or 🥗 Salad", quick_replies: persuade_stage_qr_1
       }
