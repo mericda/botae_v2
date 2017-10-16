@@ -50,8 +50,8 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
   questionnaire_welcome = 'Welcome to the sample questionnaire! Are you ready?'
   # Define vartiables you want to use for both messages and postbacks
   # outside both Bot.on method calls.
-  trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
-  trust_stage_qr_4 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+  trust_prestage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
+  trust_prestage_qr_4 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
 
   persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_STAGE_1'], [NO.sample, 'PERSUADE'])
 
@@ -109,13 +109,12 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
       }
 
       bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
-        composer_input_disabled: true,
 
-        message: "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
+
+        message: "Cool! What are you interested in?", quick_replies: trust_prestage_qr_1
       }
 
       bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
-        composer_input_disabled: true,
 
         message: "So I am a chatbot that searches for the best places on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general.", quick_replies: persuade_stage_qr_1
       }
@@ -232,12 +231,10 @@ questionnaire_replies = UI::QuickReplies.build(%w[Yes START_QUESTIONNAIRE],
         quick_replies: questionnaire_replies
       }
       bind 'TRUST_STAGE_1', to: :trust_stage_2, start_thread: {
-        composer_input_disabled: true,
-        message:  "Cool! What are you interested in?", quick_replies: trust_stage_qr_1
+        message:  "Cool! What are you interested in?", quick_replies: trust_prestage_qr_1
       }
       bind 'TRUST_STAGE_4', to: :trust_stage_4, start_thread: {
-        composer_input_disabled: true,
-        message:  "Alright, are you ready to see the most popular places among your Facebook friends?", quick_replies: trust_stage_qr_4
+        message:  "Alright, are you ready to see the most popular places among your Facebook friends?", quick_replies: trust_prestage_qr_4
       }
       bind 'PERSUADE_STAGE_1', to: :persuade_stage_2, start_thread: {
         composer_input_disabled: true,
