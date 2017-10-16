@@ -270,16 +270,22 @@ module Trust
       sleep 3
       trust_stage_qr_feedback= UI::QuickReplies.build(*NAY_FEEDBACK)
       say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
-      next_command :trust_stage_3
-    end
-    trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
-    @message.typing_on
-    sleep 3
-    say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
-    next_command :trust_stage_4
+      next_command :trust_stage_3_2
+
   end
 
+  end
 
+  def trust_stage_3_2
+    fall_back && return
+
+    @user.answers[:trust_stage_2] = @message.text
+    @message.typing_on
+    sleep 3
+    trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+    say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
+    next_command :trust_stage_3_4
+end
 
   def trust_stage_4
     fall_back && return
@@ -293,8 +299,9 @@ module Trust
       say 'Cool! In order to do that I need to get your permissions to read your friends list on Facebook. Click to button to get the Facebook authentication pop-up.', quick_replies: trust_stage_qr_4
       next_command :trust_stage_5
     else
+      @message.typing_on if @message
       UI::ImageAttachment.new('https://media.giphy.com/media/rHUCLo2s1otC8/giphy.gif').send(@user)
-      @message.typing_on
+      @message.typing_off if @message
       sleep 3
       say 'Type \'friends\' to if you want to see the most popular places among your friends any time.'
       stop_thread
@@ -450,6 +457,7 @@ module Trust
     @user.answers = {}
     puts "user answers: #{@user.answers}"
   end
+
 
 
 end
