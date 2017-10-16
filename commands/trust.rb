@@ -408,6 +408,8 @@ module Trust
   end
 
   def trust_auth_3_2
+    @user.answers[:trust_auth_3] = @message.text
+
     @message.typing_on
     sleep 3
     say 'By the way, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
@@ -473,7 +475,7 @@ module Trust
     user_answers = @user.answers
     puts "user answers: #{user_answers}"
     @message.typing_on
-    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+    UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
     @message.typing_off
   end
 
