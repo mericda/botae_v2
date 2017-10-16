@@ -267,12 +267,10 @@ module Trust
     @message.typing_off
     if @@choice == 'coffee'
       @message.typing_on
-      sleep 3
       UI::FBCarousel.new(COFFEE).send(@user)
   @message.typing_off
     elsif @@choice == 'food'
       @message.typing_on
-      sleep 3
       UI::FBCarousel.new(FOOD).send(@user)
   @message.typing_off
     end
