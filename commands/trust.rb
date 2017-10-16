@@ -459,8 +459,6 @@ end
   # specify stop word
   def stop_word_used?(word)
     !(@message.text =~ /#{word.downcase}/i).nil?
-    say 'Okay. This is where I stop.'
-    @message.typing_off
   end
 
   def user_responses
