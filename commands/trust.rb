@@ -504,7 +504,7 @@ end
   def fall_back
     say 'You tried to fool me, human! Start over!' unless text_message?
     return false unless !text_message? || stop_word_used?('Stop')
-    stop_thread
+    user_responses
     puts 'Fallback triggered!'
     true # to trigger return from the caller on 'and return'
   end

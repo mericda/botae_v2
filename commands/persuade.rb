@@ -5,11 +5,17 @@ module Persuade
   # commands are mixed into Dispatch classes as private methods.
   module_function
 
+PERSUADE_STAGE_2_PHRASES = ["I am a chatbot","I am a chatbot!","I am a chatbot!!"]
+PERSUADE_STAGE_3_PHRASES = ["Alright","Got it","Okay"]
+PERSUADE_STAGE_4_PHRASES = ["Alright","Got it","Okay"]
+PERSUADE_STAGE_5_PHRASES = ["Alright","Got it","Okay"]
+
+
   def persuade_stage_2
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information about this project. 2'
+      say PERSUADE_STAGE_2_PHRASES.sample
       persuade_stage_qr_2 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
-      say 'Ready to browse the best?', quick_replies: persuade_stage_qr_2
+      say HELP_CTA.sample, quick_replies: persuade_stage_qr_2
       next_command :persuade_stage_3
     else
       trust_stage_1
@@ -20,9 +26,9 @@ module Persuade
     # Fallback functionality if stop word used or user input is not text
     fall_back && return
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information about this project. 3'
+      say PERSUADE_STAGE_3_PHRASES.sample
       persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
-      say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
+      say HELP_CTA.sample, quick_replies: persuade_stage_qr_3
       next_command :persuade_stage_4
     else
       trust_stage_1
@@ -32,9 +38,9 @@ module Persuade
     # Fallback functionality if stop word used or user input is not text
     fall_back && return
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information about this project. 3'
+      say PERSUADE_STAGE_4_PHRASES.sample
       persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
-      say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
+      say HELP_CTA.sample, quick_replies: persuade_stage_qr_3
       next_command :persuade_stage_5
     else
       trust_stage_1
@@ -44,9 +50,9 @@ module Persuade
     # Fallback functionality if stop word used or user input is not text
     fall_back && return
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information about this project. 5 final'
+      say PERSUADE_STAGE_5_PHRASES.sample
       persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Quit', 'QUIT_SURVEY'])
-      say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
+      say HELP_CTA.sample, quick_replies: persuade_stage_qr_3
       next_command :persuade_unsuccessful
     else
       trust_stage_1
