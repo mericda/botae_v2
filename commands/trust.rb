@@ -354,7 +354,7 @@ end
       @message.typing_off if @message
       @message.typing_on
       sleep 3
-      say 'Type \'friends\' favorites\' to if you want to see the most popular places among your friends any time.'
+      say 'Type \'friends favorites\' to if you want to see the most popular places among your friends any time.'
       @message.typing_off
       stop_thread
 
