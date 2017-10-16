@@ -34,10 +34,10 @@ module Rubotnik
                     type: 'postback',
                     payload: 'HAVEAGIF'
                   },
-=end
+
                 ]
               }
-
+=end
             ]
           }
         ]
