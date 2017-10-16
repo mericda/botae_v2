@@ -28,17 +28,17 @@ HELP_TEXT = "What would you like to do?".freeze
 HELP_BUTTONS = [
   {
     type: 'postback',
-    title: 'Best food or coffee nearby',
+    title: 'Find the best 🍱 or ☕️ nearby',
     payload: 'TRUST_PRESTAGE_1'
   },
   {
     type: 'postback',
-    title: 'Places popular among friends',
+    title: 'Find Friends\' Favs 👭',
     payload: 'TRUST_PRESTAGE_4'
   },
   {
     type: 'postback',
-    title: 'Tell me more',
+    title: 'Tell me more ℹ️',
     payload: 'PERSUADE_PRESTAGE_1'
   }
 ].freeze
