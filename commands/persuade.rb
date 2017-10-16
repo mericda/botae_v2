@@ -7,7 +7,7 @@ module Persuade
 
   def persuade_stage_2
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information. 2'
+      say 'More information about this project. 2'
       persuade_stage_qr_2 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_2
       next_command :persuade_stage_3
@@ -20,7 +20,7 @@ module Persuade
     # Fallback functionality if stop word used or user input is not text
     fall_back && return
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information. 3'
+      say 'More information about this project. 3'
       persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
       next_command :persuade_stage_4
@@ -32,7 +32,7 @@ module Persuade
     # Fallback functionality if stop word used or user input is not text
     fall_back && return
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information.4'
+      say 'More information about this project. 3'
       persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
       next_command :persuade_stage_5
@@ -44,7 +44,7 @@ module Persuade
     # Fallback functionality if stop word used or user input is not text
     fall_back && return
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
-      say 'More information. 5 final'
+      say 'More information about this project. 5 final'
       persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Quit', 'QUIT_SURVEY'])
       say 'Ready to browse the best?', quick_replies: persuade_stage_qr_3
       next_command :persuade_unsuccessful
