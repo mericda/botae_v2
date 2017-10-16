@@ -4,5 +4,6 @@ class CreateResponsesTable < ActiveRecord::Migration[5.1]
       t.integer :response_id
       t.integer :stage_id
       text :response_content
+    end
   end
 end
