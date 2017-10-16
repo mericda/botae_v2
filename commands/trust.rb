@@ -195,7 +195,7 @@ module Trust
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /coffee/i
       @message.typing_on
       sleep 3
-      say 'Let me see if I can find better ☕️ than Starbucks.'
+      say 'Let\'s find a better ☕️ than Starbucks around you.'
       @message.typing_off
 
 
@@ -204,7 +204,7 @@ module Trust
     elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /food/i
       @message.typing_on
       sleep 3
-      say 'Let me see if I can find better 🍽 than Subway.'
+      say 'Let\'s find a better 🍽 than Subway around you.'
       @@choice = 'food'
       @message.typing_off
 
@@ -226,7 +226,7 @@ module Trust
 
     @message.typing_on
     sleep 3
-    say 'Cool! Send me a location by clicking the button 👇 to find out the best nearby.', quick_replies: LOCATION_PROMPT
+    say 'Send me a location by clicking the button 👇 to find out the best nearby.', quick_replies: LOCATION_PROMPT
     @message.typing_off
 
     next_command :lookup_location
