@@ -260,7 +260,7 @@ module Trust
       sleep 1
       say 'Great 🙌'
 
-    else
+    elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /no/i
       #
       @message.typing_on
       sleep 2
@@ -270,6 +270,7 @@ module Trust
       sleep 3
       trust_stage_qr_feedback= UI::QuickReplies.build(*NAY_FEEDBACK)
       say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
+      next_command :trust_stage_3
     end
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
     @message.typing_on
