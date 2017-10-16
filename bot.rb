@@ -125,7 +125,7 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
         message: "So I am a chatbot that searches for the best places on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general.", quick_replies: persuade_prestage_qr_1
       }
 
-      bind 'friends', to: :trust_stage_4, start_thread: {
+      bind 'friends','favorites', all:true, to: :trust_stage_4, start_thread: {
 
         message: "Alright, are you ready to see the most popular places among your Facebook friends.", quick_replies: persuade_prestage_qr_4
       }
