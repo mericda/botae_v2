@@ -186,7 +186,7 @@ module Trust
       sleep 3
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       @@choice = 'food'
-trust_stage_2_2
+      trust_stage_2_2
     else
       trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
       say "To proceed, tell me what are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
@@ -196,15 +196,15 @@ trust_stage_2_2
   end
 
 
-def trust_stage_2_2
-  fall_back && return
+  def trust_stage_2_2
+    fall_back && return
 
-  @message.typing_on
-  sleep 3
-  say 'Send me your location by clicking the button below and I\'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
-  next_command :lookup_location
+    @message.typing_on
+    sleep 3
+    say 'Send me your location by clicking the button below and I\'ll tell you what\'s the location close to you.', quick_replies: LOCATION_PROMPT
+    next_command :lookup_location
 
-end
+  end
 
   def lookup_location
 
@@ -269,7 +269,7 @@ end
       @message.typing_on
       sleep 1
       say 'Great 🙌'
-trust_stage_3_2
+      trust_stage_3_2
     elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /no/i
       #
       @message.typing_on
@@ -282,7 +282,7 @@ trust_stage_3_2
       say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
       next_command :trust_stage_3_2
 
-  end
+    end
 
   end
 
@@ -295,10 +295,10 @@ trust_stage_3_2
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     next_command :trust_stage_4
-end
+  end
 
   def trust_stage_4
-        #log = @message.text
+    #log = @message.text
     @user.answers[:trust_stage_3] = @message.text
 
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
@@ -393,6 +393,9 @@ end
       @message.typing_on
       sleep 3
       say 'There are many malicious bots. They can steal your personal information such as your account details or location.'
+      @message.typing_on
+      UI::ImageAttachment.new('https://media.giphy.com/media/mzJMYiKAHF1aE/giphy.gif').send(@user)
+      @message.typing_off
 
       @message.typing_on
       sleep 3
@@ -462,8 +465,9 @@ end
     stop_thread
     user_answers = @user.answers
     puts "user answers: #{user_answers}"
+    @message.typing_on
     UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-
+    @message.typing_off
   end
 
 
