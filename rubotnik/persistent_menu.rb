@@ -2,7 +2,7 @@
 module Rubotnik
   # Enables persistent menu for your bot
   class PersistentMenu
-    def self.enable
+    #def self.enable
       # Design your persistent menu here:
       Facebook::Messenger::Profile.set({
         persistent_menu: [
