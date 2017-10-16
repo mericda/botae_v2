@@ -23,7 +23,7 @@ module Trust
     {
       title: 'Crepes Parisiennes',
       # Horizontal image should have 1.91:1 ratio
-      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_1.jpg',
+      image_url: 'http://www.mericdagli.com/botae/coffee_1.jpg',
       subtitle: "🚶 2 mins ⭐️ 4.3 (128 Reviews)",
       default_action: {
         type: 'web_url',
@@ -48,7 +48,7 @@ module Trust
     {
       title: 'Tazza D\'Oro at Forbes Ave',
       # Horizontal image should have 1.91:1 ratio
-      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_2.jpg',
+      image_url: 'http://www.mericdagli.com/botae/coffee_2.jpg',
       subtitle: "🚶 5 mins ⭐️ 4.6 (26 Reviews)",
       default_action: {
         type: 'web_url',
@@ -73,7 +73,7 @@ module Trust
     {
       title: 'Redhawk Coffee',
       # Horizontal image should have 1.91:1 ratio
-      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/coffee_4.jpg',
+      image_url: 'http://www.mericdagli.com/botae/coffee_4.jpg',
       subtitle: "🚶 13 mins ⭐️ 5 (82 Reviews)",
       default_action: {
         type: 'web_url',
@@ -102,7 +102,7 @@ module Trust
     {
       title: 'Las Palmas Pittsburgh #2',
       # Horizontal image should have 1.91:1 ratio
-      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_1.jpg',
+      image_url: 'http://www.mericdagli.com/botae/food_1.jpg',
       subtitle: "🚶 14 mins ⭐️ 4.6 (174 Reviews)",
       default_action: {
         type: 'web_url',
@@ -127,7 +127,7 @@ module Trust
     {
       title: 'Mount Everest Sushi',
       # Horizontal image should have 1.91:1 ratio
-      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_2.jpg',
+      image_url: 'http://www.mericdagli.com/botae/food_2.jpg',
       subtitle: "🚶 10 mins ⭐️ 5 (84 Reviews)",
       default_action: {
         type: 'web_url',
@@ -152,7 +152,7 @@ module Trust
     {
       title: 'Piada Italian Street Food',
       # Horizontal image should have 1.91:1 ratio
-      image_url: 'https://s3.amazonaws.com/efidosrb3yha/botae/food_3.jpg',
+      image_url: 'http://www.mericdagli.com/botae/food_3.jpg',
       subtitle: "🚶 12 mins ⭐️ 4.6 (121 Reviews)",
       default_action: {
         type: 'web_url',
