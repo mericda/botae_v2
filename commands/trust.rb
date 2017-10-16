@@ -499,13 +499,6 @@ end
 
   end
 
-  #else #IF_FACEBOOK_AUTH == 0
-  #trust_stage_qr_final_redirect= UI::QuickReplies.build(['Try again to authenticate', 'TRUST'], ['Tell me more', 'TRUST_NOT_STABLE'])
-  #say 'Something is wrong, I could not get confirmation from Facebook.', quick_replies: trust_stage_qr_final_redirect
-  #next_command :trust_stage_5
-  #stop_thread #INTERIM
-  #end
-  #GET CONFIRMATION OF USERS
 
   # NOTE: A way to enforce sanity checks (repeat for each sequential command)
   def fall_back
@@ -519,7 +512,6 @@ end
   # specify stop word
   def stop_word_used?(word)
     !(@message.text =~ /#{word.downcase}/i).nil?
-    stop_thread
   end
 
   def user_responses
