@@ -23,7 +23,8 @@ module Rubotnik
                 type: 'postback',
                 title: 'Places popular among your friends',
                 payload: 'TRUST_STAGE_4'
-              },
+              }
+=begin
               {
                 type: 'nested',
                 title: 'Info',
@@ -33,6 +34,7 @@ module Rubotnik
                     type: 'postback',
                     payload: 'HAVEAGIF'
                   },
+=end
                 ]
               }
 
