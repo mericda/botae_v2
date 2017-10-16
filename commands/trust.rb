@@ -425,18 +425,15 @@ end
       #sleep 3
 
       say BYE.sample + ", #{user_name}! ✌️"
-      UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+
 
     else
       @message.typing_on
       #sleep 3
       say BYE.sample + "! ✌️"
-      UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
-
     end
-
-
     user_responses
+
   end
 
   #else #IF_FACEBOOK_AUTH == 0
@@ -465,6 +462,8 @@ end
     stop_thread
     @user.answers = {}
     puts "user answers: #{@user.answers}"
+    UI::ImageAttachment.new('https://media.giphy.com/media/3orieR0VunUxJKfwHe/giphy.gif').send(@user)
+
   end
 
 
