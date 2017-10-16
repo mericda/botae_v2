@@ -197,7 +197,6 @@ module Trust
 
 
   def lookup_location
-    fall_back && return
 
     if message_contains_location?
       handle_user_location
