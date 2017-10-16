@@ -22,7 +22,7 @@ module Rubotnik
               {
                 type: 'postback',
                 title: 'Places popular among friends',
-                payload: 'TRUST_STAGE_4'
+                payload: 'trust_stage_4'
               }
 =begin
               {
