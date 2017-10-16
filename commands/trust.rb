@@ -256,16 +256,15 @@ module Trust
     coords = @message.attachments.first['payload']['coordinates']
     lat = coords['lat']
     long = coords['long']
-    @message.typing_on
     parsed = get_parsed_response(REVERSE_API_URL, "#{lat},#{long}")
     address = extract_full_address(parsed)
     @message.typing_on
     sleep 2
-    say "Got your address:#{address}"
+    say "Got your address: #{address}"
     @message.typing_off
     @message.typing_on
     sleep 3
-    say "Here are the top places nearbye"
+    say "Here are the top 3 places nearby."
     @message.typing_off
     if @@choice == 'coffee'
       @message.typing_on
