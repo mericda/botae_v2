@@ -177,15 +177,16 @@ module Trust
       @message.typing_on
       sleep 3
       say 'Nice! Let me see if I can find ☕️ better than Starbucks.'
-next_command :trust_stage_2_2
+
 
       @@choice = 'coffee'
+      trust_stage_2_2
     elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
       say 'Nice! Let me see if I can find 🍽 better than Subway.'
       @@choice = 'food'
-next_command :trust_stage_2_2
+trust_stage_2_2
     else
       trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
       say "To proceed, tell me what are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
