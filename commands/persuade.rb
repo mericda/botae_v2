@@ -63,3 +63,4 @@ module Persuade
       trust_stage_1
     end
   end
+end
