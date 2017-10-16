@@ -7,7 +7,7 @@ class CreateLogsTable < ActiveRecord::Migration[5.1]
       t.integer :flow_id
       t.integer :intent_id
       t.text :raw_message
-      boolean :has_attachment
+      t.boolean :has_attachment
       t.timestamps
 
     end
