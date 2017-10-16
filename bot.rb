@@ -4,7 +4,6 @@ require 'facebook/messenger'
 require 'sinatra'
 
 require 'sinatra/activerecord'
-require 'rake'
 
 require 'active_support/all'
 require "active_support/core_ext"
