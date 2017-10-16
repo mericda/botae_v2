@@ -259,7 +259,6 @@ module Trust
     say "Got your address: #{address}"
     @message.typing_off
     @message.typing_on
-    sleep 3
     say "Here are the top 3 places nearby."
     @message.typing_off
     if @@choice == 'coffee'
@@ -272,7 +271,6 @@ module Trust
       @message.typing_off
     end
     @message.typing_on
-    sleep 3
     trust_stage_qr_3_1 = UI::QuickReplies.build(['Yes', 'TRUST_STABLE'], ['No', 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
     @message.typing_off
@@ -299,18 +297,15 @@ module Trust
     if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
       #log = @message.text
       @message.typing_on
-      sleep 1
       say 'Great 🙌'
       @message.typing_off
       trust_stage_3_2
     elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /no/i
       #
       @message.typing_on
-      sleep 2
       say 'Sorry to hear that 😭'
       @message.typing_off
       @message.typing_on
-      sleep 3
       trust_stage_qr_feedback= UI::QuickReplies.build(*NAY_FEEDBACK)
       say 'Let me know why you didn\'t like it. ', quick_replies: trust_stage_qr_feedback
       @message.typing_off
@@ -400,27 +395,26 @@ end
     if user_info
       user_name = user_info[:first_name]
       @message.typing_on
-      sleep 3
+      sleep 2
       say "#{user_name}, I have good and bad news."
       @message.typing_off
     else
       @message.typing_on
-      sleep 3
+      sleep 2
       say "I have good and bad news."
       @message.typing_off
     end
 
 
     @message.typing_on if @message
-    sleep 2
+    sleep   1
     say 'Bad news first.'
     @message.typing_off if @message
 
   @message.typing_on if @message
-    sleep 3
 
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
-    say 'I will be honest with you. Although you trusted me to show you popular places among your friends, I\'m not designed to do it.', quick_replies: trust_auth_qr_1
+    say 'Although you trusted me to show you popular places among your friends, I\'m not designed to do it.', quick_replies: trust_auth_qr_1
 @message.typing_off if @message
     next_command :trust_auth_2
 
@@ -433,7 +427,6 @@ end
 
     if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
       @message.typing_on
-      sleep 3
       say 'Sorry if this makes you feel upset.'
       @message.typing_off
 
@@ -454,23 +447,22 @@ end
   def trust_auth_3
     fall_back && return
     @user.answers[:trust_auth_2] = @message.text
-    @message.typing_on
-    sleep 3
+    @message.typing_on if @message
     say 'There are many malicious bots that can steal your account details or location.'
-    @message.typing_off
+    @message.typing_off if @message
     #@message.typing_on
     #UI::ImageAttachment.new('https://media.giphy.com/media/mzJMYiKAHF1aE/giphy.gif').send(@user)
     #@message.typing_off
 
-    @message.typing_on
+    @message.typing_on if @message
     sleep 3
     say 'Please think twice when you are providing access or directly giving your personal data to a computer program.'
-    @message.typing_off
+    @message.typing_off if @message
 
-    @message.typing_on
+    @message.typing_on if @message
     sleep 3
     say 'On top of all, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
-    @message.typing_off
+    @message.typing_off if @message
 
     trust_auth_qr_3  = UI::QuickReplies.build(['Yes', 'LEARN_MORE'], ['No', 'THANKS'])
     say 'Want to learn more about the project?', quick_replies: trust_auth_qr_3
