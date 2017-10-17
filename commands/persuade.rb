@@ -26,7 +26,7 @@ puts "#{@@current_flow}"
 
     @user.answers[:persuade_stage_1] = @message.text
 
-    if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
+    if @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /yes/i
       @message.typing_on
       say PERSUADE_STAGE_1_1_PHRASES[@@current_flow]
       @message.typing_off
@@ -42,9 +42,7 @@ puts "#{@@current_flow}"
       @message.typing_off
 
       next_command :persuade_stage_2
-    elsif @message.quick_reply == 'TRUST_NOT_STABLE'|| @message.text =~ /yes/i
-
-      persuade_stage_1
+  
 else
   trust_stage_1
     end
