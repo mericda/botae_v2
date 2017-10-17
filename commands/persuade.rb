@@ -42,7 +42,7 @@ puts "#{@@current_flow}"
       @message.typing_off
 
       next_command :persuade_stage_2
-    elsif @message.quick_reply == 'PERSUADE'|| @message.text =~ /yes/i
+    elsif @message.quick_reply == 'TRUST_NOT_STABLE'|| @message.text =~ /yes/i
 
       persuade_stage_1
 else
