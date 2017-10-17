@@ -66,12 +66,12 @@ HELP_BUTTONS = [
 GREETINGS = ["Hi","Yo", "Hey","Howdy", "Hello", "Ahoy", "‘Ello", "Aloha", "Hola", "Bonjour", "Hallo", "Ciao", "Konnichiwa", "Merhaba"]
 INTROS = ["I'm Botae.", "I am Botae.", "Boate at your service.", "You are speaking with Botae."]
 BYE = ["Goodbye","Have a good one"]
-APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "I don\'t understand everything. "]
+APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "I don\'t understand everything."]
 HELP = ["I can help you to find the closest best places for a coffee or food.", "I know the best places for coffee or food nearby.", "I do one thing good: Finding the best food and coffee nearby."]
 HELP_CTA = ["Ready to go?","Are you in?","Ready to find out?","Are you ready?"]
-HELP_PERSUADE_CTA = ["Ready to try me?","Try me yourself", "Are you ready to try me out?","Find the best places now"]
-NO = ["Tell me more","More information"]
-YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me","Yes, I\'m ready"]
+HELP_PERSUADE_CTA = ["Ready to try me?","Try me yourself", "Are you ready to try me out?","Find the best places now.","Get started"]
+NO = ["Tell me more","More information","Tell more"]
+YES = ["Sounds good", "I\'m in","Yeah","Let\'s do it","Yes","Sounds good to me","Yes, I\'m ready","I\'m ready"]
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
 
 
