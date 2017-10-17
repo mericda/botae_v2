@@ -20,18 +20,19 @@ module Persuade
 
   def persuade_stage_2
 
-    @@flow = rand(1 .. 2)
+    flows = [1,2]
+ @@@@current_flow = flows.sample
     @user.answers[:persuade_stage_1] = @message.text
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
-      say PERSUADE_STAGE_2_1_PHRASES.fetch(@@flow)
+      say PERSUADE_STAGE_2_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      say PERSUADE_STAGE_2_2_PHRASES.fetch(@@flow)
+      say PERSUADE_STAGE_2_2_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
@@ -55,7 +56,7 @@ module Persuade
 
       @message.typing_on
       sleep 3
-      say PERSUADE_STAGE_3_1_PHRASES.fetch(@@flow)
+      say PERSUADE_STAGE_3_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
@@ -79,12 +80,12 @@ module Persuade
 
       @message.typing_on
       sleep 3
-      say PERSUADE_STAGE_4_1_PHRASES.fetch(@@flow)
+      say PERSUADE_STAGE_4_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      say PERSUADE_STAGE_4_2_PHRASES.fetch(@@flow)
+      say PERSUADE_STAGE_4_2_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
@@ -107,12 +108,12 @@ module Persuade
 
       @message.typing_on
       sleep 3
-      say PERSUADE_STAGE_5_1_PHRASES.fetch(@@flow)
+      say PERSUADE_STAGE_5_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      say PERSUADE_STAGE_5_2_PHRASES.fetch(@@flow)
+      say PERSUADE_STAGE_5_2_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
