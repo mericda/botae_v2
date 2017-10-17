@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016221006) do
+ActiveRecord::Schema.define(version: 20171017195620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20171016221006) do
     t.integer "stage_id"
     t.text "response_content"
     t.integer "step_id"
+    t.integer "flow_id"
   end
 
 end
