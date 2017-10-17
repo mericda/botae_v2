@@ -21,7 +21,7 @@ module Persuade
   def persuade_stage_2
 
     flows = [1,2]
- @@@@current_flow = flows.sample
+ @@current_flow = flows.sample
     @user.answers[:persuade_stage_1] = @message.text
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
