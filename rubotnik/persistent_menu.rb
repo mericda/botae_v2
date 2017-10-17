@@ -1,6 +1,7 @@
 # rubocop:disable all
 module Rubotnik
   # Enables persistent menu for your bot
+=begin
   class PersistentMenu
     def self.enable
       # Design your persistent menu here:
@@ -44,4 +45,5 @@ module Rubotnik
         }, access_token: ENV['ACCESS_TOKEN'])
     end
   end
+=end
 end
