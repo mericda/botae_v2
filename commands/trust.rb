@@ -462,8 +462,6 @@ module Trust
 
 
   def trust_auth_1
-    #handle_facebook_auth
-    # if FACEBOOK_AUTH == 1
     fall_back && return
     @user.answers[:trust_stage_5] = @message.text
 if @message.quick_reply == 'TRUST_NOT_STABLE'
@@ -471,7 +469,8 @@ if @message.quick_reply == 'TRUST_NOT_STABLE'
   persuade_stage_2
 elsif @message.quick_reply == 'TRUST_CONFIRMATION_INTENT'
   trust_stage_4
-end
+
+else
     #  say 'Now, give me some time while I am looking what your friends did.'
     #  say 'I will let you know when I am ready to share the results.'
     user_info = get_user_info(:first_name)
@@ -500,7 +499,7 @@ end
     say 'Although you trusted me to show you popular places among your friends, I\'m not designed to do it.', quick_replies: trust_auth_qr_1
     @message.typing_off if @message
     next_command :trust_auth_2
-
+end
   end
 
 
