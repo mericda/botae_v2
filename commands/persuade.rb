@@ -5,29 +5,40 @@ module Persuade
   # commands are mixed into Dispatch classes as private methods.
   module_function
 
-PERSUADE_STAGE_1_1_PHRASES = ["I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places.","I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare."]
-PERSUADE_STAGE_1_2_PHRASES = ["I try to understand the context, in this case where you are, and navigate you in the overcrowded food and coffee scene.","I use data to better understand the context,and suggest personalized places to check out."]
-PERSUADE_STAGE_2_1_PHRASES = ["Why Botae? Botae is its designer\'s early exploration of how Messenger bots can interact with users.","The idea of Botae came from its designer\'s own need of finding that best place to eat nearby."]
-PERSUADE_STAGE_2_2_PHRASES = ["Botae answers the question of \'Where should I eat now?\'","Botae is a bot, because you don\'t need another app in your phone, right?"]
-PERSUADE_STAGE_3_1_PHRASES = ["I\'m designed by Meric Dagli, who is a graduate interaction design student at Carnegie Mellon University.","I\'m designed by Meric Dagli, a graduate interaction design student at Carnegie Mellon University, who is originally from 🇹🇷","My father is Meriç Dağlı, who is a graduate interaction design student at Carnegie Mellon University.","My father is Meric Dagli, an interaction design student from Carnegie Mellon University.","My father is Meric Dagli, a graduate interaction design student at Carnegie Mellon University, who is originally from Turkey."]
-PERSUADE_STAGE_3_2_PHRASES = []
-PERSUADE_STAGE_4_1_PHRASES = ["In addition, I may also find places among your Facebook Friends by running a similarity-based classification algorithm.","In addition, I may also find places among your Facebook Friends by running a smart algorithm."]
-PERSUADE_STAGE_4_2_PHRASES = ["I said \'I may find it\' is because I cannot always read data of your friends, or simply there is not enough data.","I said \'I may find it\' is because I cannot always read data of your friends."]
-PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying? Here is an example suggestion."]
-PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://mericdagli.com/botae/p2.jpg"]
+  PERSUADE_STAGE_1_1_PHRASES = ["I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places.","I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare."]
+  PERSUADE_STAGE_1_2_PHRASES = ["I try to understand the context, in this case where you are, and navigate you in the overcrowded food and coffee scene.","I use data to better understand the context,and suggest personalized places to check out."]
+  PERSUADE_STAGE_2_1_PHRASES = ["Why Botae? Botae is its designer\'s early exploration of how Messenger bots can interact with users.","The idea of Botae came from its designer\'s own need of finding that best place to eat nearby."]
+  PERSUADE_STAGE_2_2_PHRASES = ["Botae answers the question of \'Where should I eat now?\'","Botae is a bot, because you don\'t need another app in your phone, right?"]
+  PERSUADE_STAGE_3_1_PHRASES = ["I\'m designed by Meric Dagli, who is a graduate interaction design student at Carnegie Mellon University.","I\'m designed by Meric Dagli, a graduate interaction design student at Carnegie Mellon University, who is originally from 🇹🇷","My father is Meriç Dağlı, who is a graduate interaction design student at Carnegie Mellon University.","My father is Meric Dagli, an interaction design student from Carnegie Mellon University.","My father is Meric Dagli, a graduate interaction design student at Carnegie Mellon University, who is originally from Turkey."]
+  PERSUADE_STAGE_3_2_PHRASES = []
+  PERSUADE_STAGE_4_1_PHRASES = ["In addition, I may also find places among your Facebook Friends by running a similarity-based classification algorithm.","In addition, I may also find places among your Facebook Friends by running a smart algorithm."]
+  PERSUADE_STAGE_4_2_PHRASES = ["I said \'I may find it\' is because I cannot always read data of your friends, or simply there is not enough data.","I said \'I may find it\' is because I cannot always read data of your friends."]
+  PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying? Here is an example suggestion."]
+  PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://mericdagli.com/botae/p2.jpg"]
 
 
 
   def persuade_stage_2
 
-@@flow = rand(1 .. 2)
-@user.answers[:persuade_stage_1] = @message.text
+    @@flow = rand(1 .. 2)
+    @user.answers[:persuade_stage_1] = @message.text
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
+      @message.typing_on if @message
+      sleep 3
       say PERSUADE_STAGE_2_1_PHRASES.fetch(@@flow)
+      @message.typing_off if @message
+
+      @message.typing_on if @message
+      sleep 3
       say PERSUADE_STAGE_2_2_PHRASES.fetch(@@flow)
+      @message.typing_off if @message
+      @message.typing_on if @message
+      sleep 3
       persuade_stage_qr_2 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
       say HELP_CTA.sample, quick_replies: persuade_stage_qr_2
+      @message.typing_off if @message
+
       next_command :persuade_stage_3
     else
       trust_stage_1
@@ -40,6 +51,8 @@ PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://meric
     @user.answers[:persuade_stage_2] = @message.text
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
+      @message.typing_on if @message
+      sleep 3
       say PERSUADE_STAGE_3_1_PHRASES.fetch(@@flow)
       persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
       say HELP_CTA.sample, quick_replies: persuade_stage_qr_3
@@ -83,13 +96,21 @@ PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://meric
   def persuade_unsuccessful
     # Fallback functionality if stop word used or user input is not text
     fall_back && return
+    @user.answers[:persuade_stage_5] = @message.text
+
     if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
-trust_stage_1
+      trust_stage_1
     else
       say 'Sorry to hear that!'
-      say 'Is there any question that you want to ask me?'
-      return
-      user_responses
+      say 'Is there any questions that I can answer? Please type why don\'t want to try me.'
+      persuade_stage_qr_fail = UI::QuickReplies.build(['No,I am good ', 'NO_THANKS'])
+      say HELP_CTA.sample, quick_replies: persuade_stage_qr_fail
+      next_command :persuade_feedback
     end
   end
-end
+  def persuade_feedback
+    fall_back && return
+    @user.answers[:persuade_unsuccessful] = @message.text
+
+    user_responses
+  end
