@@ -122,7 +122,8 @@ puts "#{@@current_flow}"
       @message.typing_on
       sleep 3
       puts "#{@@current_flow}"
-      say PERSUADE_STAGE_5_2_PHRASES[@@current_flow]
+      UI::ImageAttachment.new(PERSUADE_STAGE_5_2_PHRASES[@@current_flow]).send(@user)
+
       @message.typing_off
 
       @message.typing_on

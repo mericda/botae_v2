@@ -19,7 +19,80 @@ module Trust
     }
   ].freeze
 
+=begin
+  #+++++++++++
+  #FACEBOOK LIST TRIAL
+  #DESIGNED FOR PERSUADE_STAGE_4
+        @message.reply(
+          attachment: {
+            type: 'template',
+            payload: {
+              template_type: 'list',
+              top_element_style: 'compact',
+              elements: [
+                {
+                  title: "1. The Porch",
+                  subtitle: "45 friends checked-in here.",
+                  image_url: "http://www.mericdagli.com/botae/pr-1.jpg",
+                  buttons: [
+                    {
+                      title: "Directions",
+                      type: "web_url",
+                      url: "https://www.google.com/search?q=The+Porch+at+Schenley",
 
+                    }
+                  ]
+                },
+                {
+                  title: "2. Sushi Fuku",
+                  subtitle: "32 friends checked-in here.",
+                  image_url: "http://www.mericdagli.com/botae/pr-2.jpg",
+                  default_action: {
+                    type: "web_url",
+                    url: "https://www.google.com/search?q=Sushi+Fuku",
+
+                  },
+                  buttons: [
+                    {
+                      title: "Directions",
+                      type: "web_url",
+                      url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+
+                    },
+                  ]
+                },
+                {
+                  title: "3. Pamela\'s Dinner",
+                  subtitle: "29 friends checked-in here.",
+                  image_url: "http://www.mericdagli.com/botae/pr-3.jpg",
+                  default_action: {
+                    type: "web_url",
+                    url: "https://www.google.com/search?q=Pamela+Dinner",
+
+                  },
+                  buttons: [
+                    {
+                      title: "Directions",
+                      type: "web_url",
+                      url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+
+                    },
+                  ]
+                }
+              ],
+              buttons: [
+                {
+                  title: "View More Places",
+                  type: "postback",
+                  payload: "LEARN_MORE"
+                }
+              ]
+            }
+          }
+        )
+
+        #+++++++++++
+=end
 
 
 
@@ -399,85 +472,9 @@ module Trust
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
-      say 'Here are the top 3 places among your Facebook friends.'
-
-#+++++++++++
-      @message.reply(
-        attachment: {
-          type: 'template',
-          payload: {
-            template_type: 'list',
-            top_element_style: 'compact',
-            elements: [
-              {
-                title: "1. The Porch",
-                subtitle: "45 friends checked-in here.",
-                image_url: "http://www.mericdagli.com/botae/pr-1.jpg",
-                buttons: [
-                  {
-                    title: "Directions",
-                    type: "web_url",
-                    url: "https://www.google.com/search?q=The+Porch+at+Schenley",
-
-                  }
-                ]
-              },
-              {
-                title: "2. Sushi Fuku",
-                subtitle: "32 friends checked-in here.",
-                image_url: "http://www.mericdagli.com/botae/pr-2.jpg",
-                default_action: {
-                  type: "web_url",
-                  url: "https://www.google.com/search?q=Sushi+Fuku",
-
-                },
-                buttons: [
-                  {
-                    title: "Directions",
-                    type: "web_url",
-                    url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
-
-                  },
-                ]
-              },
-              {
-                title: "3. Pamela\'s Dinner",
-                subtitle: "29 friends checked-in here.",
-                image_url: "http://www.mericdagli.com/botae/pr-3.jpg",
-                default_action: {
-                  type: "web_url",
-                  url: "https://www.google.com/search?q=Pamela+Dinner",
-
-                },
-                buttons: [
-                  {
-                    title: "Directions",
-                    type: "web_url",
-                    url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
-
-                  },
-                ]
-              }
-            ],
-            buttons: [
-              {
-                title: "View More Places",
-                type: "postback",
-                payload: "LEARN_MORE"
-              }
-            ]
-          }
-        }
-      )
-
-      #+++++++++++
-
-
-
       @message.typing_on
       sleep 2
-      #say "#{user_name}, I have good and bad news."
-      say "Did you like it?"
+      say "#{user_name}, I have good and bad news."
       @message.typing_off
     else
       @message.typing_on
