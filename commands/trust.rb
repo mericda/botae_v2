@@ -467,7 +467,7 @@ module Trust
 if @message.quick_reply == 'TRUST_NOT_STABLE'
   stop_thread
 
-  #persuade_stage_1
+  persuade_stage_1
 
 
 
