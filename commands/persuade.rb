@@ -52,7 +52,6 @@ module Persuade
 
 
   def persuade_stage_2
-    puts "#{PERSUADE_STAGE_2_1_PHRASES}"
 
     @@current_flow = FLOWS.sample.freeze
 
@@ -64,7 +63,7 @@ module Persuade
       @message.typing_on
 
       response = Response.where(stage_id: 2, step_id: 1, flow_id: @@current_flow )
-
+puts "#{response}"
       say response.response_content
 
       @message.typing_off
