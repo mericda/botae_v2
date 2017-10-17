@@ -55,7 +55,7 @@ module Persuade
 
     @@current_flow = FLOWS.sample.freeze
 
-    puts "#{@@current_flow}"
+    puts "response: #{@@current_flow}"
 
     @user.answers[:persuade_stage_1] = @message.text
 
