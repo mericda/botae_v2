@@ -19,6 +19,11 @@ module Trust
     }
   ].freeze
 
+
+
+
+
+
   COFFEE = [
     {
       title: 'Crepes Parisiennes',
@@ -311,15 +316,15 @@ module Trust
       @message.typing_off
       next_command :trust_stage_3_2
 
-else
-  @user.answers[:lookup_location_fail] = @message.text
-  @message.typing_on
-  sleep 3
-  trust_stage_qr_3_1_fail = UI::QuickReplies.build(['Yes, I liked it', 'TRUST_STABLE'], ['No, I don\'t', 'TRUST_NOT_STABLE'])
-  say "I don\'t understand. Please use buttons 👇", quick_replies: trust_stage_qr_3_1_fail
-  @message.typing_off
-  next_command :trust_stage_3
-end
+    else
+      @user.answers[:lookup_location_fail] = @message.text
+      @message.typing_on
+      sleep 3
+      trust_stage_qr_3_1_fail = UI::QuickReplies.build(['Yes, I liked it', 'TRUST_STABLE'], ['No, I don\'t', 'TRUST_NOT_STABLE'])
+      say "I don\'t understand. Please use buttons 👇", quick_replies: trust_stage_qr_3_1_fail
+      @message.typing_off
+      next_command :trust_stage_3
+    end
 
 
 
@@ -394,9 +399,94 @@ end
     user_info = get_user_info(:first_name)
     if user_info
       user_name = user_info[:first_name]
+
+#+++++++++++
+      message.reply(
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'list',
+            top_element_style: 'compact',
+            elements: [
+              {
+                title: "🏆🏆🏆 \'The Porch at Schenley\' 🏆🏆🏆",
+                subtitle: "45 friends checked-in here.",
+                image_url: "http://www.mericdagli.com/botae/pr-1.jpg",
+                buttons: [
+                  {
+                    title: "View",
+                    type: "web_url",
+                    url: "https://peterssendreceiveapp.ngrok.io/collection",
+                    messenger_extensions: false,
+                    webview_height_ratio: "tall",
+                    fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                  }
+                ]
+              },
+              {
+                title: "🏆🏆 \'Sushi Fuku at Forbes Ave\' 🏆🏆",
+                subtitle: "32 friends checked-in here.",
+                image_url: "http://www.mericdagli.com/botae/pr-2.jpg",
+                default_action: {
+                  type: "web_url",
+                  url: "https://peterssendreceiveapp.ngrok.io/view?item=100",
+                  messenger_extensions: false,
+                  webview_height_ratio: "tall",
+                  fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                },
+                buttons: [
+                  {
+                    title: "Directions",
+                    type: "web_url",
+                    url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                    messenger_extensions: false,
+                    webview_height_ratio: "tall",
+                    fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                  },
+                ]
+              },
+              {
+                title: "🏆 \'Pamela\'s Dinner at Forbes Ave\' 🏆",
+                subtitle: "29 friends checked-in here.",
+                image_url: "http://www.mericdagli.com/botae/pr-3.jpg",
+                default_action: {
+                  type: "web_url",
+                  url: "https://peterssendreceiveapp.ngrok.io/view?item=101",
+                  messenger_extensions: false,
+                  webview_height_ratio: "tall",
+                  fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                },
+                buttons: [
+                  {
+                    title: "Directions",
+                    type: "web_url",
+                    url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+                    messenger_extensions: false,
+                    webview_height_ratio: "tall",
+                    fallback_url: "https://peterssendreceiveapp.ngrok.io/"
+                  },
+                ]
+              }
+            ],
+            buttons: [
+              {
+                title: "View More Places",
+                type: "postback",
+                payload: "payload"
+              }
+            ]
+          }
+        }
+      )
+
+      #+++++++++++
+
+
+
       @message.typing_on
       sleep 2
-      say "#{user_name}, I have good and bad news."
+      #say "#{user_name}, I have good and bad news."
+      say "Did you like it?"
       @message.typing_off
     else
       @message.typing_on
@@ -411,11 +501,11 @@ end
     say 'Bad news first.'
     @message.typing_off if @message
 
-  @message.typing_on if @message
+    @message.typing_on if @message
 
     trust_auth_qr_1 = UI::QuickReplies.build(['Whaat?', 'WHAT'], ['Good News?', 'GOOD_NEWS'])
     say 'Although you trusted me to show you popular places among your friends, I\'m not designed to do it.', quick_replies: trust_auth_qr_1
-@message.typing_off if @message
+    @message.typing_off if @message
     next_command :trust_auth_2
 
   end
