@@ -451,7 +451,7 @@ module Trust
     else
       @message.typing_on
       sleep 1
-      trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Tell me more', 'TRUST_NOT_STABLE'])
+      trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Why?', 'TRUST_NOT_STABLE'])
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       @message.typing_off
 
@@ -467,6 +467,9 @@ module Trust
 if @message.quick_reply == 'TRUST_NOT_STABLE'
   stop_thread
   persuade_stage_1
+
+
+
 elsif @message.quick_reply == 'TRUST_CONFIRMATION_INTENT'
   trust_stage_4
 
