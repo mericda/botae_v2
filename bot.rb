@@ -240,10 +240,7 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
       bind 'TRUST_PRESTAGE_4', to: :trust_stage_4, start_thread: {
         message:  "Alright, are you ready to see the most popular places among your Facebook friends?", quick_replies: trust_prestage_qr_4
       }
-      bind 'PERSUADE_PRESTAGE_1', to: :persuade_stage_2, start_thread: {
-        composer_input_disabled: true,
-        message: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place. Ready?", quick_replies: persuade_prestage_qr_1
-      }
+      bind 'PERSUADE_PRESTAGE_1', to: :persuade_stage_1, start_thread:
 
     end
   end

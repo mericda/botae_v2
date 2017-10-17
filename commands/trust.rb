@@ -466,7 +466,7 @@ module Trust
     @user.answers[:trust_stage_5] = @message.text
 if @message.quick_reply == 'TRUST_NOT_STABLE'
   stop_thread
-  persuade_stage_2
+  persuade_stage_1
 elsif @message.quick_reply == 'TRUST_CONFIRMATION_INTENT'
   trust_stage_4
 

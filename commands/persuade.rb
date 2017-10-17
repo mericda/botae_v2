@@ -5,7 +5,7 @@ module Persuade
   # commands are mixed into Dispatch classes as private methods.
   module_function
 
-  PERSUADE_STAGE_1_1_PHRASES = ["I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places.","I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare."]
+  PERSUADE_STAGE_1_1_PHRASES = ["I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places.","Need something to eat 🍱 or drink ☕️? I am the one who will find the best place. "]
   PERSUADE_STAGE_1_2_PHRASES = ["I try to understand the context, in this case where you are, and navigate you in the overcrowded food and coffee scene.","I use data to better understand the context,and suggest personalized places to check out."]
   PERSUADE_STAGE_2_1_PHRASES = ["Why Botae? Botae is its designer\'s early exploration of how Messenger bots can interact with users.","The idea of Botae came from its designer\'s own need of finding that best place to eat nearby."]
   PERSUADE_STAGE_2_2_PHRASES = ["Botae answers the question of \'Where should I eat now?\'","Botae is a bot, because you don\'t need another app in your phone, right?"]
@@ -18,11 +18,40 @@ module Persuade
   FLOWS = [1,2]
 
 
-  def persuade_stage_2
+  def persuade_stage_1
 
 
     @@current_flow = FLOWS.sample.freeze
 puts "#{@@current_flow}"
+
+    @user.answers[:persuade_stage_1] = @message.text
+
+    if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
+      @message.typing_on
+      say PERSUADE_STAGE_1_1_PHRASES[@@current_flow]
+      @message.typing_off
+
+      @message.typing_on
+      sleep 2
+      say PERSUADE_STAGE_1_2_PHRASES[@@current_flow]
+      @message.typing_off
+
+      @message.typing_on
+      persuade_stage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
+      say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_1
+      @message.typing_off
+
+      next_command :persuade_stage_2
+    else
+      trust_stage_1
+
+    end
+  end
+
+
+  def persuade_stage_2
+
+
 
     @user.answers[:persuade_stage_1] = @message.text
 
