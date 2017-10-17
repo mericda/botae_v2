@@ -28,7 +28,6 @@ puts "#{@@current_flow}"
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
       @message.typing_on
-      sleep 3
       say PERSUADE_STAGE_2_1_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -38,7 +37,6 @@ puts "#{@@current_flow}"
       @message.typing_off
 
       @message.typing_on
-      sleep 3
       persuade_stage_qr_2 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
       say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_2
       @message.typing_off
@@ -54,7 +52,7 @@ puts "#{@@current_flow}"
     fall_back && return
     @user.answers[:persuade_stage_2] = @message.text
 
-    if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
+    if @message.quick_reply == 'PERSUADE' || @message.text =~ /no/i
 
       @message.typing_on
       sleep 3
@@ -62,7 +60,6 @@ puts "#{@@current_flow}"
       @message.typing_off
 
       @message.typing_on
-      sleep 3
       persuade_stage_qr_3 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
       say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_3
       @message.typing_off
@@ -78,7 +75,7 @@ puts "#{@@current_flow}"
     fall_back && return
     @user.answers[:persuade_stage_3] = @message.text
 
-    if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
+    if @message.quick_reply == 'PERSUADE' || @message.text =~ /no/i
 
       @message.typing_on
       sleep 3
@@ -106,10 +103,9 @@ puts "#{@@current_flow}"
     fall_back && return
     @user.answers[:persuade_stage_4] = @message.text
 
-    if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
+    if @message.quick_reply == 'PERSUADE' || @message.text =~ /no/i
 
       @message.typing_on
-      sleep 3
       say PERSUADE_STAGE_5_1_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -132,7 +128,7 @@ puts "#{@@current_flow}"
     fall_back && return
     @user.answers[:persuade_stage_5] = @message.text
 
-    if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
+    if @message.quick_reply == 'TRUST' || @message.text =~ /no/i
       trust_stage_1
     else
       @message.typing_on
