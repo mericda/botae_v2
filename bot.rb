@@ -133,6 +133,7 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
       # for input to the next command. You can also pass an array of
       # quick replies (and process them inside the thread).
 
+      bind 'clear', to: :stop_thread
 
       bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
 
