@@ -170,12 +170,10 @@ module Persuade
       trust_stage_1
     else
       @message.typing_on
-      sleep 1
       say '😭 Sorry to hear that!'
       @message.typing_off
 
       @message.typing_on
-      sleep 2
       persuade_stage_qr_fail = UI::QuickReplies.build(['No,I am good', 'NO_THANKS'])
       say 'Is there any questions that I can answer? Please type them.', quick_replies: persuade_stage_qr_fail
       @message.typing_off
