@@ -51,7 +51,10 @@ puts "#{@@current_flow}"
 
   def persuade_stage_2
 
-
+if @@current_flow == nil
+    @@current_flow = FLOWS.sample.freeze
+end
+    puts "#{@@current_flow}"
 
     @user.answers[:persuade_stage_1] = @message.text
 
