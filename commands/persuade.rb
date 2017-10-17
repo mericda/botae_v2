@@ -114,3 +114,4 @@ module Persuade
 
     user_responses
   end
+end
