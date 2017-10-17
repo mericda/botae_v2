@@ -28,6 +28,11 @@ module Helpers
     @user.reset_command
   end
 
+  def clear_user_state_safely
+    @user.reset_command # Stop any current interaction
+    @user.answers = {} # Reset whatever you stored in the user
+  end
+
   def text_message?
     @message.respond_to?(:text) && !@message.text.nil?
   end
