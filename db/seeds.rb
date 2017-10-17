@@ -2,7 +2,7 @@
 Response.delete_all
 # reset the primary ids to start at 1
 # when the next item is inserted/created
-Response.reset_autoincrement
+#Response.reset_autoincrement
 
 # create a bunch of data to test with
 Response.create!([{ response_id: 1, stage_id: 1 , step_id: 1 ,response_content: "I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places." } ])
