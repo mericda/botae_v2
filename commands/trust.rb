@@ -466,6 +466,8 @@ module Trust
     @user.answers[:trust_stage_5] = @message.text
 if @message.quick_reply == 'TRUST_NOT_STABLE'
   stop_thread
+  say 'Alright.'
+
   persuade_stage_1
 
 
