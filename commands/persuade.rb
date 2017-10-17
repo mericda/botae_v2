@@ -15,23 +15,27 @@ module Persuade
   PERSUADE_STAGE_4_2_PHRASES = ["I said \'I may find it\' is because I cannot always read data of your friends, or simply there is not enough data.","I said \'I may find it\' is because I cannot always read data of your friends."]
   PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying? Here is an example suggestion."]
   PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://mericdagli.com/botae/p2.jpg"]
-
+  FLOWS = [1,2]
 
 
   def persuade_stage_2
 
-    flows = [1,2]
- @@current_flow = flows.sample
+
+    @@current_flow = FLOWS.sample.freeze
+puts "#{@@curent_flow}"
+
     @user.answers[:persuade_stage_1] = @message.text
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
+      puts "#{@@curent_flow}"
       say PERSUADE_STAGE_2_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
+      puts "#{@@curent_flow}"
       say PERSUADE_STAGE_2_2_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -56,6 +60,7 @@ module Persuade
 
       @message.typing_on
       sleep 3
+      puts "#{@@curent_flow}"
       say PERSUADE_STAGE_3_1_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -80,11 +85,13 @@ module Persuade
 
       @message.typing_on
       sleep 3
+      puts "#{@@curent_flow}"
       say PERSUADE_STAGE_4_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
+      puts "#{@@curent_flow}"
       say PERSUADE_STAGE_4_2_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -108,11 +115,13 @@ module Persuade
 
       @message.typing_on
       sleep 3
+      puts "#{@@curent_flow}"
       say PERSUADE_STAGE_5_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
+      puts "#{@@curent_flow}"
       say PERSUADE_STAGE_5_2_PHRASES[@@current_flow]
       @message.typing_off
 
