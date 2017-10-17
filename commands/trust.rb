@@ -455,7 +455,7 @@ module Trust
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       @message.typing_off
 
-      next_command :trust_stage_5
+      next_command :trust_auth_1
 
     end
   end
