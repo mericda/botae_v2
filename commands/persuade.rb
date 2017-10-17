@@ -161,7 +161,23 @@ puts "#{@@current_flow}"
   def persuade_feedback
     fall_back && return
     @user.answers[:persuade_unsuccessful] = @message.text
+    say 'Thanks for your feedback 🙏'
 
+        user_info = get_user_info(:first_name)
+        if user_info
+          user_name = user_info[:first_name]
+          @message.typing_on
+          UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
+          @message.typing_off
+          say BYE.sample + ", #{user_name}! ✌️"
+
+
+        else
+          @message.typing_on
+          UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
+          @message.typing_off
+          say BYE.sample + "! ✌️"
+        end
     user_responses
   end
 end
