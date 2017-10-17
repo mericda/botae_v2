@@ -21,7 +21,7 @@ module Persuade
 
   def persuade_stage_1
 
-    puts ""
+    puts "#{PERSUADE_STAGE_2_1_PHRASES}"
     @@current_flow = FLOWS.sample.freeze
     puts "#{@@current_flow}"
 
