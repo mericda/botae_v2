@@ -1,7 +1,7 @@
 
 source 'https://rubygems.org'
 gem 'addressable'
-ruby '2.3.4'
+ruby '2.4.1'
 gem 'dotenv'
 gem 'facebook-messenger', github: 'hyperoslo/facebook-messenger'
 gem 'httparty'
