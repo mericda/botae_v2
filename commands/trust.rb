@@ -466,7 +466,9 @@ module Trust
     # if FACEBOOK_AUTH == 1
     fall_back && return
     @user.answers[:trust_stage_5] = @message.text
-
+if @message.quick_reply == 'TRUST_NOT_STABLE'
+  persuade_stage_2
+end
     #  say 'Now, give me some time while I am looking what your friends did.'
     #  say 'I will let you know when I am ready to share the results.'
     user_info = get_user_info(:first_name)
