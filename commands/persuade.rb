@@ -61,7 +61,7 @@ module Persuade
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
       @message.typing_on
-      reply_back = Response.find_by(stage_id: 2, step_id: 1, flow_id: @@curent_flow)
+      reply_back = Response.find_by(stage_id: 2, step_id: 1, flow_id: params[:@@current_flow])
       say reply_back.response_content
       @message.typing_off
 
