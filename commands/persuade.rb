@@ -22,20 +22,20 @@ module Persuade
 
 
     @@current_flow = FLOWS.sample.freeze
-puts "#{@@curent_flow}"
+puts "#{@@current_flow}"
 
     @user.answers[:persuade_stage_1] = @message.text
 
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
-      puts "#{@@curent_flow}"
+      puts "#{@@current_flow}"
       say PERSUADE_STAGE_2_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      puts "#{@@curent_flow}"
+      puts "#{@@current_flow}"
       say PERSUADE_STAGE_2_2_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -60,7 +60,7 @@ puts "#{@@curent_flow}"
 
       @message.typing_on
       sleep 3
-      puts "#{@@curent_flow}"
+      puts "#{@@current_flow}"
       say PERSUADE_STAGE_3_1_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -85,13 +85,13 @@ puts "#{@@curent_flow}"
 
       @message.typing_on
       sleep 3
-      puts "#{@@curent_flow}"
+      puts "#{@@current_flow}"
       say PERSUADE_STAGE_4_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      puts "#{@@curent_flow}"
+      puts "#{@@current_flow}"
       say PERSUADE_STAGE_4_2_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -115,13 +115,13 @@ puts "#{@@curent_flow}"
 
       @message.typing_on
       sleep 3
-      puts "#{@@curent_flow}"
+      puts "#{@@current_flow}"
       say PERSUADE_STAGE_5_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      puts "#{@@curent_flow}"
+      puts "#{@@current_flow}"
       say PERSUADE_STAGE_5_2_PHRASES[@@current_flow]
       @message.typing_off
 
