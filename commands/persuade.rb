@@ -28,12 +28,13 @@ module Persuade
 
     if @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /yes/i
       @message.typing_on
-      say PERSUADE_STAGE_1_1_PHRASES[@@current_flow]
+      reply_back = Response.find_by(stage_id: 1, step_id: 1, flow_id: @@current_flow)
+      say reply_back.response_content
       @message.typing_off
 
       @message.typing_on
-      sleep 2
-      say PERSUADE_STAGE_1_2_PHRASES[@@current_flow]
+      reply_back = Response.find_by(stage_id: 1, step_id: 2, flow_id: @@current_flow)
+      say reply_back.response_content
       @message.typing_off
 
       @message.typing_on
