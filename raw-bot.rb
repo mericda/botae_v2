@@ -9,6 +9,94 @@ include Facebook::Messenger
 include Helpers # mixing helpers into the common namespace
 # so they can be used outside of Dispatches
 
+#PERSUADE_STAGE_1_1_PHRASES = ["I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places.","Need something to eat 🍱 or drink ☕️? I am the one who will find the best place."]
+#PERSUADE_STAGE_1_2_PHRASES = ["I try to understand the context, in this case where you are, and navigate you in the overcrowded food and coffee scene.","I use data to better understand the context,and suggest personalized places to check out."]
+#PERSUADE_STAGE_2_1_PHRASES = ["Why Botae? Botae is its designer\'s early exploration of how Messenger bots can interact with users.","The idea of Botae came from its designer\'s own need of finding that best place to eat nearby."]
+#PERSUADE_STAGE_2_2_PHRASES = ["Botae answers the question of \'Where should I eat now?\'","Botae is a bot, because you don\'t need another app in your phone, right?"]
+#PERSUADE_STAGE_3_1_PHRASES = ["I\'m designed by Meric Dagli, who is a graduate interaction design student at Carnegie Mellon University.","I\'m designed by Meric Dagli, a graduate interaction design student at Carnegie Mellon University, who is originally from 🇹🇷","My father is Meriç Dağlı, who is a graduate interaction design student at Carnegie Mellon University.","My father is Meric Dagli, an interaction design student from Carnegie Mellon University.","My father is Meric Dagli, a graduate interaction design student at Carnegie Mellon University, who is originally from Turkey."]
+#PERSUADE_STAGE_3_2_PHRASES = []
+#PERSUADE_STAGE_4_1_PHRASES = ["In addition, I may also find places among your Facebook Friends by running a similarity-based classification algorithm.","In addition, I may also find places among your Facebook Friends by running a smart algorithm."]
+#PERSUADE_STAGE_4_2_PHRASES = ["I said \'I may find it\' is because I cannot always read data of your friends, or simply there is not enough data.","I said \'I may find it\' is because I cannot always read data of your friends."]
+#PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying me? Here is an example suggestion."]
+#PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://mericdagli.com/botae/p2.jpg"]
+
+
+=begin
+  #+++++++++++
+  #FACEBOOK LIST TRIAL
+  #DESIGNED FOR PERSUADE_STAGE_4
+        @message.reply(
+          attachment: {
+            type: 'template',
+            payload: {
+              template_type: 'list',
+              top_element_style: 'compact',
+              elements: [
+                {
+                  title: "1. The Porch",
+                  subtitle: "45 friends checked-in here.",
+                  image_url: "http://www.mericdagli.com/botae/pr-1.jpg",
+                  buttons: [
+                    {
+                      title: "Directions",
+                      type: "web_url",
+                      url: "https://www.google.com/search?q=The+Porch+at+Schenley",
+
+                    }
+                  ]
+                },
+                {
+                  title: "2. Sushi Fuku",
+                  subtitle: "32 friends checked-in here.",
+                  image_url: "http://www.mericdagli.com/botae/pr-2.jpg",
+                  default_action: {
+                    type: "web_url",
+                    url: "https://www.google.com/search?q=Sushi+Fuku",
+
+                  },
+                  buttons: [
+                    {
+                      title: "Directions",
+                      type: "web_url",
+                      url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+
+                    },
+                  ]
+                },
+                {
+                  title: "3. Pamela\'s Dinner",
+                  subtitle: "29 friends checked-in here.",
+                  image_url: "http://www.mericdagli.com/botae/pr-3.jpg",
+                  default_action: {
+                    type: "web_url",
+                    url: "https://www.google.com/search?q=Pamela+Dinner",
+
+                  },
+                  buttons: [
+                    {
+                      title: "Directions",
+                      type: "web_url",
+                      url: "https://peterssendreceiveapp.ngrok.io/shop?item=101",
+
+                    },
+                  ]
+                }
+              ],
+              buttons: [
+                {
+                  title: "View More Places",
+                  type: "postback",
+                  payload: "LEARN_MORE"
+                }
+              ]
+            }
+          }
+        )
+
+        #+++++++++++
+=end
+
+
 ############# START UP YOUR BOT, SET UP GREETING AND MENU ###################
 
 # NB: Subcribe your bot to your page here.
