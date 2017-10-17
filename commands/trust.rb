@@ -401,7 +401,7 @@ module Trust
       user_name = user_info[:first_name]
 
 #+++++++++++
-      message.reply(
+      @message.reply(
         attachment: {
           type: 'template',
           payload: {
