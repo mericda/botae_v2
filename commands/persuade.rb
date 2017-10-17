@@ -16,14 +16,14 @@ module Persuade
   PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying me? Here is an example suggestion."]
   PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://mericdagli.com/botae/p2.jpg"]
   FLOWS = [1,2]
-      PERSUADE_STAGE_2_1_PHRASES = Response.where(stage_id: "2" step_id: "1" )
+  PERSUADE_STAGE_2_1_PHRASES = Response.where(stage_id: "2", step_id: "1")
 
 
   def persuade_stage_1
-
-puts ""
+    
+    puts ""
     @@current_flow = FLOWS.sample.freeze
-puts "#{@@current_flow}"
+    puts "#{@@current_flow}"
 
     @user.answers[:persuade_stage_1] = @message.text
 
@@ -44,19 +44,19 @@ puts "#{@@current_flow}"
 
       next_command :persuade_stage_2
 
-else
-  trust_stage_1
+    else
+      trust_stage_1
     end
 
   end
 
 
   def persuade_stage_2
-puts "#{PERSUADE_STAGE_2_1_PHRASES}"
+    puts "#{PERSUADE_STAGE_2_1_PHRASES}"
 
-if @@current_flow == nil
-    @@current_flow = FLOWS.sample.freeze
-end
+    if @@current_flow == nil
+      @@current_flow = FLOWS.sample.freeze
+    end
     puts "#{@@current_flow}"
 
     @user.answers[:persuade_stage_1] = @message.text
@@ -185,21 +185,21 @@ end
     @user.answers[:persuade_unsuccessful] = @message.text
     say 'Thanks for your feedback 🙏'
 
-        user_info = get_user_info(:first_name)
-        if user_info
-          user_name = user_info[:first_name]
-          @message.typing_on
-          UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
-          @message.typing_off
-          say BYE.sample + ", #{user_name}! ✌️"
+    user_info = get_user_info(:first_name)
+    if user_info
+      user_name = user_info[:first_name]
+      @message.typing_on
+      UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
+      @message.typing_off
+      say BYE.sample + ", #{user_name}! ✌️"
 
 
-        else
-          @message.typing_on
-          UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
-          @message.typing_off
-          say BYE.sample + "! ✌️"
-        end
+    else
+      @message.typing_on
+      UI::ImageAttachment.new('https://media.giphy.com/media/PDh7vdu40CnhS/giphy.gif').send(@user)
+      @message.typing_off
+      say BYE.sample + "! ✌️"
+    end
     user_responses
   end
 end
