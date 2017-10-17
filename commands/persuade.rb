@@ -32,7 +32,7 @@ puts "#{@@current_flow}"
       @message.typing_off
 
       @message.typing_on
-      sleep 3
+      sleep 2
       say PERSUADE_STAGE_2_2_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -55,7 +55,7 @@ puts "#{@@current_flow}"
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /no/i
 
       @message.typing_on
-      sleep 3
+      sleep 2
       say PERSUADE_STAGE_3_1_PHRASES[@@current_flow]
       @message.typing_off
 
@@ -78,17 +78,17 @@ puts "#{@@current_flow}"
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /no/i
 
       @message.typing_on
-      sleep 3
+      sleep 2
       say PERSUADE_STAGE_4_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
-      sleep 3
+      sleep 2
       say PERSUADE_STAGE_4_2_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
-      sleep 3
+      sleep 2
       persuade_stage_qr_3 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
       say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_3
       @message.typing_off
@@ -114,7 +114,7 @@ puts "#{@@current_flow}"
       @message.typing_off
 
       @message.typing_on
-      sleep 3
+      sleep 2
       persuade_stage_qr_3 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
       say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_3
       @message.typing_off
@@ -132,12 +132,12 @@ puts "#{@@current_flow}"
       trust_stage_1
     else
       @message.typing_on
-      sleep 2
+      sleep 1
       say 'Sorry to hear that!'
       @message.typing_off
 
       @message.typing_on
-      sleep 3
+      sleep 2
       say 'Is there any questions that I can answer? Please type why don\'t want to try me.'
       persuade_stage_qr_fail = UI::QuickReplies.build(['No,I am good', 'NO_THANKS'])
       say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_fail

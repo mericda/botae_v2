@@ -260,7 +260,7 @@ module Trust
   def trust_stage_1
     fall_back && return
     @message.typing_on
-    sleep 3
+    sleep 1
     trust_stage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
     say "To proceed, tell me what are you interested in by clicking 👇  buttons." , quick_replies: trust_stage_qr_1
     @message.typing_off
@@ -272,7 +272,7 @@ module Trust
     @@choice = nil
     if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /coffee/i
       @message.typing_on
-      sleep 3
+      sleep 1
       say 'Let\'s find a better ☕️ than Starbucks around you.'
       @message.typing_off
 
@@ -281,7 +281,7 @@ module Trust
       trust_stage_2_2
     elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /food/i
       @message.typing_on
-      sleep 3
+      sleep 1
       say 'Let\'s find a better 🍽 than Subway around you.'
       @@choice = 'food'
       @message.typing_off
@@ -289,7 +289,7 @@ module Trust
       trust_stage_2_2
     else
       @message.typing_on
-      sleep 3
+      sleep 1
       trust_stage_qr_1_fail = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
       say "To proceed, tell me what are you interested in by clicking buttons 👇" , quick_replies: trust_stage_qr_1_fail
       @message.typing_off
@@ -303,7 +303,7 @@ module Trust
     fall_back && return
 
     @message.typing_on
-    sleep 3
+    sleep 1
     say 'Send me a location by clicking the button 👇 to find out the best nearby.', quick_replies: LOCATION_PROMPT
     @message.typing_off
 
@@ -318,7 +318,7 @@ module Trust
     else
       @user.answers[:lookup_location_fail] = @message.text
       @message.typing_on
-      sleep 3
+      sleep 1
       say "Please try your request again and use \'Send location\' button below", quick_replies: LOCATION_PROMPT
       @message.typing_off
 
@@ -392,7 +392,7 @@ module Trust
     else
       @user.answers[:lookup_location_fail] = @message.text
       @message.typing_on
-      sleep 3
+      sleep 1
       trust_stage_qr_3_1_fail = UI::QuickReplies.build(['Yes, I liked it', 'TRUST_STABLE'], ['No, I don\'t', 'TRUST_NOT_STABLE'])
       say "I don\'t understand. Please use buttons 👇", quick_replies: trust_stage_qr_3_1_fail
       @message.typing_off
@@ -408,7 +408,7 @@ module Trust
 
     @user.answers[:trust_stage_2] = @message.text
     @message.typing_on
-    sleep 3
+    sleep 1
     trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     @message.typing_off
@@ -421,7 +421,7 @@ module Trust
 
     if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
       @message.typing_on
-      sleep 3
+      sleep 1
       trust_stage_qr_4 = UI::QuickReplies.build(['Authorize', 'TRUST'])
       say 'To do this, I need your permission to read your Facebook profile. Click the button 👇 to authorize me.', quick_replies: trust_stage_qr_4
       @message.typing_off
@@ -431,7 +431,7 @@ module Trust
       UI::ImageAttachment.new('https://media.giphy.com/media/5EU19WZsBUdqM/giphy.gif').send(@user)
       @message.typing_off if @message
       @message.typing_on
-      sleep 3
+      sleep 1
       say 'Type \'friends favorites\' to if you want to see the most popular places among your friends any time.'
       @message.typing_off
       stop_thread
@@ -450,7 +450,7 @@ module Trust
 
     else
       @message.typing_on
-      sleep 3
+      sleep 1
       trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Tell me more', 'TRUST_NOT_STABLE'])
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       @message.typing_off
@@ -473,12 +473,12 @@ module Trust
     if user_info
       user_name = user_info[:first_name]
       @message.typing_on
-      sleep 2
+      sleep 1
       say "#{user_name}, I have good and bad news."
       @message.typing_off
     else
       @message.typing_on
-      sleep 2
+      sleep 1
       say "I have good and bad news."
       @message.typing_off
     end
@@ -510,11 +510,11 @@ module Trust
 
     end
     @message.typing_on
-    sleep 3
+    sleep 1
     say 'Good news: I didn\'t even try to access your Facebook data so you are perfectly safe.'
     @message.typing_off
     @message.typing_on
-    sleep 3
+    sleep 1
     trust_auth_qr_2  = UI::QuickReplies.build(['Got it', 'CONTINUE_TRUST_FINAL'])
     say 'Instead, I\'m designed to show you how easy you trust a program like myself to give your personal data.', quick_replies: trust_auth_qr_2
     @message.typing_off
@@ -533,12 +533,12 @@ module Trust
     #@message.typing_off
 
     @message.typing_on if @message
-    sleep 3
+    sleep 1
     say 'Please think twice when you are providing access or directly giving your personal data to a computer program.'
     @message.typing_off if @message
 
     @message.typing_on if @message
-    sleep 3
+    sleep 1
     say 'On top of all, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     @message.typing_off if @message
 
