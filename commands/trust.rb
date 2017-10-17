@@ -9,7 +9,7 @@ module Trust
   # and store it in the answers hash inside the User instance.\
 
   LOCATION_PROMPT = UI::QuickReplies.location
-  NAY_FEEDBACK = [['My location were not accurate', 'TEST_1'],['Yese', 'TEST_2'],['Yesa', 'TEST_3']]
+  NAY_FEEDBACK = [['Not accurate', 'TEST_1'],['Not close', 'TEST_2'],['Already tried', 'TEST_3'],['I am not sure', 'TEST_4']]
   EMAIL_TEXT = "If you have questions about this research, please contact the researcher, Meric Dagli.".freeze
   EMAIL = [
     {
