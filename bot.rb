@@ -35,7 +35,7 @@ Facebook::Messenger::Subscriptions.subscribe(access_token: ENV['ACCESS_TOKEN'])
 
 # Enable "Get Started" button, greeting and persistent menu for your bot
 Rubotnik::BotProfile.enable
-Rubotnik::PersistentMenu.enable
+#Rubotnik::PersistentMenu.enable
 
 ############################################################################
 
