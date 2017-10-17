@@ -410,7 +410,7 @@ module Trust
             top_element_style: 'compact',
             elements: [
               {
-                title: "1. The Porch at Schenley",
+                title: "1. The Porch",
                 subtitle: "45 friends checked-in here.",
                 image_url: "http://www.mericdagli.com/botae/pr-1.jpg",
                 buttons: [
