@@ -13,7 +13,7 @@ module Persuade
   PERSUADE_STAGE_3_2_PHRASES = []
   PERSUADE_STAGE_4_1_PHRASES = ["In addition, I may also find places among your Facebook Friends by running a similarity-based classification algorithm.","In addition, I may also find places among your Facebook Friends by running a smart algorithm."]
   PERSUADE_STAGE_4_2_PHRASES = ["I said \'I may find it\' is because I cannot always read data of your friends, or simply there is not enough data.","I said \'I may find it\' is because I cannot always read data of your friends."]
-  PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying? Here is an example suggestion."]
+  PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying me? Here is an example suggestion."]
   PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://mericdagli.com/botae/p2.jpg"]
   FLOWS = [1,2]
 
@@ -29,20 +29,18 @@ puts "#{@@current_flow}"
     if @message.quick_reply == 'PERSUADE' || @message.text =~ /yes/i
       @message.typing_on
       sleep 3
-      puts "#{@@current_flow}"
       say PERSUADE_STAGE_2_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      puts "#{@@current_flow}"
       say PERSUADE_STAGE_2_2_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      persuade_stage_qr_2 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
-      say HELP_CTA.sample, quick_replies: persuade_stage_qr_2
+      persuade_stage_qr_2 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
+      say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_2
       @message.typing_off
 
       next_command :persuade_stage_3
@@ -60,14 +58,13 @@ puts "#{@@current_flow}"
 
       @message.typing_on
       sleep 3
-      puts "#{@@current_flow}"
       say PERSUADE_STAGE_3_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
-      say HELP_CTA.sample, quick_replies: persuade_stage_qr_3
+      persuade_stage_qr_3 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
+      say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_3
       @message.typing_off
 
 
@@ -85,20 +82,18 @@ puts "#{@@current_flow}"
 
       @message.typing_on
       sleep 3
-      puts "#{@@current_flow}"
       say PERSUADE_STAGE_4_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      puts "#{@@current_flow}"
       say PERSUADE_STAGE_4_2_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Tell me more', 'PERSUADE'])
-      say HELP_CTA.sample, quick_replies: persuade_stage_qr_3
+      persuade_stage_qr_3 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
+      say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_3
       @message.typing_off
 
       next_command :persuade_stage_5
@@ -115,21 +110,17 @@ puts "#{@@current_flow}"
 
       @message.typing_on
       sleep 3
-      puts "#{@@current_flow}"
       say PERSUADE_STAGE_5_1_PHRASES[@@current_flow]
       @message.typing_off
 
       @message.typing_on
-      sleep 3
-      puts "#{@@current_flow}"
       UI::ImageAttachment.new(PERSUADE_STAGE_5_2_PHRASES[@@current_flow]).send(@user)
-
       @message.typing_off
 
       @message.typing_on
       sleep 3
-      persuade_stage_qr_3 = UI::QuickReplies.build(['I am ready', 'TRUST'], ['Quit', 'QUIT_SURVEY'])
-      say HELP_CTA.sample, quick_replies: persuade_stage_qr_3
+      persuade_stage_qr_3 = UI::QuickReplies.build([YES.sample, 'TRUST'], [NO.sample, 'PERSUADE'])
+      say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_3
       @message.typing_off
       next_command :persuade_unsuccessful
     else
@@ -152,8 +143,8 @@ puts "#{@@current_flow}"
       @message.typing_on
       sleep 3
       say 'Is there any questions that I can answer? Please type why don\'t want to try me.'
-      persuade_stage_qr_fail = UI::QuickReplies.build(['No,I am good ', 'NO_THANKS'])
-      say HELP_CTA.sample, quick_replies: persuade_stage_qr_fail
+      persuade_stage_qr_fail = UI::QuickReplies.build(['No,I am good', 'NO_THANKS'])
+      say HELP_PERSUADE_CTA.sample, quick_replies: persuade_stage_qr_fail
       @message.typing_off
 
       next_command :persuade_feedback

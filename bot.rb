@@ -69,6 +69,7 @@ BYE = ["Goodbye","Have a good one"]
 APOLOGIES = ["I didn't catch that.", "Hmmm I don't know that word.", "I don\'t understand everything. "]
 HELP = ["I can help you to find the closest best places for a coffee or food.", "I know the best places for coffee or food nearby.", "I do one thing good: Finding the best food and coffee nearby."]
 HELP_CTA = ["Ready to go?","Are you in?","Ready to find out?","Are you ready?"]
+HELP_PERSUADE_CTA = ["Ready to try me?","Try me yourself", "Are you ready to try me out?","Find the best places now"]
 NO = ["Tell me more","More information"]
 YES = ["Sounds good", "I am in","Yeah","Let'\s do it","Yes","Sounds good to me","Yes, I\'m ready"]
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
@@ -241,7 +242,7 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
       }
       bind 'PERSUADE_PRESTAGE_1', to: :persuade_stage_2, start_thread: {
         composer_input_disabled: true,
-        message: "So I am a chatbot that searches for the best restaurants on Yelp, Facebook, Foursquare that is close to your location.\n I can only search food or coffee places in general.", quick_replies: persuade_prestage_qr_1
+        message: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place.", quick_replies: persuade_prestage_qr_1
       }
 
     end
