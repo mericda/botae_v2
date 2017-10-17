@@ -455,7 +455,7 @@ module Trust
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       @message.typing_off
 
-      next_command :trust_stage_4
+      next_command :trust_stage_5
 
     end
   end
@@ -468,6 +468,8 @@ module Trust
     @user.answers[:trust_stage_5] = @message.text
 if @message.quick_reply == 'TRUST_NOT_STABLE'
   persuade_stage_2
+elsif @message.quick_reply == 'TRUST_CONFIRMATION_INTENT'
+  trust_stage_4
 end
     #  say 'Now, give me some time while I am looking what your friends did.'
     #  say 'I will let you know when I am ready to share the results.'
