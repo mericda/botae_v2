@@ -465,9 +465,9 @@ module Trust
     fall_back && return
     @user.answers[:trust_stage_5] = @message.text
 if @message.quick_reply == 'TRUST_NOT_STABLE'
-  stop_thread
+  clear_user_state_safely
 
-  persuade_stage_4
+  persuade_stage_1
 
 
 
