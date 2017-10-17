@@ -16,7 +16,7 @@ module Persuade
   PERSUADE_STAGE_5_1_PHRASES = ["Want to see some suggestions before you try? Here is a screenshot of one of my earlier suggestions.","Not sure about trying me? Here is an example suggestion."]
   PERSUADE_STAGE_5_2_PHRASES = ["http://mericdagli.com/botae/p1.jpg","http://mericdagli.com/botae/p2.jpg"]
   FLOWS = [1,2]
-  PERSUADE_STAGE_2_1_PHRASES = Response.where(stage_id: "2", step_id: "1")
+  PERSUADE_STAGE_2_1_PHRASES = Response.where(stage_id: 2, step_id: 1)
 
 
   def persuade_stage_1
