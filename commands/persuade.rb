@@ -54,9 +54,9 @@ module Persuade
   def persuade_stage_2
     puts "#{PERSUADE_STAGE_2_1_PHRASES}"
 
-    if @@current_flow == nil
+
       @@current_flow = FLOWS.sample.freeze
-    end
+
     puts "#{@@current_flow}"
 
     @user.answers[:persuade_stage_1] = @message.text
