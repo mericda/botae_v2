@@ -147,6 +147,7 @@ module Persuade
             @message.typing_off
 
       @message.typing_on
+      reply_back = Response.find_by(stage_id: 5, step_id: 2, flow_id: @@current_flow)
       UI::ImageAttachment.new(reply_back.response_content).send(@user)
       @message.typing_off
 
