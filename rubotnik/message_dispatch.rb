@@ -4,37 +4,12 @@ module Rubotnik
   class MessageDispatch
     include Commands
 
-#def entityname (name)
-#return @message.nlp.first['entities'][name]
-#end
-
-#coords = @message.attachments.first['payload']['coordinates']
-#lat = coords['lat']
-#long = coords['long']
-
 
     def initialize(message)
       @message = message
       p @message.class
       p @message
 
-# if keys.include? 'greetings'
-  # confidence = entities['greetings'].first['confidence']
-  # confidence = confidence.to_f
-#  puts "#{confidence}"
- #end
-
- #alternatively to loop over them all
-
-      #confidence = entities.first['confidence']
-      #confidence = keys.confidence
-      #puts "#{entities}"
-
-      #entitiesoutput = @message.nlp.['entities']
-      #if stringkeys && confidence > 0.8
-      #  puts 'it works'
-      #end
-      #puts "#{stringkeys}"
 
       @user = UserStore.instance.find_or_create_user(@message.sender['id'])
     end
