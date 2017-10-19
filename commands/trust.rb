@@ -255,12 +255,11 @@ module Trust
           @message.typing_off if @message
           @message.typing_on
               sleep 2
-          say 'Type \'find the best\' to see the best places nearby.'
+          say 'Alright, type \'find the best\' anytime to see the best places nearby.'
           @message.typing_off2
           stop_thread
         end
-
-
+        say 'Send me a location by clicking the button 👇 to find out the best nearby.', quick_replies: LOCATION_PROMPT
       next_command :lookup_location
     end
 
