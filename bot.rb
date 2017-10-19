@@ -71,7 +71,9 @@ HELP = ["I can help you to find the closest best places for a coffee or food.", 
 HELP_CTA = ["Ready to go?","Are you in?","Ready to find out?","Are you ready?"]
 HELP_PERSUADE_CTA = ["Ready to try me?","Ready to find the best places?", "Are you ready to try me out?","Ready to get started?"]
 NO = ["Tell me more","More information","Tell more"]
+NO_DIRECT = ["No","Nope","Not really","No, thanks","Nah","Nop"]
 YES = ["Sounds good", "I\'m in","Yeah","Let\'s do it","Sounds good to me","Yes, I\'m ready","I\'m ready"]
+YES_DIRECT = ["Sounds good","Nope","Not really","No, thanks","Nah","Nop"]
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
 FUNNY_REACTIONS = [":D","😎","😊","☺️","😅","lol","That was funny!","😁",":P","😜","😝","😛","🙂","🙃","😉","😌","😊","☺️","🤣","😂",":p",":)",":P"]
 
