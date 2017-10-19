@@ -73,7 +73,7 @@ HELP_PERSUADE_CTA = ["Ready to try me?","Ready to find the best places?", "Are y
 NO = ["Tell me more","More information","Tell more"]
 YES = ["Sounds good", "I\'m in","Yeah","Let\'s do it","Sounds good to me","Yes, I\'m ready","I\'m ready"]
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
-FUNNY_REACTIONS = [":D","😎","😊","☺️","😅","lol","That was funny!","😁",":P","😜","😝","😛"]
+FUNNY_REACTIONS = [":D","😎","😊","☺️","😅","lol","That was funny!","😁",":P","😜","😝","😛","🙂","🙃","😉","😌","😊","☺️","🤣","😂",":p",":)",":P"]
 
 
 intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], ['Tell me more', 'PERSUADE_PRESTAGE_1'])
