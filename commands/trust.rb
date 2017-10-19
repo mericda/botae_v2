@@ -246,8 +246,19 @@ module Trust
       @user.answers[:lookup_location_fail] = @message.text
       @message.typing_on
         sleep 2
-      say "Please try your request again and use \'Send location\' button below", quick_replies: LOCATION_PROMPT
-      @message.typing_off
+
+        @matched_entity = get_entity_for @message, 0.9
+
+        if @matched_entity == "no"
+          @message.typing_on if @message
+          UI::ImageAttachment.new('https://media.giphy.com/media/5EU19WZsBUdqM/giphy.gif').send(@user)
+          @message.typing_off if @message
+          @message.typing_on
+              sleep 2
+          say 'Type \'find the best\' to see the best places nearby.'
+          @message.typing_off
+          stop_thread
+
 
       next_command :lookup_location
     end

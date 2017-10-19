@@ -151,6 +151,11 @@ Bot.on :message do |message|
       message: "Alright, are you ready to see the most popular places among your Facebook friends.", quick_replies: trust_prestage_qr_4
     }
 
+    bind 'find','the','best', all:true, to: :trust_stage_2, start_thread: {
+
+      message: "What are you interested in?", quick_replies: trust_prestage_qr_1
+    }
+
 
     #bind "Have a gif", to: :get_cute_gif
 
@@ -159,25 +164,7 @@ Bot.on :message do |message|
     # NB: Should always come last. Takes a block.
     default do
       if text_message?
-=begin
-        entities = @message.nlp["entities"]
-        keys = entities.keys
-        # store the entity with the
-        # highest confidence
-        entity_max = nil
-        confidence_max = 0
-        # iterate over the keys and find
-        #the one with the highest confidence
-        keys.each do |key|
-          confidence = entities[key].first['confidence']
-          confidence = confidence.to_f
-          puts "#{key} #{confidence}"
-          if confidence > confidence_max
-            entity_max = key
-            confidence_max = confidence
-          end
-        end
-=end
+
         user_info = get_user_info(:first_name)
         @matched_entity = get_entity_for @message, 0.9
 
