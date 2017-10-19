@@ -47,17 +47,17 @@ HELP_TEXT = "What would you like to do?".freeze
 HELP_BUTTONS = [
   {
     type: 'postback',
-    title: '🍱 ☕️ Find the best',
+    title: 'Find the best 🍱 ☕️ ',
     payload: 'TRUST_PRESTAGE_1'
   },
   {
     type: 'postback',
-    title: '👯 Find Friends\' Favs',
+    title: ' Find Friends\' Favs 👯',
     payload: 'TRUST_PRESTAGE_4'
   },
   {
     type: 'postback',
-    title: 'ℹ️ Tell me more',
+    title: 'Tell me more ℹ️ ',
     payload: 'PERSUADE_PRESTAGE_1'
   }
 ].freeze
@@ -73,7 +73,7 @@ HELP_PERSUADE_CTA = ["Ready to try me?","Ready to find the best places?", "Are y
 NO = ["Tell me more","More information","Tell more"]
 NO_DIRECT = ["No","Nope","Not really","No, thanks","Nah","Nop"]
 YES = ["Sounds good", "I\'m in","Yeah","Let\'s do it","Sounds good to me","Yes, I\'m ready","I\'m ready"]
-YES_DIRECT = ["Sounds good","Nope","Not really","No, thanks","Nah","Nop"]
+YES_DIRECT = ["Sounds good","Yes","Yeah","Yeap"]
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
 FUNNY_REACTIONS = [":D","😎","😊","☺️","😅","lol","That was funny!","😁",":P","😜","😝","😛","🙂","🙃","😉","😌","😊","☺️","🤣","😂",":p",":)",":P"]
 
