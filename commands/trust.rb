@@ -272,24 +272,24 @@ module Trust
     parsed = get_parsed_response(REVERSE_API_URL, "#{lat},#{long}")
     address = extract_full_address(parsed)
     @message.typing_on
-      sleep 2
+      sleep 1
     say "Got your address: #{address}"
     @message.typing_off
     @message.typing_on
-          sleep 2
     say "Here are the top 3 places nearby."
     @message.typing_off
+
     if @@choice == 'coffee'
       @message.typing_on
-            sleep 2
       UI::FBCarousel.new(COFFEE).send(@user)
       @message.typing_off
+
     elsif @@choice == 'food'
       @message.typing_on
-          sleep 2
       UI::FBCarousel.new(FOOD).send(@user)
       @message.typing_off
     end
+
     @message.typing_on
     trust_stage_qr_3_1 = UI::QuickReplies.build([YES_DIRECT.sample, 'TRUST_STABLE'], [NO_DIRECT.sample, 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
@@ -421,7 +421,7 @@ elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
   say 'Type \'friends favorites\' to if you want to see the most popular places among your friends any time.'
   @message.typing_off
   stop_thread
-  
+
     else
       @message.typing_on
       sleep 1

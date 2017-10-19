@@ -7,8 +7,8 @@ Response.delete_all
 # create a bunch of data to test with
 Response.create!([{ response_id: 1, stage_id: 1 , step_id: 1, flow_id: 1 ,response_content: "I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places." } ])
 Response.create!([{ response_id: 2, stage_id: 1 , step_id: 1, flow_id: 2 ,response_content: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place." } ])
-Response.create!([{ response_id: 3, stage_id: 1 , step_id: 2, flow_id: 1 ,response_content: "I try to understand the context, in this case where you are, and navigate you in the overcrowded food and coffee scene." } ])
-Response.create!([{ response_id: 4, stage_id: 1 , step_id: 2, flow_id: 2 ,response_content: "I use data to better understand the context,and suggest personalized places to check out." } ])
+Response.create!([{ response_id: 3, stage_id: 1 , step_id: 2, flow_id: 1 ,response_content: "I try to understand the context, in this case where you are and navigate you in the overcrowded food and coffee scene." } ])
+Response.create!([{ response_id: 4, stage_id: 1 , step_id: 2, flow_id: 2 ,response_content: "I use data to better understand the context and suggest personalized places to check out." } ])
 Response.create!([{ response_id: 5, stage_id: 2 , step_id: 1, flow_id: 1 ,response_content: "Why Botae? Botae is its designer\'s early exploration of how Messenger bots can interact with users." } ])
 Response.create!([{ response_id: 6, stage_id: 2 , step_id: 1, flow_id: 2 ,response_content: "The idea of Botae came from its designer\'s own need of finding that best place to eat nearby." } ])
 Response.create!([{ response_id: 7, stage_id: 2 , step_id: 2, flow_id: 1 ,response_content: "Botae answers the question of \'Where should I eat now?\'",  } ])
