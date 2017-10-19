@@ -73,6 +73,7 @@ HELP_PERSUADE_CTA = ["Ready to try me?","Ready to find the best places?", "Are y
 NO = ["Tell me more","More information","Tell more"]
 YES = ["Sounds good", "I\'m in","Yeah","Let\'s do it","Sounds good to me","Yes, I\'m ready","I\'m ready"]
 ACKNOWLEDGED = ["Alright","Got it","Okay"]
+FUNNY_REACTIONS = [":D","😎","😊","☺️","😅","lol","That was funny!","😁"]
 
 
 intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], ['Tell me more', 'PERSUADE_PRESTAGE_1'])
@@ -180,8 +181,9 @@ Bot.on :message do |message|
           elsif  @matched_entity == "no"
             say ACKNOWLEDGED.sample + " #{user_name}."
           elsif  @matched_entity == "help"
-
             UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
+          elsif  @matched_entity == "funny_reaction"
+            say FUNNY_REACTIONS.sample
           else
             say   APOLOGIES.sample
             UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
