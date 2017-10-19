@@ -258,6 +258,7 @@ module Trust
           say 'Type \'find the best\' to see the best places nearby.'
           @message.typing_off
           stop_thread
+        end
 
 
       next_command :lookup_location
