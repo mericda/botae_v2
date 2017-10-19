@@ -185,7 +185,6 @@ Bot.on :message do |message|
           user_name = user_info[:first_name]
 
 
-          puts "Entity with max confidence: #{entity_max} #{confidence_max}"
           if @matched_entity == "greetings"
             say GREETINGS.sample + " #{user_name} 👋"
             UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
