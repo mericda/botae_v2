@@ -80,193 +80,191 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
 
 # Build a quick reply that prompts location from user
 
-  # Define vartiables you want to use for both messages and postbacks
-  # outside both Bot.on method calls.
-  trust_prestage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
-  trust_prestage_qr_4 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+# Define vartiables you want to use for both messages and postbacks
+# outside both Bot.on method calls.
+trust_prestage_qr_1 = UI::QuickReplies.build(['☕️ Coffee', 'TRUST_STAGE_1_CHOICE_A'], ['🍱 Food', 'TRUST_STAGE_1_CHOICE_B'])
+trust_prestage_qr_4 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
 
-  persuade_prestage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_PRESTAGE_1'], [NO.sample, 'PERSUADE'])
+persuade_prestage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_PRESTAGE_1'], [NO.sample, 'PERSUADE'])
 
-  ####################### ROUTE MESSAGES HERE ################################
+####################### ROUTE MESSAGES HERE ################################
 
-  Bot.on :message do |message|
-    # Use DSL inside the following block:
-    Rubotnik::MessageDispatch.new(message).route do
-      # All strings will be turned into case insensitive regular expressions.
-      # If you pass a number of strings, any match will trigger a command,
-      # unless 'all: true' flag is present. In that case, MessageDispatch
-      # will expect all words to be present in a single message.
+Bot.on :message do |message|
+  # Use DSL inside the following block:
+  Rubotnik::MessageDispatch.new(message).route do
+    # All strings will be turned into case insensitive regular expressions.
+    # If you pass a number of strings, any match will trigger a command,
+    # unless 'all: true' flag is present. In that case, MessageDispatch
+    # will expect all words to be present in a single message.
 
-      # Use with 'to:' syntax to bind to a command found inside Commands
-      # or its sub-modules.
+    # Use with 'to:' syntax to bind to a command found inside Commands
+    # or its sub-modules.
 
 
-      # bind also takes regexps directly
-      bind(/my name/i, /mon nom/i) do
-        user_info = get_user_info(:first_name,:last_name,:profile_pic)
+    # bind also takes regexps directly
+    bind(/my name/i, /mon nom/i) do
+      user_info = get_user_info(:first_name,:last_name,:profile_pic)
+      if user_info
+        user_name = user_info[:first_name]
+        last_name = user_info[:last_name]
+        img_url = user_info[:profile_pic]
+        say "Your name is #{user_name}."
+        say "Your lastname is #{last_name}."
+        say "This is your profile photo."
+        UI::ImageAttachment.new(img_url).send(@user)
+
+      else
+        say 'I could not get your name, sorry :('
+      end
+    end
+
+
+
+    # Use with block if you want to provide response behaviour
+    # directly without looking for an existing command inside Commands.
+
+    #  bind 'hi', 'hello', 'yo', 'hey' do
+    #      say "Nice to meet you! Here's what I can do", quick_replies: HINTS
+    #  end
+
+    # Use with 'to:' and 'start_thread:' to point to the first
+    # command of a thread. Thread should be located in Commands
+    # or a separate module mixed into Commands.
+    # Include nested hash to provide a message asking user
+    # for input to the next command. You can also pass an array of
+    # quick replies (and process them inside the thread).
+
+    bind 'clear', to: :clear_user_state_safely
+
+    bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
+
+      message: "What are you interested in?", quick_replies: trust_prestage_qr_1
+    }
+
+    bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
+
+      message: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place.", quick_replies: persuade_prestage_qr_1
+    }
+
+    bind 'friends','favorites', all:true, to: :trust_stage_4, start_thread: {
+
+      message: "Alright, are you ready to see the most popular places among your Facebook friends.", quick_replies: trust_prestage_qr_4
+    }
+
+
+    #bind "Have a gif", to: :get_cute_gif
+
+
+    # Falback action if none of the commands matched the input,
+    # NB: Should always come last. Takes a block.
+    default do
+      if text_message?
+=begin
+        entities = @message.nlp["entities"]
+        keys = entities.keys
+        # store the entity with the
+        # highest confidence
+        entity_max = nil
+        confidence_max = 0
+        # iterate over the keys and find
+        #the one with the highest confidence
+        keys.each do |key|
+          confidence = entities[key].first['confidence']
+          confidence = confidence.to_f
+          puts "#{key} #{confidence}"
+          if confidence > confidence_max
+            entity_max = key
+            confidence_max = confidence
+          end
+        end
+=end
+        user_info = get_user_info(:first_name)
+        @matched_entity = get_entity_for @message, 0.9
+
         if user_info
           user_name = user_info[:first_name]
-          last_name = user_info[:last_name]
-          img_url = user_info[:profile_pic]
-          say "Your name is #{user_name}."
-          say "Your lastname is #{last_name}."
-          say "This is your profile photo."
-          UI::ImageAttachment.new(img_url).send(@user)
-
-        else
-          say 'I could not get your name, sorry :('
-        end
-      end
 
 
-
-      # Use with block if you want to provide response behaviour
-      # directly without looking for an existing command inside Commands.
-
-      #  bind 'hi', 'hello', 'yo', 'hey' do
-      #      say "Nice to meet you! Here's what I can do", quick_replies: HINTS
-      #  end
-
-      # Use with 'to:' and 'start_thread:' to point to the first
-      # command of a thread. Thread should be located in Commands
-      # or a separate module mixed into Commands.
-      # Include nested hash to provide a message asking user
-      # for input to the next command. You can also pass an array of
-      # quick replies (and process them inside the thread).
-
-      bind 'clear', to: :clear_user_state_safely
-
-      bind 'i', 'am', 'ready', all:true, to: :trust_stage_2, start_thread: {
-
-        message: "What are you interested in?", quick_replies: trust_prestage_qr_1
-      }
-
-      bind 'tell', 'me', 'more', all:true, to: :persuade_stage_2, start_thread: {
-
-        message: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place.", quick_replies: persuade_prestage_qr_1
-      }
-
-      bind 'friends','favorites', all:true, to: :trust_stage_4, start_thread: {
-
-        message: "Alright, are you ready to see the most popular places among your Facebook friends.", quick_replies: trust_prestage_qr_4
-      }
-
-
-      #bind "Have a gif", to: :get_cute_gif
-
-
-      # Falback action if none of the commands matched the input,
-      # NB: Should always come last. Takes a block.
-      default do
-        if text_message?
-=begin
-          entities = @message.nlp["entities"]
-          keys = entities.keys
-          # store the entity with the
-          # highest confidence
-          entity_max = nil
-          confidence_max = 0
-          # iterate over the keys and find
-          #the one with the highest confidence
-          keys.each do |key|
-            confidence = entities[key].first['confidence']
-            confidence = confidence.to_f
-            puts "#{key} #{confidence}"
-            if confidence > confidence_max
-              entity_max = key
-              confidence_max = confidence
-            end
-          end
-=end
-          user_info = get_user_info(:first_name)
-          @matched_entity = get_entity_for @message, 0.9
-
-          if user_info
-            user_name = user_info[:first_name]
-
-
-            puts "Entity with max confidence: #{entity_max} #{confidence_max}"
-            if @matched_entity == "greetings"
-              say GREETINGS.sample + " #{user_name} 👋"
-              UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
-            elsif  @matched_entity == "bye"
-              say BYE.sample + " #{user_name} ✌️"
-            elsif  @matched_entity == "no"
-              say ACKNOWLEDGED.sample + " #{user_name}."
-            elsif  @matched_entity == "help"
+          puts "Entity with max confidence: #{entity_max} #{confidence_max}"
+          if @matched_entity == "greetings"
+            say GREETINGS.sample + " #{user_name} 👋"
+            UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
+          elsif  @matched_entity == "bye"
+            say BYE.sample + " #{user_name} ✌️"
+          elsif  @matched_entity == "no"
+            say ACKNOWLEDGED.sample + " #{user_name}."
+          elsif  @matched_entity == "help"
 
             UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
-            else
-              say   APOLOGIES.sample
-              UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
-            end
           else
             say   APOLOGIES.sample
             UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
-
           end
         else
+          say   APOLOGIES.sample
+          UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
+
         end
-
-
-
+      else
       end
     end
-  end
 
-  ######################## ROUTE POSTBACKS HERE ###############################
-
-  Bot.on :postback do |postback|
-    Rubotnik::PostbackDispatch.new(postback).route do
-
-      ## START THE CONVERSATION
-      bind 'START' do
-
-        say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
-        say 'I can also find the places popular among your Facebook friends.'
-        UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
-        say 'Ready to browse the best?', quick_replies: intention_replies
-      end
-
-
-      # Use block syntax when a command takes an argument rather
-      # than 'message' or 'user' (which are accessible from everyhwere
-      # as instance variables, no need to pass them around).
-
-
-
-      # No custom parameter passed, can use simplified syntax
-
-
-      bind 'TRUST_PRESTAGE_1', to: :trust_stage_2, start_thread: {
-        message:  "What are you interested in?", quick_replies: trust_prestage_qr_1
-      }
-      bind 'TRUST_PRESTAGE_4', to: :trust_stage_4, start_thread: {
-        message:  "Alright, are you ready to see the most popular places among your Facebook friends?", quick_replies: trust_prestage_qr_4
-      }
-      bind 'PERSUADE_PRESTAGE_1', to: :persuade_stage_2, start_thread: {
-        message: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place. Ready?", quick_replies: persuade_prestage_qr_1
-      }
-
+end
     end
-  end
 
-  ##### USE STANDARD SINATRA TO IMPLEMENT WEBHOOKS FOR OTHER SERVICES #######
+######################## ROUTE POSTBACKS HERE ###############################
 
+Bot.on :postback do |postback|
+  Rubotnik::PostbackDispatch.new(postback).route do
 
+    ## START THE CONVERSATION
+    bind 'START' do
 
-
-  # Example of API integration. Use regular Sintatra syntax to define endpoints.
-  post '/incoming' do
-    begin
-      sender_id = params['id']
-      user = UserStore.instance.find_or_create_user(sender_id)
-      say("You got a message: #{params['message']}", user: user)
-    rescue
-      p 'User not recognized or not available at the time'
+      say 'Hi! 👋 I am here to find the closest best places for food and coffee to you.'
+      say 'I can also find the places popular among your Facebook friends.'
+      UI::ImageAttachment.new('https://media.giphy.com/media/jKaFXbKyZFja0/giphy.gif').send(@user)
+      say 'Ready to browse the best?', quick_replies: intention_replies
     end
-  end
 
-  get '/' do
-    'Nothing to look at'
+
+    # Use block syntax when a command takes an argument rather
+    # than 'message' or 'user' (which are accessible from everyhwere
+    # as instance variables, no need to pass them around).
+
+
+
+    # No custom parameter passed, can use simplified syntax
+
+
+    bind 'TRUST_PRESTAGE_1', to: :trust_stage_2, start_thread: {
+      message:  "What are you interested in?", quick_replies: trust_prestage_qr_1
+    }
+    bind 'TRUST_PRESTAGE_4', to: :trust_stage_4, start_thread: {
+      message:  "Alright, are you ready to see the most popular places among your Facebook friends?", quick_replies: trust_prestage_qr_4
+    }
+    bind 'PERSUADE_PRESTAGE_1', to: :persuade_stage_2, start_thread: {
+      message: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place. Ready?", quick_replies: persuade_prestage_qr_1
+    }
+
   end
+end
+
+##### USE STANDARD SINATRA TO IMPLEMENT WEBHOOKS FOR OTHER SERVICES #######
+
+
+
+
+# Example of API integration. Use regular Sintatra syntax to define endpoints.
+post '/incoming' do
+  begin
+    sender_id = params['id']
+    user = UserStore.instance.find_or_create_user(sender_id)
+    say("You got a message: #{params['message']}", user: user)
+  rescue
+    p 'User not recognized or not available at the time'
+  end
+end
+
+get '/' do
+  'Nothing to look at'
+end
