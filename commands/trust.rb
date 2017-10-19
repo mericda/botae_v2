@@ -291,7 +291,7 @@ module Trust
       @message.typing_off
     end
     @message.typing_on
-    trust_stage_qr_3_1 = UI::QuickReplies.build(["Yes", 'TRUST_STABLE'], ["No", 'TRUST_NOT_STABLE'])
+    trust_stage_qr_3_1 = UI::QuickReplies.build([YES_DIRECT.sample, 'TRUST_STABLE'], [NO_DIRECT.sample, 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
     @message.typing_off
     next_command :trust_stage_3
@@ -341,7 +341,7 @@ module Trust
       @user.answers[:lookup_location_fail] = @message.text
       @message.typing_on
       sleep 2
-      trust_stage_qr_3_1_fail = UI::QuickReplies.build([YES.sample, 'TRUST_STABLE'], [NO.sample, 'TRUST_NOT_STABLE'])
+      trust_stage_qr_3_1_fail = UI::QuickReplies.build([YES_DIRECT.sample, 'TRUST_STABLE'], [NO_DIRECT.sample, 'TRUST_NOT_STABLE'])
       say "I don\'t understand. Please use buttons 👇", quick_replies: trust_stage_qr_3_1_fail
       @message.typing_off
       next_command :trust_stage_3
@@ -357,7 +357,7 @@ module Trust
     @user.answers[:trust_stage_2] = @message.text
     @message.typing_on
         sleep 2
-    trust_stage_qr_3_2 = UI::QuickReplies.build([YES.sample, 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+    trust_stage_qr_3_2 = UI::QuickReplies.build([YES_DIRECT.sample, 'TRUST_CONFIRMATION_INTENT'], [NO_DIRECT.sample, 'TRUST_NOT_STABLE'])
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     @message.typing_off
     next_command :trust_stage_4
@@ -515,7 +515,7 @@ end
     say 'On top of all, I am part of a research project at Carnegie Mellon University that investigates the trust between users and computer programs.'
     @message.typing_off if @message
 
-    trust_auth_qr_3  = UI::QuickReplies.build(['Yes', 'LEARN_MORE'], ['No', 'THANKS'])
+    trust_auth_qr_3  = UI::QuickReplies.build([YES_DIRECT.sample, 'LEARN_MORE'], [NO_DIRECT.sample, 'THANKS'])
     say 'Want to learn more about the project?', quick_replies: trust_auth_qr_3
     next_command :trust_auth_4
 
