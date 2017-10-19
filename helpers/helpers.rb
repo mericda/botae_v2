@@ -10,6 +10,35 @@ module Helpers
 
   GRAPH_URL = 'https://graph.facebook.com/v2.8/'.freeze
 
+  def get_entity_for message, with_threshold
+
+    entities = message.nlp["entities"]
+    keys = entities.keys
+    # store the entity with the
+    # highest confidence
+    entity_max = nil
+    confidence_max = 0
+    # iterate over the keys and find
+    #the one with the highest confidence
+    keys.each do |key|
+      confidence = entities[key].first['confidence']
+      confidence = confidence.to_f
+      puts "#{key} #{confidence}"
+      if confidence > confidence_max
+        entity_max = key
+        confidence_max = confidence
+      end
+    end
+
+    if confidence_max > with_threshold
+      return entity_max
+    end
+
+    return ""
+
+  end
+
+
   # abstraction over Bot.deliver to send messages declaratively and directly
   def say(text = 'What was I talking about?', quick_replies: nil, user: @user)
     message_options = {
