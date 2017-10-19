@@ -159,6 +159,7 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
       # NB: Should always come last. Takes a block.
       default do
         if text_message?
+=begin
           entities = @message.nlp["entities"]
           keys = entities.keys
           # store the entity with the
@@ -176,20 +177,22 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
               confidence_max = confidence
             end
           end
+=end
           user_info = get_user_info(:first_name)
           if user_info
             user_name = user_info[:first_name]
+            @matched_entity = get_entity_for @message, 0.9
 
 
             puts "Entity with max confidence: #{entity_max} #{confidence_max}"
-            if entity_max == 'greetings' && confidence_max > 0.9
+            if @matched_entity == "greetings"
               say GREETINGS.sample + " #{user_name} 👋"
               UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
-            elsif  entity_max == 'bye' && confidence_max > 0.9
+            elsif  @matched_entity == "bye"
               say BYE.sample + " #{user_name} ✌️"
-            elsif  entity_max == 'no' && confidence_max > 0.9
+            elsif  @matched_entity == "no"
               say ACKNOWLEDGED.sample + " #{user_name}."
-            elsif  entity_max == 'help' && confidence_max > 0.9
+            elsif  @matched_entity == "help"
 
             UI::FBButtonTemplate.new(HELP_TEXT,HELP_BUTTONS).send(@user)
             else
