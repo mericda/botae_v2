@@ -15,7 +15,6 @@ module Commands
   # commands are mixed into Dispatch classes as private methods.
   module_function
 
-    #the one with the highest confidence
 
 
 
