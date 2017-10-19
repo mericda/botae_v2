@@ -412,6 +412,16 @@ module Trust
 
       trust_auth_1
 
+elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
+  @message.typing_on if @message
+  UI::ImageAttachment.new('https://media.giphy.com/media/5EU19WZsBUdqM/giphy.gif').send(@user)
+  @message.typing_off if @message
+  @message.typing_on
+      sleep 2
+  say 'Type \'friends favorites\' to if you want to see the most popular places among your friends any time.'
+  @message.typing_off
+  stop_thread
+  
     else
       @message.typing_on
       sleep 1
@@ -507,7 +517,7 @@ end
 
     @message.typing_on if @message
     sleep 1
-    say '🤓 Please think twice when you are providing access or directly giving your personal data to a computer program.'
+    say '🤓Please think twice when you are providing access or directly giving your personal data to a computer program.'
     @message.typing_off if @message
 
     @message.typing_on if @message
