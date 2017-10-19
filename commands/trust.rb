@@ -280,7 +280,7 @@ module Trust
       @message.typing_off
     end
     @message.typing_on
-    trust_stage_qr_3_1 = UI::QuickReplies.build([YES.sample, 'TRUST_STABLE'], [NO.sample, 'TRUST_NOT_STABLE'])
+    trust_stage_qr_3_1 = UI::QuickReplies.build(["Yes", 'TRUST_STABLE'], ["No", 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
     @message.typing_off
     next_command :trust_stage_3
