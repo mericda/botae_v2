@@ -25,3 +25,5 @@ Response.create!([{ response_id: 17, stage_id: 5 , step_id: 1, flow_id: 1 ,respo
 Response.create!([{ response_id: 18, stage_id: 5 , step_id: 1, flow_id: 2 ,response_content: "Not sure about trying me? Here is an example suggestion." } ])
 Response.create!([{ response_id: 18, stage_id: 5 , step_id: 2, flow_id: 1 ,response_content: "http://mericdagli.com/botae/p1.jpg" } ])
 Response.create!([{ response_id: 18, stage_id: 5 , step_id: 2, flow_id: 2 ,response_content: "http://mericdagli.com/botae/p2.jpg" } ])
+
+Partner.create!([{ name: 1, phone_number: 1 , industry: 1, problem: 1 ,customer: "I\'m a bot that searches the best places nearby on Yelp, Facebook, Foursquare. For now, I can only search food or coffee places." } ])
