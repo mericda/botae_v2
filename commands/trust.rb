@@ -197,7 +197,7 @@ module Trust
     # find the highest likelyhood entity
     @matched_entity = get_entity_for @message, 0.9
 
-    if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @message.text =~ /coffee/i || @matched_entity == "yes"
+    if @message.quick_reply == 'TRUST_STAGE_1_CHOICE_A' || @matched_entity == "coffee"
       @message.typing_on
           sleep 2
       say 'Let\'s find a better ☕️ than Starbucks around you.'
@@ -206,7 +206,7 @@ module Trust
 
       @@choice = 'coffee'
       trust_stage_2_2
-    elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @message.text =~ /food/i
+    elsif @message.quick_reply == 'TRUST_STAGE_1_CHOICE_B' || @matched_entity == "food"
       @message.typing_on
       sleep 2
       say 'Let\'s find a better 🍽 than Subway around you.'
@@ -280,7 +280,7 @@ module Trust
       @message.typing_off
     end
     @message.typing_on
-    trust_stage_qr_3_1 = UI::QuickReplies.build(['Yes', 'TRUST_STABLE'], ['No', 'TRUST_NOT_STABLE'])
+    trust_stage_qr_3_1 = UI::QuickReplies.build([YES.sample, 'TRUST_STABLE'], [NO.sample, 'TRUST_NOT_STABLE'])
     say 'Did you like it?', quick_replies: trust_stage_qr_3_1
     @message.typing_off
     next_command :trust_stage_3
@@ -302,15 +302,18 @@ module Trust
     fall_back && return
     @user.answers[:trust_stage_2] = @message.text
 
+    @matched_entity = get_entity_for @message, 0.9
+
+
     # Fallback functionality if stop word used or user input is not text
-    if @message.quick_reply == 'TRUST_STABLE' || @message.text =~ /yes/i
+    if @message.quick_reply == 'TRUST_STABLE' || @matched_entity == "yes"
       #log = @message.text
       @message.typing_on
             sleep 2
       say 'Great 🙌'
       @message.typing_off
       trust_stage_3_2
-    elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @message.text =~ /no/i
+    elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
       #
       @message.typing_on
               sleep 2
@@ -327,7 +330,7 @@ module Trust
       @user.answers[:lookup_location_fail] = @message.text
       @message.typing_on
       sleep 2
-      trust_stage_qr_3_1_fail = UI::QuickReplies.build(['Yes, I liked it', 'TRUST_STABLE'], ['No, I don\'t', 'TRUST_NOT_STABLE'])
+      trust_stage_qr_3_1_fail = UI::QuickReplies.build([YES.sample, 'TRUST_STABLE'], [NO.sample, 'TRUST_NOT_STABLE'])
       say "I don\'t understand. Please use buttons 👇", quick_replies: trust_stage_qr_3_1_fail
       @message.typing_off
       next_command :trust_stage_3
@@ -343,7 +346,7 @@ module Trust
     @user.answers[:trust_stage_2] = @message.text
     @message.typing_on
         sleep 2
-    trust_stage_qr_3_2 = UI::QuickReplies.build(['Yes', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+    trust_stage_qr_3_2 = UI::QuickReplies.build([YES.sample, 'TRUST_CONFIRMATION_INTENT'], [NO.sample, 'TRUST_NOT_STABLE'])
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     @message.typing_off
     next_command :trust_stage_4
@@ -353,14 +356,17 @@ module Trust
     #log = @message.text
     @user.answers[:trust_stage_3] = @message.text
 
-    if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @message.text =~ /yes/i
+    @matched_entity = get_entity_for @message, 0.9
+
+
+    if @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @matched_entity == "yes"
       @message.typing_on
           sleep 2
       trust_stage_qr_4 = UI::QuickReplies.build(['Authorize', 'TRUST'])
       say 'To do this, I need your permission to read your Facebook profile. Click the button 👇 to authorize me.', quick_replies: trust_stage_qr_4
       @message.typing_off
       next_command :trust_stage_5
-    else
+    elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
       @message.typing_on if @message
       UI::ImageAttachment.new('https://media.giphy.com/media/5EU19WZsBUdqM/giphy.gif').send(@user)
       @message.typing_off if @message
@@ -369,6 +375,17 @@ module Trust
       say 'Type \'friends favorites\' to if you want to see the most popular places among your friends any time.'
       @message.typing_off
       stop_thread
+    else
+      @message.typing_on if @message
+      UI::ImageAttachment.new('https://media.giphy.com/media/5EU19WZsBUdqM/giphy.gif').send(@user)
+      @message.typing_off if @message
+      @message.typing_on
+          sleep 2
+      say APOLOGIES + "Please use buttons 👇"
+      trust_stage_qr_4_1_fail = UI::QuickReplies.build([YES.sample, 'TRUST_CONFIRMATION_INTENT'], [NO.sample, 'TRUST_NOT_STABLE'])
+      say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_4_1_fail
+      @message.typing_off
+      next_command :trust_stage_3
 
     end
   end
@@ -378,7 +395,9 @@ module Trust
     fall_back && return
     @user.answers[:trust_stage_4] = @message.text
 
-    if @message.quick_reply == 'TRUST' || @message.text =~ /yes/i
+    @matched_entity = get_entity_for @message, 0.9
+
+    if @message.quick_reply == 'TRUST' || @matched_entity == "yes"
 
       trust_auth_1
 
@@ -398,13 +417,14 @@ module Trust
   def trust_auth_1
     fall_back && return
     @user.answers[:trust_stage_5] = @message.text
-if @message.quick_reply == 'TRUST_NOT_STABLE'
+    @matched_entity = get_entity_for @message, 0.9
+if @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
 
   persuade_stage_1
 
 
 
-elsif @message.quick_reply == 'TRUST_CONFIRMATION_INTENT'
+elsif @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @matched_entity == "yes"
   trust_stage_4
 
 else
@@ -443,8 +463,9 @@ end
   def trust_auth_2
     fall_back && return
     @user.answers[:trust_auth_1] = @message.text
+    @matched_entity = get_entity_for @message, 0.9
 
-    if @message.quick_reply == 'WHAT' || @message.text =~ /yes/i
+    if @message.quick_reply == 'WHAT'   || @matched_entity == "what" || @matched_entity == "how"
       @message.typing_on
       say 'Sorry if this makes you feel upset.'
       @message.typing_off
@@ -495,7 +516,10 @@ end
 
     @user.answers[:trust_auth_3] = @message.text
 
-    if @message.quick_reply == 'LEARN_MORE' || @message.text =~ /yes/i
+    @matched_entity = get_entity_for @message, 0.9
+
+
+    if @message.quick_reply == 'LEARN_MORE'  || @matched_entity == "learn_more" || @matched_entity == "yes"
       UI::FBButtonTemplate.new(EMAIL_TEXT,EMAIL).send(@user)
     end
 
@@ -521,7 +545,7 @@ end
 
   # NOTE: A way to enforce sanity checks (repeat for each sequential command)
   def fall_back
-    say 'You tried to fool me, human! Start over!' unless text_message?
+    say 'Something is wrong. Please start over.' unless text_message?
     return false unless !text_message? || stop_word_used?('Stop')
     user_responses
     puts 'Fallback triggered!'
