@@ -15,33 +15,8 @@ module Commands
   # commands are mixed into Dispatch classes as private methods.
   module_function
 
-  def get_entity_for message, with_threshold
-
-    entities = message.nlp["entities"]
-    keys = entities.keys
-    # store the entity with the
-    # highest confidence
-    entity_max = nil
-    confidence_max = 0
-    # iterate over the keys and find
     #the one with the highest confidence
-    keys.each do |key|
-      confidence = entities[key].first['confidence']
-      confidence = confidence.to_f
-      puts "#{key} #{confidence}"
-      if confidence > confidence_max
-        entity_max = key
-        confidence_max = confidence
-      end
-    end
 
-    if confidence_max > with_threshold
-      return entity_max
-    end
-
-    return ""
-
-  end
 
 
   def get_cute_gif
