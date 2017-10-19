@@ -256,7 +256,7 @@ module Trust
           @message.typing_on
               sleep 2
           say 'Type \'find the best\' to see the best places nearby.'
-          @message.typing_off
+          @message.typing_off2
           stop_thread
         end
 
@@ -358,7 +358,7 @@ module Trust
     @user.answers[:trust_stage_2] = @message.text
     @message.typing_on
         sleep 2
-    trust_stage_qr_3_2 = UI::QuickReplies.build(['YES.sample', 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
+    trust_stage_qr_3_2 = UI::QuickReplies.build([YES.sample, 'TRUST_CONFIRMATION_INTENT'], ['No', 'TRUST_NOT_STABLE'])
     say 'Alright, are you ready to see the most popular places among your Facebook friends?', quick_replies: trust_stage_qr_3_2
     @message.typing_off
     next_command :trust_stage_4
