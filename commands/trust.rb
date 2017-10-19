@@ -499,7 +499,7 @@ end
     fall_back && return
     @user.answers[:trust_auth_2] = @message.text
     @message.typing_on if @message
-    say 'There are many malicious bots that can steal your account details or location.'
+    say '🚨 There are many malicious bots that can steal your account details or location.'
     @message.typing_off if @message
     #@message.typing_on
     #UI::ImageAttachment.new('https://media.giphy.com/media/mzJMYiKAHF1aE/giphy.gif').send(@user)
@@ -507,7 +507,7 @@ end
 
     @message.typing_on if @message
     sleep 1
-    say 'Please think twice when you are providing access or directly giving your personal data to a computer program.'
+    say '🤓 Please think twice when you are providing access or directly giving your personal data to a computer program.'
     @message.typing_off if @message
 
     @message.typing_on if @message
