@@ -179,9 +179,10 @@ intention_replies = UI::QuickReplies.build(['I am ready', 'TRUST_PRESTAGE_1'], [
           end
 =end
           user_info = get_user_info(:first_name)
+          @matched_entity = get_entity_for @message, 0.9
+
           if user_info
             user_name = user_info[:first_name]
-            @matched_entity = get_entity_for @message, 0.9
 
 
             puts "Entity with max confidence: #{entity_max} #{confidence_max}"
