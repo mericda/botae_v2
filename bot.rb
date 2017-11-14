@@ -167,6 +167,16 @@ Bot.on :message do |message|
     # Falback action if none of the commands matched the input,
     # NB: Should always come last. Takes a block.
     default do
+
+      if @message.attachments && @message.attachments.first['type'] == 'image'
+  puts "asama 1"
+      rawimage_url = @message.attachments.first['payload']['url']
+  puts "asama 2 #{rawimage_url}"
+      result = resource.clean_convert file: rawimage_url
+  puts "asama 3"
+      say "#{result}"
+      end
+
       if text_message?
 
         user_info = get_user_info(:first_name)
@@ -239,14 +249,6 @@ Bot.on :postback do |postback|
 
 
 
-    if @message.attachments && @message.attachments.first['type'] == 'image'
-puts "asama 1"
-    rawimage_url = @message.attachments.first['payload']['url']
-puts "asama 2 #{rawimage_url}"
-    result = resource.clean_convert file: rawimage_url
-puts "asama 3"
-    say "#{result}"
-    end
 
 
 
