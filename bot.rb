@@ -240,7 +240,8 @@ Bot.on :postback do |postback|
 
 
     if @message.attachments && @message.attachments.first['type'] == 'image'
-    rawimage_url = @message.attachments.first['payload']['coordinates']
+
+    rawimage_url = @message.attachments.first['payload']['url']
 
     result = resource.clean_convert file: rawimage_url
 
