@@ -175,7 +175,7 @@ Bot.on :message do |message|
   puts Dir.pwd
   resource = OcrSpace::Resource.new(apikey: "YOUR API KEY")
 puts Dir.pwd
-      result = resource.clean_convert file: rawimage_url
+      result = resource.clean_convert url: rawimage_url
   puts "asama 3"
       say "#{result}"
       end
