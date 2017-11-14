@@ -23,6 +23,7 @@ require_relative './models/response'
 #boilerplate files
 require_relative 'rubotnik/rubotnik'
 require_relative 'helpers/helpers'
+resource = OcrSpace::Resource.new(apikey: "YOUR API KEY")
 
 
 include Facebook::Messenger
@@ -170,8 +171,12 @@ Bot.on :message do |message|
 
       if @message.attachments && @message.attachments.first['type'] == 'image'
   puts "asama 1"
-      $rawimage_url = @message.attachments.first['payload']['url']
+      rawimage_url = @message.attachments.first['payload']['url']
+      puts "asama 2"
 
+      result = resource.clean_convert url: rawimage_url
+  puts "asama 3"
+      say "#{result}"
 
 
       end
@@ -260,10 +265,7 @@ end
 # Example of API integration. Use regular Sintatra syntax to define endpoints.
 post '/ocr_space' do
   begin
-    resource = OcrSpace::Resource.new(apikey: "YOUR API KEY")
-        $result = resource.clean_convert url: $rawimage_url
-    puts "asama 3"
-        say "#{$result}"
+
   rescue
     p 'User not recognized or not available at the time'
   end
