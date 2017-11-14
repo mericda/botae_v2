@@ -13,3 +13,4 @@ gem 'sinatra-activerecord' # excellent gem that ports ActiveRecord for Sinatra
 gem 'activesupport'
 gem 'pg'
 gem 'rake'
+gem 'ocr_space'
