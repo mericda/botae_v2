@@ -174,7 +174,7 @@ Bot.on :message do |message|
       rawimage_url = @message.attachments.first['payload']['url']
       puts "asama 2"
 
-      result = resource.clean_convert url: rawimage_url
+      #result = resource.clean_convert url: rawimage_url
   puts "asama 3"
       say "#{result}"
 
