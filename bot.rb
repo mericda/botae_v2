@@ -170,12 +170,10 @@ Bot.on :message do |message|
 
       if @message.attachments && @message.attachments.first['type'] == 'image'
   puts "asama 1"
-      rawimage_url = @message.attachments.first['payload']['url']
-  puts "asama 2 #{rawimage_url}"
-  resource = OcrSpace::Resource.new(apikey: "YOUR API KEY")
-      result = resource.clean_convert url: "http://www.azquotes.com/picture-quotes/quote-if-you-want-to-find-the-secrets-of-the-universe-think-in-terms-of-energy-frequency-and-nikola-tesla-43-76-81.jpg"
-  puts "asama 3"
-      say "#{result}"
+      $rawimage_url = @message.attachments.first['payload']['url']
+
+
+
       end
 
       if text_message?
@@ -260,11 +258,12 @@ end
 
 
 # Example of API integration. Use regular Sintatra syntax to define endpoints.
-post '/incoming' do
+post '/ocr_space' do
   begin
-    sender_id = params['id']
-    user = UserStore.instance.find_or_create_user(sender_id)
-    say("You got a message: #{params['message']}", user: user)
+    resource = OcrSpace::Resource.new(apikey: "YOUR API KEY")
+        $result = resource.clean_convert url: $rawimage_url
+    puts "asama 3"
+        say "#{$result}"
   rescue
     p 'User not recognized or not available at the time'
   end
