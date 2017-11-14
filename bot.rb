@@ -252,8 +252,6 @@ result = resource.clean_convert file: rawimage_url
 say "#{result}"
 end
 
-=> #If you want to find the secrets of the universe, think in terms of energy, frequency and vibration. AZ QUOTES
-
 
 # Example of API integration. Use regular Sintatra syntax to define endpoints.
 post '/incoming' do
