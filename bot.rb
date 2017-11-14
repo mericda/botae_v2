@@ -172,6 +172,8 @@ Bot.on :message do |message|
   puts "asama 1"
       rawimage_url = @message.attachments.first['payload']['url']
   puts "asama 2 #{rawimage_url}"
+  resource = OcrSpace::Resource.new(apikey: "YOUR API KEY")
+
       result = resource.clean_convert file: rawimage_url
   puts "asama 3"
       say "#{result}"
