@@ -237,20 +237,22 @@ Bot.on :postback do |postback|
       message: "Need something to eat 🍱 or drink ☕️? I am the one who will find the best place. Ready?", quick_replies: persuade_prestage_qr_1
     }
 
+
+
+    if @message.attachments && @message.attachments.first['type'] == 'image'
+    rawimage_url = @message.attachments.first['payload']['coordinates']
+
+    result = resource.clean_convert file: rawimage_url
+
+    say "#{result}"
+    end
+
+
+
   end
 end
 
 ##### USE STANDARD SINATRA TO IMPLEMENT WEBHOOKS FOR OTHER SERVICES #######
-
-
-
-if @message.attachments && @message.attachments.first['type'] == 'image'
-rawimage_url = @message.attachments.first['payload']['coordinates']
-
-result = resource.clean_convert file: rawimage_url
-
-say "#{result}"
-end
 
 
 # Example of API integration. Use regular Sintatra syntax to define endpoints.
