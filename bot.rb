@@ -94,6 +94,16 @@ persuade_prestage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_PRESTAGE_1']
 
 ####################### ROUTE MESSAGES HERE ################################
 
+Bot.deliver({
+  recipient: {
+    id: '2018744271745973'
+  },
+  message: {
+    text: 'Human?'
+  }
+}, access_token: ENV['ACCESS_TOKEN'])
+
+
 Bot.on :message do |message|
   # Use DSL inside the following block:
   Rubotnik::MessageDispatch.new(message).route do
