@@ -446,7 +446,7 @@ if @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
   @message.typing_off
 
   @message.typing_on
-  say 'Let me know this. Why you don\'t want to share your data?', quick_replies:   trust_stage_after_qr_fail
+  say 'Let me know this. Why you don\'t want to share your data?'
   @message.typing_off
 
   next_command :persuade_feedback
