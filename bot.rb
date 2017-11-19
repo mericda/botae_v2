@@ -96,7 +96,7 @@ persuade_prestage_qr_1 = UI::QuickReplies.build([YES.sample, 'TRUST_PRESTAGE_1']
 
 Bot.deliver({
   recipient: {
-    id: '2018744271745973'
+    id: '1763943440314296'
   },
   message: {
     text: 'Human?'
