@@ -383,7 +383,7 @@ module Trust
       @message.typing_off if @message
       @message.typing_on
           sleep 2
-      say 'Type \'friends favorites\' to if you want to see the most popular places among your friends any time.'
+      say 'Okay. Just let me know any time if you want to see the most popular places among your friends.'
       @message.typing_off
       stop_thread
     else
@@ -418,14 +418,14 @@ elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
   @message.typing_off if @message
   @message.typing_on
       sleep 2
-  say 'Type \'friends favorites\' to if you want to see the most popular places among your friends any time.'
+  say 'Okay. Just let me know any time if you want to see the most popular places among your friends.'
   @message.typing_off
   stop_thread
 
     else
       @message.typing_on
       sleep 1
-      trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['Why?', 'TRUST_NOT_STABLE'])
+      trust_stage_qr_5 = UI::QuickReplies.build(['Try again', 'TRUST_CONFIRMATION_INTENT'], ['I don\'t want to share my profile data.', 'TRUST_NOT_STABLE'])
       say 'You need to click the button to give me permission to read your Facebook profile.', quick_replies: trust_stage_qr_5
       @message.typing_off
 
@@ -441,8 +441,16 @@ elsif @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
     @matched_entity = get_entity_for @message, 0.9
 if @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
 
-  persuade_stage_1
+  @message.typing_on
+  say '😭 Sorry to hear that!'
+  @message.typing_off
 
+  @message.typing_on
+  trust_stage_after_qr_fail = UI::QuickReplies.build(['No,I am good', 'NO_THANKS'])
+  say 'Let me know this. Why you don\'t want to share your data?', quick_replies:   trust_stage_after_qr_fail
+  @message.typing_off
+
+  next_command :persuade_feedback
 
 
 elsif @message.quick_reply == 'TRUST_CONFIRMATION_INTENT' || @matched_entity == "yes"
