@@ -446,7 +446,6 @@ if @message.quick_reply == 'TRUST_NOT_STABLE' || @matched_entity == "no"
   @message.typing_off
 
   @message.typing_on
-  trust_stage_after_qr_fail = UI::QuickReplies.build(['No,I am good', 'NO_THANKS'])
   say 'Let me know this. Why you don\'t want to share your data?', quick_replies:   trust_stage_after_qr_fail
   @message.typing_off
 
