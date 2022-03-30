@@ -1,8 +1,8 @@
 GIT
-  remote: git://github.com/hyperoslo/facebook-messenger.git
-  revision: 3c23cbcab388a1cba956fd6d492129ec4f874be0
+  remote: https://github.com/hyperoslo/facebook-messenger.git
+  revision: 64fe1f5cef4c1e3fca295b205037f64dfebdbcab
   specs:
-    facebook-messenger (1.0.0)
+    facebook-messenger (2.0.1)
       httparty (~> 0.13, >= 0.13.7)
       rack (>= 1.4.5)
 
@@ -50,12 +50,17 @@ GEM
     json (2.1.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    mimemagic (0.3.2)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
+    mini_portile2 (2.4.0)
     minitest (5.10.3)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     mustermann (1.0.1)
-    nio4r (2.5.2)
+    nio4r (2.5.8)
+    nokogiri (1.10.10)
+      mini_portile2 (~> 2.4.0)
     ocr_space (2.3.7)
       colorize
       httmultiparty
@@ -64,7 +69,7 @@ GEM
     oj (3.3.8)
     pg (0.21.0)
     public_suffix (3.0.0)
-    puma (4.3.1)
+    puma (4.3.12)
       nio4r (~> 2.0)
     rack (2.0.3)
     rack-protection (2.0.0)
